@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>My Restaurant</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content>
+    <div>
+        <ion-segment [(ngModel)]="restaurants">
+          <ion-segment-button value="menu">
+            Menus
+          </ion-segment-button>
+          <ion-segment-button value="beverage">
+            Beverages
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      
+      <div [ngSwitch]="restaurants">
+        <ion-list *ngSwitchCase="'menu'">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img src="img/thumbnail-puppy-1.jpg">
+            </ion-thumbnail>
+            <h2>Ruby</h2>
+          </ion-item>
+        </ion-list>
+      
+        <ion-list *ngSwitchCase="'beverage'">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img src="img/thumbnail-kitten-1.jpg">
+            </ion-thumbnail>
+            <h2>Luna</h2>
+          </ion-item>
+        </ion-list>
+      </div>  
+</ion-content>
