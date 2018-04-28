@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="bigmomma">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -8,101 +8,5 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-scroll scrollX="true" style="height:40px">
-    <ion-segment [(ngModel)]="months" color="dark">
-      <ion-segment-button value="january">
-        January
-      </ion-segment-button>
-      <ion-segment-button value="february">
-        February
-      </ion-segment-button>
-      <ion-segment-button value="march">
-        March
-      </ion-segment-button>
-      <ion-segment-button value="april">
-        April
-      </ion-segment-button>
-      <ion-segment-button value="may">
-        May
-      </ion-segment-button>
-      <ion-segment-button value="june">
-        June
-      </ion-segment-button>
-      <ion-segment-button value="july">
-        July
-      </ion-segment-button>
-      <ion-segment-button value="august">
-        August
-      </ion-segment-button>
-    </ion-segment>
-  </ion-scroll>
-  <div [ngSwitch]="months">
-    <ion-list *ngSwitchCase="'january'">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="img/thumbnail-puppy-1.jpg">
-        </ion-thumbnail>
-        <h2>Ruby</h2>
-      </ion-item>
-    </ion-list>
 
-    <ion-list *ngSwitchCase="'april'">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="img/thumbnail-kitten-1.jpg">
-        </ion-thumbnail>
-        <h2>Luna</h2>
-      </ion-item>
-    </ion-list>
-  </div> -->
-
-  <ion-slides slidesPerView="5" style="height: 10%;" (ionSlideTap)="onTap()"> 
-    <ion-slide></ion-slide>
-    <ion-slide></ion-slide>
-    <ion-slide [class.active]="index === 1">
-      <small>January</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 2">
-      <small>February</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 3">
-        <small>March</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 4">
-        <small>April</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 5">
-        <small>May</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 6">
-        <small>June</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 7">
-        <small>July</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 8">
-        <small>August</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 9">
-        <small>September</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 10">
-        <small>October</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 11">
-        <small>November</small>
-    </ion-slide>
-    <ion-slide [class.active]="index === 12">
-        <small>December {{index}}</small>
-    </ion-slide>
-    <ion-slide></ion-slide>
-    <ion-slide></ion-slide>
-  </ion-slides>
-
-  <ion-list>
-    <ion-item *ngFor="let expense of expenses">
-      <h3>{{expense.expense_name}}</h3>
-      <p>{{expense.amount}}</p>
-    </ion-item>
-  </ion-list>
 </ion-content>

@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the OrderPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { OrderDetailPage } from '../order-detail/order-detail'
 
 @IonicPage()
 @Component({
@@ -23,6 +17,10 @@ export class OrderPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrderPage');
+  }
+
+  detail(){
+    this.navCtrl.push(OrderDetailPage)
   }
 
 }

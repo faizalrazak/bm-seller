@@ -5,11 +5,15 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { RiderPage } from '../pages/rider/rider';
+import { CheckoutPage } from '../pages/checkout/checkout';
+import { OrderDetailPage } from '../pages/order-detail/order-detail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { OrderPage } from '../pages/order/order'
 import { MyRestaurantPage } from '../pages/my-restaurant/my-restaurant';
+import { SubscriptionPage } from '../pages/subscription/subscription';
 import { ProfilePage } from '../pages/profile/profile';
 import { HttpProvider } from '../providers/http/http';
 import { HttpModule } from '@angular/http';
@@ -23,7 +27,11 @@ import { HttpModule } from '@angular/http';
     ListPage,
     OrderPage,
     MyRestaurantPage,
-    ProfilePage
+    ProfilePage,
+    SubscriptionPage,
+    RiderPage,
+    CheckoutPage,
+    OrderDetailPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +45,11 @@ import { HttpModule } from '@angular/http';
     ListPage,
     OrderPage,
     MyRestaurantPage,
-    ProfilePage
+    ProfilePage,
+    SubscriptionPage,
+    RiderPage,
+    CheckoutPage,
+    OrderDetailPage
   ],
   providers: [
     StatusBar,

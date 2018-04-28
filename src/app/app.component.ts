@@ -8,6 +8,8 @@ import { ListPage } from '../pages/list/list';
 import { OrderPage } from '../pages/order/order';
 import { MyRestaurantPage } from '../pages/my-restaurant/my-restaurant'
 import { ProfilePage } from '../pages/profile/profile'
+import { SubscriptionPage } from '../pages/subscription/subscription';
+
 
 
 @Component({
@@ -28,7 +30,7 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'My Restaurant', component: MyRestaurantPage },
       { title: 'Orders', component: OrderPage },
-      { title: 'Subscription', component: ListPage },
+      { title: 'Subscription', component: SubscriptionPage },
       { title: 'Profile', component: ProfilePage }, 
     ];
 

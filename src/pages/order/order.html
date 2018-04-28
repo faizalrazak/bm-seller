@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="bigmomma">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -7,36 +7,54 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content >
-    <div >
-      <ion-segment [(ngModel)]="orders">
-        <ion-segment-button value="current">
-          Current Order
-        </ion-segment-button>
-        <ion-segment-button value="past">
-          Past Order
-        </ion-segment-button>
-      </ion-segment>
-    </div>
-    
-    <div [ngSwitch]="orders">
-      <ion-list *ngSwitchCase="'past'">
-        <ion-item>
-          <ion-thumbnail item-start>
-            <img src="img/thumbnail-puppy-1.jpg">
-          </ion-thumbnail>
-          <h2>Ruby</h2>
-        </ion-item>
-      </ion-list>
-    
-      <ion-list *ngSwitchCase="'current'">
-        <ion-item>
-          <ion-thumbnail item-start>
-            <img src="img/thumbnail-kitten-1.jpg">
-          </ion-thumbnail>
-          <h2>Luna</h2>
-        </ion-item>
-      </ion-list>
-    </div>
+<ion-content style="background: #D8D8D8">
+
+
+  <div>
+    <ion-segment [(ngModel)]="orders" color="bigmomma" style="background: white">
+      <ion-segment-button value="current">
+        Current Order
+      </ion-segment-button>
+      <ion-segment-button value="past">
+        Past Order
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div class="label">
+    <ion-row>
+      <ion-col col-3>
+        <small>Food Ready</small>
+      </ion-col>
+      <ion-col col-3>
+        <small>On The Way</small>
+      </ion-col>
+      <ion-col col-3>
+        <small>Delivered</small>
+      </ion-col>
+      <ion-col col-3>
+        <small>Cancelled</small>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+  <div [ngSwitch]="orders">
+    <ion-list *ngSwitchCase="'past'">
+      <div (click)="detail()" class="past-order">
+        <p>Nov 23, 2017</p>
+        <hr>
+        <p>Receipt No.</p>
+      </div>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'current'">
+      <div class="order">
+        <p>Apr 13, 2018</p>
+        <hr>
+        <p>Receipt No.</p>
+      </div>
+    </ion-list>
+  </div>
 
 </ion-content>

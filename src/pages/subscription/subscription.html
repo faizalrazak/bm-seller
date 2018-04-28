@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="bigmomma">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Subscription</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="content">
+
+  <div class="banner">
+    <p>
+      Subscribe now to set up your restaurant and be ready to get more customers!
+    </p>
+  </div>
+
+  <p padding no-margin>
+    SUBSCRIPTION PLAN
+  </p>
+
+   <ion-list radio-group no-lines no-margin>
+      <ion-item>
+        <ion-label>10 Days [ RM 10.00 ]</ion-label>
+        <ion-radio value="1"></ion-radio>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>20 Days [ RM 20.00 ]</ion-label>
+        <ion-radio value="rust"></ion-radio>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>30 Days [ RM 30.00 ]</ion-label>
+        <ion-radio value="python"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button ion-button full block color="bigmomma" (click)="proceedSubscription()">continue</button>
+    </div>
+
+</ion-content>

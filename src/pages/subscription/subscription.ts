@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RiderPage } from '../rider/rider'
+import { CheckoutPage } from '../checkout/checkout';
 
 /**
- * Generated class for the ProfilePage page.
+ * Generated class for the SubscriptionPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,20 +11,20 @@ import { RiderPage } from '../rider/rider'
 
 @IonicPage()
 @Component({
-  selector: 'page-profile',
-  templateUrl: 'profile.html',
+  selector: 'page-subscription',
+  templateUrl: 'subscription.html',
 })
-export class ProfilePage {
+export class SubscriptionPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+    console.log('ionViewDidLoad SubscriptionPage');
   }
 
-  rider(){
-    this.navCtrl.push(RiderPage)
+  proceedSubscription(){
+    this.navCtrl.push(CheckoutPage)
   }
 
 }

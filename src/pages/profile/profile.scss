@@ -12,6 +12,7 @@ page-profile {
     
         .first-row{
             padding-top: 20px;
+
         }
         .first-row > div > img{
             width: inherit;
@@ -72,5 +73,18 @@ page-profile {
             font-weight: bold;
             font-family: "Montserrat-Bold";
     
+        }
+
+        .first-box{
+            background: white;
+        }
+
+        ion-row{
+            padding: 10px;
+            border-bottom: groove 0.5px;
+        }
+
+        .divider{
+            padding: 0px 16px;
         }
 }
