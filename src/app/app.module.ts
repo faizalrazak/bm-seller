@@ -8,6 +8,8 @@ import { ListPage } from '../pages/list/list';
 import { RiderPage } from '../pages/rider/rider';
 import { CheckoutPage } from '../pages/checkout/checkout';
 import { OrderDetailPage } from '../pages/order-detail/order-detail';
+import { FindRiderPage } from '../pages/find-rider/find-rider';
+import { MessageRoomPage } from '../pages/message-room/message-room';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,6 +19,7 @@ import { SubscriptionPage } from '../pages/subscription/subscription';
 import { ProfilePage } from '../pages/profile/profile';
 import { HttpProvider } from '../providers/http/http';
 import { HttpModule } from '@angular/http';
+import { Ionic2RatingModule } from 'ionic2-rating';
 
 
 
@@ -31,12 +34,16 @@ import { HttpModule } from '@angular/http';
     SubscriptionPage,
     RiderPage,
     CheckoutPage,
-    OrderDetailPage
+    OrderDetailPage,
+    FindRiderPage,
+    MessageRoomPage
+    
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,7 +56,9 @@ import { HttpModule } from '@angular/http';
     SubscriptionPage,
     RiderPage,
     CheckoutPage,
-    OrderDetailPage
+    OrderDetailPage,
+    FindRiderPage,
+    MessageRoomPage
   ],
   providers: [
     StatusBar,
