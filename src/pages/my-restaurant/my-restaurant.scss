@@ -5,16 +5,26 @@ page-my-restaurant {
     }
 
     .detail{
-        width: 80%;
+        width: 90%;
         background: white;
-        height: 190px;
+        height: 200px;
         position: absolute;
-        margin-top: -20px;
+        margin-top: -40px;
         margin-left: auto;
         margin-right: auto;
         right: 0px;
         left: 0px;
         padding: 10px;
+    }
+
+    .box-below{
+        background: #D8D8D8;
+        padding: 5px;
+        margin-top: 10px;
+    }
+
+    .rating > ion-icon{
+        padding: 3px;
     }
 
 }

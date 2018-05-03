@@ -10,6 +10,8 @@ import { CheckoutPage } from '../pages/checkout/checkout';
 import { OrderDetailPage } from '../pages/order-detail/order-detail';
 import { FindRiderPage } from '../pages/find-rider/find-rider';
 import { MessageRoomPage } from '../pages/message-room/message-room';
+import { EditRestaurantPage } from '../pages/edit-restaurant/edit-restaurant';
+import { EditMenuPage } from '../pages/edit-menu/edit-menu';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -36,7 +38,9 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     CheckoutPage,
     OrderDetailPage,
     FindRiderPage,
-    MessageRoomPage
+    MessageRoomPage,
+    EditRestaurantPage,
+    EditMenuPage
     
   ],
   imports: [
@@ -58,7 +62,9 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     CheckoutPage,
     OrderDetailPage,
     FindRiderPage,
-    MessageRoomPage
+    MessageRoomPage,
+    EditRestaurantPage,
+    EditMenuPage
   ],
   providers: [
     StatusBar,
