@@ -20,7 +20,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { HttpProvider } from '../providers/http/http';
 import { HttpModule } from '@angular/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
-
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
@@ -41,6 +41,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
   ],
   imports: [
     BrowserModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
     Ionic2RatingModule
