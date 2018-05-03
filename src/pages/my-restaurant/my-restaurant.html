@@ -4,6 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>My Restaurant</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="editRestaurant()">
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -12,15 +17,40 @@
     <img src="assets/imgs/res_bg.png">
   </div>
 
+
   <div class="detail">
+    <ion-item no-lines no-padding>
+      <ion-label>
+        Restoran Tanjung
+      </ion-label>
+      <ion-toggle [(ngModel)]="checked"></ion-toggle>
+    </ion-item>
+
     <div class="content">
-      <h6 no-margin>Restoran Tanjung</h6>
+      <!-- <h6 no-margin>Restoran Tanjung</h6> -->
       <small>Malaysian, Western, Halal, Indonesian</small>
+<<<<<<< HEAD
     </div>
     <div class="discount">
       <p>Discount 15% for all purchases!
       Just enter Coupon Code M1234</p>
       
+=======
+      <ion-row class="rating">
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-badge>
+          30 min
+        </ion-badge>
+      </ion-row>
+      <p>10:00 AM - 5:00 PM</p>
+      <div class="box-below">
+        Discount 15% for all purchases! Just enter Coupon Code M1234
+      </div>
+>>>>>>> 2c5b5fb2f0486eda19ae0150f4e6148490a379e8
     </div>
   </div>
   <div class="menus">
@@ -43,7 +73,7 @@
           </ion-avatar>
           <h2>Nasi Ayam Buah Bidara</h2>
           <p>RM 4.50</p>
-          <ion-icon name="create" item-end></ion-icon>
+          <ion-icon name="create" item-end (click)="editMenu()"></ion-icon>
         </ion-item>
       </ion-list>
 
@@ -54,7 +84,7 @@
           </ion-avatar>
           <h2>Lai Chee Kang</h2>
           <p>RM 7.50</p>
-          <ion-icon name="create" item-end></ion-icon>
+          <ion-icon name="create" item-end (click)="editMenu()"></ion-icon>
         </ion-item>
       </ion-list>
     </div>

@@ -10,6 +10,8 @@ import { CheckoutPage } from '../pages/checkout/checkout';
 import { OrderDetailPage } from '../pages/order-detail/order-detail';
 import { FindRiderPage } from '../pages/find-rider/find-rider';
 import { MessageRoomPage } from '../pages/message-room/message-room';
+import { EditRestaurantPage } from '../pages/edit-restaurant/edit-restaurant';
+import { EditMenuPage } from '../pages/edit-menu/edit-menu';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -36,7 +38,9 @@ import { ComponentsModule } from '../components/components.module';
     CheckoutPage,
     OrderDetailPage,
     FindRiderPage,
-    MessageRoomPage
+    MessageRoomPage,
+    EditRestaurantPage,
+    EditMenuPage
     
   ],
   imports: [
@@ -59,7 +63,9 @@ import { ComponentsModule } from '../components/components.module';
     CheckoutPage,
     OrderDetailPage,
     FindRiderPage,
-    MessageRoomPage
+    MessageRoomPage,
+    EditRestaurantPage,
+    EditMenuPage
   ],
   providers: [
     StatusBar,

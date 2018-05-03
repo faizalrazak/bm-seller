@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { EditRestaurantPage } from '../edit-restaurant/edit-restaurant';
+import { EditMenuPage } from '../edit-menu/edit-menu'
 /**
  * Generated class for the MyRestaurantPage page.
  *
@@ -15,13 +16,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MyRestaurantPage {
   restaurants:any;
+  checked:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.restaurants = 'menu'
+    this.checked = 'true'
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyRestaurantPage');
+  }
+
+  editRestaurant(){
+    this.navCtrl.push(EditRestaurantPage)
+  }
+
+  editMenu(){
+    this.navCtrl.push(EditMenuPage)
   }
 
 }

@@ -1,20 +1,27 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar color="bigmomma">
-      <ion-avatar item-start>
-        <img src="assets/imgs/logo">
-      </ion-avatar>
-      <p>Cher</p>
+      <ion-item color="bigmomma" no-lines>
+        <ion-avatar item-start>
+          <img src="assets/imgs/person.png">
+        </ion-avatar>
+        <h6>Hi, Guest..</h6>
+      </ion-item>
+
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
+
     <ion-list no-lines>
       <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </ion-item>
     </ion-list>
   </ion-content>
+  <ion-footer padding>
+    <button ion-button color="bigmomma" full block>Log in or sign up</button>
+  </ion-footer>
 
 </ion-menu>
 

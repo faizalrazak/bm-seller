@@ -1,0 +1,90 @@
+<!--
+  Generated template for the EditMenuPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="bigmomma">
+    <ion-title>edit-menu</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background: #E9E9E9">
+
+  <div class="detail">
+    <ion-list no-margin>
+      <ion-item>
+        <ion-row>
+          <ion-col col-6 no-padding>
+            <p>Food Name</p>
+          </ion-col>
+          <ion-col col-6 no-padding class="item-right">
+            <p>Nasi Lemak Buah Bidara</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col col-6 no-padding>
+            <p>Category</p>
+          </ion-col>
+          <ion-col col-6 no-padding class="item-right">
+            <p>Halal, Malaysia</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col col-6 no-padding>
+            <p>Price</p>
+          </ion-col>
+          <ion-col col-6 no-padding class="item-right">
+            <p>RM 4.50</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col col-6 no-padding>
+            <p>Add-On</p>
+          </ion-col>
+          <ion-col col-6 no-padding class="item-right" text-wrap>
+            <p>+ Add More</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label>10 Days [ RM 10.00 ]</ion-label>
+        <ion-radio value="1"></ion-radio>
+      </ion-item> -->
+    </ion-list>
+    <ion-list radio-group>
+      <ion-item class="radio-item">
+        <ion-label>Telur Mata [ RM 1.50 ]</ion-label>
+        <ion-radio checked="true" value="telurmata"></ion-radio>
+      </ion-item>
+
+      <ion-item class="radio-item">
+        <ion-label>Ayam Goreng [ RM 3.00 ]</ion-label>
+        <ion-radio value="ayamgoreng"></ion-radio>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="image-div">
+    <img class="food-image" src="assets/imgs/logo.png" alt="">
+    <div>
+      <ion-row align-items-center justify-content-center>
+        <p padding>Sold Out</p>
+        <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
+      </ion-row>
+    </div>
+  </div>
+  <div padding>
+    <button ion-button color="bigmomma" full block>save</button>
+  </div>
+
+</ion-content>
