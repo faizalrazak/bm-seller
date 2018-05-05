@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
+
+
 /**
  * Generated class for the EditRestaurantPage page.
  *
@@ -22,4 +25,7 @@ export class EditRestaurantPage {
     console.log('ionViewDidLoad EditRestaurantPage');
   }
 
+  save(){
+  	 this.navCtrl.setRoot(MyRestaurantPage);
+  }
 }

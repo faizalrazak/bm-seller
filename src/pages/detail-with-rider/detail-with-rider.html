@@ -1,0 +1,145 @@
+<!--
+  Generated template for the DetailWithRiderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>detail-with-rider</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<ion-item class="rider-item">
+      <ion-row class="rider-row">
+        <ion-col col-2>
+          <ion-avatar item-start>
+            <img src="assets/imgs/person.png">
+          </ion-avatar>
+        </ion-col>
+        <ion-col col-6>
+          <h2>Ashraf Iskandar</h2>
+        </ion-col>
+        <ion-col col-4 text-right>
+          <h2>WC 3440 M</h2>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <div padding>
+    <p>Restoran Tanjung Semenyih
+      <small>
+        <ion-icon name="pin" (click)= "goMaps()"></ion-icon> Get Location</small>
+    </p>
+    <p>Jalan Semenyih, 43000, Kajang, Selangor</p>
+  </div>
+
+  <div padding>
+    <ion-row>
+      <ion-col col-4>
+        <p no-margin>
+          DELIVERY TO
+        </p>
+      </ion-col>
+      <ion-col col-6>
+        <hr style="height: 2px; color: black">
+      </ion-col>
+      <ion-col col-2>
+        <ion-badge item-end>30 min</ion-badge>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div padding>
+    <p>En. Fadhil
+      <small>
+        <ion-icon name="pin"></ion-icon> Get Location</small>
+    </p>
+    <p>57, Jalan TSJ 20, Taman Sri Jelok, 43000 Kajang, Selangor</p>
+  </div>
+
+  <div>
+    <ion-list no-margin>
+      <ion-item>
+        <p>Nov 23, 2017</p>
+        <p item-end>10:00 am</p>
+      </ion-item>
+      <ion-item>
+        <p>Receipt Number</p>
+        <p item-end>RT-2017-51</p>
+      </ion-item>
+      <ion-item>
+        <p>Payment Method</p>
+        <p item-end>Direct Payment</p>
+      </ion-item>
+      <ion-item>
+        <p>
+          <ion-badge color="bigmomma">2</ion-badge>
+          Nasi Lemak Buah Bidara</p>
+        <p item-end>RM 9.00</p>
+      </ion-item>
+      <ion-item>
+        <p>
+          <ion-badge color="bigmomma">1</ion-badge>
+          Mee Hailam
+        </p>
+        <p item-end>RM 5.50</p>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col col-6>
+            <p>Subtotal</p>
+          </ion-col>
+          <ion-col text-right>
+            <p>RM 14.50</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            <p>Processing Fee</p>
+          </ion-col>
+          <ion-col text-right>
+            <p>RM 1.40</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            <p>GST (6%)</p>
+          </ion-col>
+          <ion-col text-right>
+            <p>RM 0.87</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            <p>Delivery Fee</p>
+          </ion-col>
+          <ion-col text-right>
+            <p>RM 3.00</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item class="total">
+        <p>
+          Total
+        </p>
+        <p item-end>RM 19.80</p>
+      </ion-item>
+      
+    </ion-list>
+    <div>
+      <p class="text">Present QR code to Rider</p>
+      <img  class="qrbox" src="assets/imgs/2012-02-12-bitrevis-qr-code.png">
+      <p class="text">ABC123</p>
+  </div>
+    <div padding text-center>
+      <button ion-button block color="bigmomma" (click)="messageRoomButton()">Message Room</button>
+      <button ion-button block color="bigmomma" (click)="presentActionSheet1()">Track Order</button>
+    </div>
+  </div>
+
+</ion-content>

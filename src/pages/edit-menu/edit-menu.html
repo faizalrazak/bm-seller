@@ -75,7 +75,8 @@
     </ion-list>
   </div>
   <div class="image-div">
-    <img class="food-image" src="assets/imgs/logo.png" alt="">
+    <img (click)="openCamera()" class="food-image" src="assets/imgs/logo.png" *ngIf="!base64Image" alt="">
+    
     <div>
       <ion-row align-items-center justify-content-center>
         <p padding>Sold Out</p>
@@ -84,7 +85,7 @@
     </div>
   </div>
   <div padding>
-    <button ion-button color="bigmomma" full block>save</button>
+    <button ion-button color="bigmomma" full block (click)="save()">save</button>
   </div>
 
 </ion-content>

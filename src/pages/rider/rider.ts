@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+
+import { DetailWithRiderPage } from '../detail-with-rider/detail-with-rider';
+
 
 /**
  * Generated class for the RiderPage page.
@@ -15,11 +18,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RiderPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RiderPage');
+  }
+
+  selectRider(){
+    this.navCtrl.push(DetailWithRiderPage);
+  }
+
+  dismissModal(){
+    this.viewCtrl.dismiss();
   }
 
 }

@@ -6,7 +6,7 @@
     <ion-title>My Restaurant</ion-title>
     <ion-buttons end>
         <button ion-button icon-only (click)="editRestaurant()">
-          <ion-icon name="create"></ion-icon>
+          <ion-icon ios="ios-redo" md="md-redo"></ion-icon>
         </button>
       </ion-buttons>
   </ion-navbar>
@@ -16,6 +16,8 @@
   <div style="height: 20%;">
     <img src="assets/imgs/res_bg.png">
   </div>
+  <ion-toggle  [(ngModel)]="open" href="#" class="open"></ion-toggle>
+
 
 
   <div class="detail">
@@ -23,19 +25,13 @@
       <ion-label>
         Restoran Tanjung
       </ion-label>
-      <ion-toggle [(ngModel)]="checked"></ion-toggle>
+     <ion-icon ios="ios-create" md="md-create" item-end (click)="editRestaurant()"></ion-icon>
     </ion-item>
 
     <div class="content">
-      <!-- <h6 no-margin>Restoran Tanjung</h6> -->
+ 
       <small>Malaysian, Western, Halal, Indonesian</small>
-<<<<<<< HEAD
-    </div>
-    <div class="discount">
-      <p>Discount 15% for all purchases!
-      Just enter Coupon Code M1234</p>
-      
-=======
+
       <ion-row class="rating">
         <ion-icon name="star"></ion-icon>
         <ion-icon name="star"></ion-icon>
@@ -50,17 +46,24 @@
       <div class="box-below">
         Discount 15% for all purchases! Just enter Coupon Code M1234
       </div>
->>>>>>> 2c5b5fb2f0486eda19ae0150f4e6148490a379e8
+
     </div>
   </div>
   <div class="menus">
     <div>
       <ion-segment [(ngModel)]="restaurants" color="bigmomma" style="background: white">
         <ion-segment-button value="menu">
+
           Menus
+       
+           
+         <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addMenu()"></ion-icon>
         </ion-segment-button>
+
         <ion-segment-button value="beverage">
+          
           Beverages
+          <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addMenu()"></ion-icon>
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -73,7 +76,7 @@
           </ion-avatar>
           <h2>Nasi Ayam Buah Bidara</h2>
           <p>RM 4.50</p>
-          <ion-icon name="create" item-end (click)="editMenu()"></ion-icon>
+          <ion-icon ios="ios-create" md="md-create" item-end (click)="editMenu()"></ion-icon>
         </ion-item>
       </ion-list>
 

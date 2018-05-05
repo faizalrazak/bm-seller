@@ -2,6 +2,11 @@
 
   <ion-navbar color="bigmomma">
     <ion-title>rider</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -9,7 +14,7 @@
 
 <ion-content padding style="background: #D8D8D8">
 
-  <ion-list no-lines>
+  <ion-list (click)="selectRider()" no-lines>
     <ion-item class="rider-item">
       <ion-row class="rider-row">
         <ion-col col-2>

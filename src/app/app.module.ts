@@ -12,6 +12,18 @@ import { FindRiderPage } from '../pages/find-rider/find-rider';
 import { MessageRoomPage } from '../pages/message-room/message-room';
 import { EditRestaurantPage } from '../pages/edit-restaurant/edit-restaurant';
 import { EditMenuPage } from '../pages/edit-menu/edit-menu';
+import { MapsPage } from '../pages/maps/maps'
+import { CurrentOrderDetailPage } from '../pages/current-order-detail/current-order-detail';
+import { AddMenuPage } from '../pages/add-menu/add-menu';
+import { LoginSignUpPage } from '../pages/login-sign-up/login-sign-up';
+import { AboutUsPage } from '../pages/about-us/about-us';
+import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
+import { TermsConditionsPage } from '../pages/terms-conditions/terms-conditions';
+import { DetailWithRiderPage } from '../pages/detail-with-rider/detail-with-rider';
+
+
+
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,7 +35,9 @@ import { HttpProvider } from '../providers/http/http';
 import { HttpModule } from '@angular/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ComponentsModule } from '../components/components.module';
+import { Camera } from '@ionic-native/camera';
 
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -40,7 +54,15 @@ import { ComponentsModule } from '../components/components.module';
     FindRiderPage,
     MessageRoomPage,
     EditRestaurantPage,
-    EditMenuPage
+    EditMenuPage,
+    CurrentOrderDetailPage,
+    AddMenuPage,
+    LoginSignUpPage,
+    AboutUsPage,
+    PrivacyPolicyPage,
+    TermsConditionsPage,
+    DetailWithRiderPage,
+    MapsPage
     
   ],
   imports: [
@@ -50,6 +72,7 @@ import { ComponentsModule } from '../components/components.module';
     HttpModule,
     Ionic2RatingModule
   ],
+
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -65,13 +88,23 @@ import { ComponentsModule } from '../components/components.module';
     FindRiderPage,
     MessageRoomPage,
     EditRestaurantPage,
-    EditMenuPage
+    EditMenuPage,
+    CurrentOrderDetailPage,
+    AddMenuPage,
+    LoginSignUpPage,
+    AboutUsPage,
+    PrivacyPolicyPage,
+    TermsConditionsPage,
+    DetailWithRiderPage,
+    MapsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HttpProvider
+    HttpProvider,
+    Camera
   ]
 })
 export class AppModule {}
