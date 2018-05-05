@@ -22,6 +22,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { HttpProvider } from '../providers/http/http';
 import { HttpModule } from '@angular/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
 
@@ -47,7 +48,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    Ionic2RatingModule
+    Ionic2RatingModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -70,7 +71,9 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HttpProvider
+    HttpProvider,
+    InAppBrowser
+    
   ]
 })
 export class AppModule {}
