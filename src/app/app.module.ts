@@ -20,6 +20,14 @@ import { AboutUsPage } from '../pages/about-us/about-us';
 import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { TermsConditionsPage } from '../pages/terms-conditions/terms-conditions';
 import { DetailWithRiderPage } from '../pages/detail-with-rider/detail-with-rider';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { NotificationsPage } from '../pages/notifications/notifications';
+import { LoginPage } from '../pages/login/login';
+
+
+
+
+
 
 
 
@@ -62,6 +70,9 @@ import { Geolocation } from '@ionic-native/geolocation';
     PrivacyPolicyPage,
     TermsConditionsPage,
     DetailWithRiderPage,
+    EditProfilePage,
+    NotificationsPage,
+    LoginPage,
     MapsPage
     
   ],
@@ -96,6 +107,9 @@ import { Geolocation } from '@ionic-native/geolocation';
     PrivacyPolicyPage,
     TermsConditionsPage,
     DetailWithRiderPage,
+    EditProfilePage,
+    NotificationsPage,
+    LoginPage,
     MapsPage
   ],
   providers: [

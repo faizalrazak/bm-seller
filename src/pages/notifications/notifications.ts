@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { LoginPage } from '../login/login';
-
-
 /**
- * Generated class for the LoginSignUpPage page.
+ * Generated class for the NotificationsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,19 +10,16 @@ import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
-  selector: 'page-login-sign-up',
-  templateUrl: 'login-sign-up.html',
+  selector: 'page-notifications',
+  templateUrl: 'notifications.html',
 })
-export class LoginSignUpPage {
+export class NotificationsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginSignUpPage');
-  }
-  loginPage(){
-  	this.navCtrl.setRoot(LoginPage);
+    console.log('ionViewDidLoad NotificationsPage');
   }
 
 }

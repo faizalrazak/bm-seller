@@ -5,7 +5,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FindRiderPage } from '../find-rider/find-rider';
 import { RiderPage } from '../rider/rider';
 import { MessageRoomPage } from '../message-room/message-room';
-import { MapsPage } from '../maps/maps'
+import { MapsPage } from '../maps/maps';
+import { OrderPage } from '../order/order'
 
 /**
  * Generated class for the OrderDetailPage page.
@@ -81,6 +82,10 @@ this.camera.getPicture(options).then((imageData) => {
 
   goMaps(){
     this.navCtrl.push(MapsPage)
+  }
+
+  cancel(){
+    this.navCtrl.setRoot(OrderPage)
   }
 
 }

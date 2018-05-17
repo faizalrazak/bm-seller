@@ -21,11 +21,11 @@ export class OrderPage {
     console.log('ionViewDidLoad OrderPage');
   }
 
-  pastDetail(){
+  currentDetail(){
     this.navCtrl.push(OrderDetailPage)
   }
 
-  currentDetail(){
+  pastDetail(){
     this.navCtrl.push(CurrentOrderDetailPage)
   }
 

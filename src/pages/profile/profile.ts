@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RiderPage } from '../rider/rider'
 
+import { RiderPage } from '../rider/rider'
+import { EditProfilePage } from '../edit-profile/edit-profile'
 /**
  * Generated class for the ProfilePage page.
  *
@@ -25,6 +26,11 @@ export class ProfilePage {
 
   rider(){
     this.navCtrl.push(RiderPage)
+  }
+
+  editProfile(){
+    this.navCtrl.push(EditProfilePage)
+
   }
 
 }
