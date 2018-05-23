@@ -5,14 +5,29 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>login</ion-title>
+  <ion-navbar color="bigmomma">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Log In</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+	<img src="assets/imgs/Page 1.png">
+	
+
+	<div padding text-center>
+      <button ion-button block color="bigmomma" (click)="facebookLogin()">Log In with Facebook</button>
+      <button ion-button block color="bigmomma" (click)="presentActionSheet()">Log In with Google</button>
+
+      <p align="center" >Forgot Password?</p>
+
+      <button ion-button block color="bigmomma" (click)="presentActionSheet()">Don't have an account? Sign Up now</button>
+      <p>{{userProfile.email}}</p>
+    </div>
+
 
 </ion-content>
