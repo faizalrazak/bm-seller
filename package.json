@@ -43,7 +43,11 @@
     "ionicons": "3.0.0",
     "rxjs": "5.5.8",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "cordova-plugin-device": "^2.0.1",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-ionic-webview": "^1.2.0",
+    "cordova-plugin-ionic-keyboard": "^2.0.5"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.9",
@@ -57,7 +61,8 @@
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
       },
       "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyAU3QFqFGD2eWV3E-PWqnXH71OyjyE_POs"
+        "API_KEY_FOR_ANDROID": "AIzaSyAU3QFqFGD2eWV3E-PWqnXH71OyjyE_POs",
+        "API_KEY_FOR_IOS": "(API_KEY_FOR_IOS)"
       },
       "cordova-plugin-camera": {},
       "cordova-plugin-whitelist": {},
@@ -65,7 +70,14 @@
         "APP_ID": "363438337479928",
         "APP_NAME": "BM Seller",
         "ANDROID_SDK_VERSION": "4.+"
-      }
-    }
+      },
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }

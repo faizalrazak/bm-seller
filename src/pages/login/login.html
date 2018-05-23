@@ -26,7 +26,10 @@
       <p align="center" >Forgot Password?</p>
 
       <button ion-button block color="bigmomma" (click)="presentActionSheet()">Don't have an account? Sign Up now</button>
+      <div *ngIf="userProfile">
       <p>{{userProfile.email}}</p>
+        
+      </div>
     </div>
 
 
