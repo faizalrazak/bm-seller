@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
 @Component({
@@ -12,7 +11,7 @@ export class ListPage {
   icons: string[];
   items: Array<{ title: string, note: string, icon: string }>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public iab:InAppBrowser, public toastCtrl:ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl:ToastController) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
 
@@ -43,7 +42,7 @@ export class ListPage {
       duration: 3000
     });
     toast1.present();
-    const browser = this.iab.create('https://pod-api-mdr.herokuapp.com/payment');
+    // const browser = this.iab.create('https://pod-api-mdr.herokuapp.com/payment');
 
     let toast = this.toastCtrl.create({
       message: 'User was added successfully',

@@ -6,9 +6,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { OrderPage } from '../pages/order/order';
-import { MyRestaurantPage } from '../pages/my-restaurant/my-restaurant'
-import { ProfilePage } from '../pages/profile/profile'
+import { MyRestaurantPage } from '../pages/my-restaurant/my-restaurant';
+import { ProfilePage } from '../pages/profile/profile';
+import { AboutUsPage } from '../pages/about-us/about-us';
+import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
+import { LoginSignUpPage } from '../pages/login-sign-up/login-sign-up';
 import { SubscriptionPage } from '../pages/subscription/subscription';
+import { TermsConditionsPage } from '../pages/terms-conditions/terms-conditions';
+
 
 
 
@@ -32,6 +37,12 @@ export class MyApp {
       { title: 'Orders', component: OrderPage },
       { title: 'Subscription', component: SubscriptionPage },
       { title: 'Profile', component: ProfilePage }, 
+      { title: 'Setting', component: ProfilePage },
+      { title: 'Notification', component: ProfilePage },
+      { title: 'About Us', component: AboutUsPage },
+      { title: 'Privacy Policy', component: PrivacyPolicyPage },
+      { title: 'Term and Conditions', component: TermsConditionsPage },
+      { title: 'Login and Sign Up', component: LoginSignUpPage },
     ];
 
   }
@@ -49,5 +60,10 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  loginSignUp(){
+    this.nav.setRoot(LoginSignUpPage);
+
   }
 }

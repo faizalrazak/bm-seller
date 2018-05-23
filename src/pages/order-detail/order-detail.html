@@ -9,7 +9,7 @@
 
 <ion-content>
   <div>
-    <img src="assets/imgs/receipt.png" alt="">
+    <img (click)="openCamera()" src="assets/imgs/receipt.png" *ngIf="!base64Image" alt="" >
   </div>
 
   <div>
@@ -32,7 +32,7 @@
   <div padding>
     <p>Restoran Tanjung Semenyih
       <small>
-        <ion-icon name="pin"></ion-icon> Get Location</small>
+        <ion-icon name="pin" (click)= "goMaps()"></ion-icon> Get Location</small>
     </p>
     <p>Jalan Semenyih, 43000, Kajang, Selangor</p>
   </div>

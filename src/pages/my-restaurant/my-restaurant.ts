@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { EditRestaurantPage } from '../edit-restaurant/edit-restaurant';
 import { EditMenuPage } from '../edit-menu/edit-menu'
+import { AddMenuPage } from '../add-menu/add-menu'
+
 /**
  * Generated class for the MyRestaurantPage page.
  *
@@ -33,6 +36,10 @@ export class MyRestaurantPage {
 
   editMenu(){
     this.navCtrl.push(EditMenuPage)
+  }
+
+  addMenu(){
+    this.navCtrl.push(AddMenuPage)
   }
 
 }

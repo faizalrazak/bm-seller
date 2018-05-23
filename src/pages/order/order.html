@@ -41,7 +41,7 @@
 
   <div [ngSwitch]="orders">
     <ion-list *ngSwitchCase="'past'">
-      <div (click)="detail()" class="past-order">
+      <div (click)="pastDetail()" class="past-order">
         <p>Nov 23, 2017</p>
         <hr>
         <p>Receipt No.</p>
@@ -49,7 +49,7 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'current'">
-      <div class="order">
+      <div (click)="currentDetail()"class="order">
         <p>Apr 13, 2018</p>
         <hr>
         <p>Receipt No.</p>

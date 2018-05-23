@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { OrderDetailPage } from '../order-detail/order-detail'
+import { OrderDetailPage } from '../order-detail/order-detail';
+import { CurrentOrderDetailPage } from '../current-order-detail/current-order-detail';
+
 
 @IonicPage()
 @Component({
@@ -19,8 +21,14 @@ export class OrderPage {
     console.log('ionViewDidLoad OrderPage');
   }
 
-  detail(){
+  pastDetail(){
     this.navCtrl.push(OrderDetailPage)
   }
+
+  currentDetail(){
+    this.navCtrl.push(CurrentOrderDetailPage)
+  }
+
+  
 
 }

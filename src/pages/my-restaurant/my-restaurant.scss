@@ -1,7 +1,7 @@
 page-my-restaurant {
 
     .menus{
-        margin-top: 50%;
+        margin-top: 60%;
     }
 
     .detail{
@@ -9,13 +9,14 @@ page-my-restaurant {
         background: white;
         height: 200px;
         position: absolute;
-        margin-top: -40px;
+        margin-top: -1px;
         margin-left: auto;
         margin-right: auto;
         right: 0px;
         left: 0px;
         padding: 10px;
     }
+
 
     .box-below{
         background: #D8D8D8;
@@ -27,4 +28,13 @@ page-my-restaurant {
         padding: 3px;
     }
 
+    .open{
+        margin-left:250px;
+        margin-top:-30px;
+
+        // margin-right: -90px;
+
+    }
+
+    
 }
