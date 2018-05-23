@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar color="bigmomma">
       <ion-item color="bigmomma" no-lines>
-        <ion-avatar item-start>
+        <ion-avatar menuClose item-start (click)="openProfile()">
           <img src="assets/imgs/person.png">
         </ion-avatar>
         <h6>Hi, Guest..</h6>
@@ -20,7 +20,7 @@
     </ion-list>
   </ion-content>
   <ion-footer padding>
-    <button ion-button color="bigmomma" full block (click)="loginSignUp()">Log in or sign up</button>
+    <button menuClose ion-button color="bigmomma" full block (click)="loginSignUp()">Log in or sign up</button>
   </ion-footer>
 
 </ion-menu>

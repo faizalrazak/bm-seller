@@ -13,6 +13,9 @@ import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { LoginSignUpPage } from '../pages/login-sign-up/login-sign-up';
 import { SubscriptionPage } from '../pages/subscription/subscription';
 import { TermsConditionsPage } from '../pages/terms-conditions/terms-conditions';
+import { NotificationsPage } from '../pages/notifications/notifications';
+
+
 
 
 
@@ -27,7 +30,8 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, 
+    public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -36,13 +40,12 @@ export class MyApp {
       { title: 'My Restaurant', component: MyRestaurantPage },
       { title: 'Orders', component: OrderPage },
       { title: 'Subscription', component: SubscriptionPage },
-      { title: 'Profile', component: ProfilePage }, 
-      { title: 'Setting', component: ProfilePage },
-      { title: 'Notification', component: ProfilePage },
+      // { title: 'Profile', component: ProfilePage }, 
+      { title: 'Notification', component: NotificationsPage },
       { title: 'About Us', component: AboutUsPage },
       { title: 'Privacy Policy', component: PrivacyPolicyPage },
       { title: 'Term and Conditions', component: TermsConditionsPage },
-      { title: 'Login and Sign Up', component: LoginSignUpPage },
+      // { title: 'Login and Sign Up', component: LoginSignUpPage },
     ];
 
   }
@@ -54,6 +57,12 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  openProfile() {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.nav.setRoot(ProfilePage);
   }
 
   openPage(page) {

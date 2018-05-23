@@ -16,7 +16,10 @@
   <div style="height: 20%;">
     <img src="assets/imgs/res_bg.png">
   </div>
-  <ion-toggle  [(ngModel)]="open" href="#" class="open"></ion-toggle>
+  <ion-toggle [(ngModel)]="open" (ionChange)="OpenRest(rest)" checked="open"></ion-toggle>
+
+ <!--  <ion-toggle  [(ngModel)]="open" href="#" class="open" *ngIf= "open" (click)="OpenCloseRest()"></ion-toggle> -->
+
 
 
 
@@ -54,7 +57,7 @@
       <ion-segment [(ngModel)]="restaurants" color="bigmomma" style="background: white">
         <ion-segment-button value="menu">
 
-          Menus
+          Mains
        
            
          <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addMenu()"></ion-icon>
@@ -63,34 +66,53 @@
         <ion-segment-button value="beverage">
           
           Beverages
-          <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addMenu()"></ion-icon>
+          <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addBeverages()"></ion-icon>
         </ion-segment-button>
       </ion-segment>
     </div>
 
     <div [ngSwitch]="restaurants">
-      <ion-list *ngSwitchCase="'menu'">
+      
+      <ion-list *ngSwitchCase="'menu'" >
+        <li *ngFor="let main of mains" value="{{main.id}}">
         <ion-item>
           <ion-avatar item-start>
             <img src="assets/imgs/person.png">
           </ion-avatar>
-          <h2>Nasi Ayam Buah Bidara</h2>
-          <p>RM 4.50</p>
+          <h2>{{main.name}}</h2>
+          <p>RM{{main.price}}</p>
           <ion-icon ios="ios-create" md="md-create" item-end (click)="editMenu()"></ion-icon>
         </ion-item>
+      </li>
       </ion-list>
+     
 
       <ion-list *ngSwitchCase="'beverage'">
+        <li *ngFor="let beverage of beverages" value="{{beverage.id}}">
         <ion-item>
           <ion-avatar item-start>
             <img src="assets/imgs/person.png">
           </ion-avatar>
-          <h2>Lai Chee Kang</h2>
-          <p>RM 7.50</p>
+          <h2>{{beverage.name}}</h2>
+          <p>RM{{beverage.price}}</p>
           <ion-icon name="create" item-end (click)="editMenu()"></ion-icon>
         </ion-item>
+          </li>
       </ion-list>
     </div>
   </div>
+
+  <!-- <div><ul>
+      <li *ngFor="let beverage of beverages" value="{{beverage.id}}"><div   
+        >{{beverage.name}}</div></li> -->
+      <!-- loop start -->
+      <!--   <li><div class="square" style="background-color: palegreen">{{category.category}}</div></li> -->
+        <!-- <li><div class="square" style="background-color: aqua">EDUCATION</div></li>
+        <li><div class="square" style="background-color: purple">ENTERTAIMENT</div></li>
+        <li><div class="square" style="background-color: yellow">FOOD AND BEVERAGES</div></li>
+        <li><div class="square" style="background-color: coral">GADGETS</div></li>
+        <li><div class="square" style="background-color: bisque">GROCERIES</div></li>
+        <li><div class="square" style="background-color: orange">TRANSPORTATION</div></li> -->
+    <!-- </ul></div> -->
 
 </ion-content>

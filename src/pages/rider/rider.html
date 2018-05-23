@@ -1,11 +1,11 @@
 <ion-header>
 
   <ion-navbar color="bigmomma">
-    <ion-title>rider</ion-title>
+    <ion-title>My Rider</ion-title>
     <ion-buttons start>
-      <button ion-button icon-only (click)="dismissModal()">
+      <!-- <button ion-button icon-only (click)="dismissModal()">
         <ion-icon name="close"></ion-icon>
-      </button>
+      </button> -->
     </ion-buttons>
   </ion-navbar>
 
@@ -15,6 +15,7 @@
 <ion-content padding style="background: #D8D8D8">
 
   <ion-list (click)="selectRider()" no-lines>
+    <li *ngFor="let rider of riders" value="{{rider.id}}">
     <ion-item class="rider-item">
       <ion-row class="rider-row">
         <ion-col col-2>
@@ -23,28 +24,14 @@
           </ion-avatar>
         </ion-col>
         <ion-col col-6>
-          <h2>Ashraf Iskandar</h2>
+          <h2>{{rider.first_name}}</h2>
         </ion-col>
         <ion-col col-4 text-right>
-          <h2>WC 3440 M</h2>
+          <h2>{{rider.plate_no}}</h2>
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="rider-item">
-      <ion-row class="rider-row">
-        <ion-col col-2>
-          <ion-avatar item-start>
-            <img src="assets/imgs/person.png">
-          </ion-avatar>
-        </ion-col>
-        <ion-col col-6>
-          <h2>Karim Raslan</h2>
-        </ion-col>
-        <ion-col col-4 text-right>
-          <h2>WC 3440 M</h2>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+  </li>
   </ion-list>
 
 </ion-content>

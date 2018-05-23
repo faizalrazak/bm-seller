@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { HttpProvider } from '../../providers/http/http';
+
 
 import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
 
@@ -21,12 +23,21 @@ import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
 export class AddMenuPage {
 	base64Image:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) {
+  input= {
+   rest_id:'',
+  name:'',
+  price:'',
+  food_image:''
+  };
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera,
+    public httpprovider: HttpProvider, public loadingCtrl: LoadingController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddMenuPage');
+ionViewDidLoad() {
+  console.log('ionViewDidLoad AddMenuPage');
   }
+
 openCamera(){
      const options: CameraOptions = {
   quality: 70,
@@ -44,8 +55,35 @@ this.camera.getPicture(options).then((imageData) => {
 });
 }
 
-save(){
-     this.navCtrl.setRoot(MyRestaurantPage);
-  }
+addMenuForm(){
 
+   let loading = this.loadingCtrl.create({
+    spinner: 'ios',
+    content: 'Please Wait...'
+  });
+
+  loading.present();
+   
+   let food = {
+       restaurant_id:"1",
+       name: this.input.name,
+      price : this.input.price,
+      food_image:"test"
+      }
+
+
+
+  console.log(food);
+  
+  
+
+     this.httpprovider.createMenu(food).then((result) => {
+       loading.dismiss();
+      this.navCtrl.setRoot(MyRestaurantPage);    
+     },
+         (err) => {
+         console.log(err);
+     });
+ }
 }
+

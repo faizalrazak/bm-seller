@@ -20,6 +20,11 @@ import { AboutUsPage } from '../pages/about-us/about-us';
 import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { TermsConditionsPage } from '../pages/terms-conditions/terms-conditions';
 import { DetailWithRiderPage } from '../pages/detail-with-rider/detail-with-rider';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { NotificationsPage } from '../pages/notifications/notifications';
+import { LoginPage } from '../pages/login/login';
+import { AddBeveragesPage } from '../pages/add-beverages/add-beverages';
+import { SignUpPage } from '../pages/sign-up/sign-up';
 
 
 
@@ -36,7 +41,7 @@ import { HttpModule } from '@angular/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ComponentsModule } from '../components/components.module';
 import { Camera } from '@ionic-native/camera';
-
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
@@ -62,6 +67,11 @@ import { Geolocation } from '@ionic-native/geolocation';
     PrivacyPolicyPage,
     TermsConditionsPage,
     DetailWithRiderPage,
+    EditProfilePage,
+    NotificationsPage,
+    LoginPage,
+    AddBeveragesPage,
+    SignUpPage,
     MapsPage
     
   ],
@@ -96,6 +106,11 @@ import { Geolocation } from '@ionic-native/geolocation';
     PrivacyPolicyPage,
     TermsConditionsPage,
     DetailWithRiderPage,
+    EditProfilePage,
+    NotificationsPage,
+    LoginPage,
+    AddBeveragesPage,
+    SignUpPage,
     MapsPage
   ],
   providers: [
@@ -104,7 +119,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpProvider,
-    Camera
+    Camera,
+    Facebook
   ]
 })
 export class AppModule {}

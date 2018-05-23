@@ -5,6 +5,8 @@ import { IonicPage, ActionSheetController, NavController, ModalController, NavPa
 import { RiderPage } from '../rider/rider';
 import { MessageRoomPage } from '../message-room/message-room';
 import { FindRiderPage } from '../find-rider/find-rider';
+import { OrderPage } from '../order/order'
+
 
 
 /**
@@ -60,6 +62,10 @@ export class CurrentOrderDetailPage {
 
   messageRoomButton(){
     this.navCtrl.push(MessageRoomPage)
+  }
+
+  cancel(){
+    this.navCtrl.setRoot(OrderPage)
   }
 
 }
