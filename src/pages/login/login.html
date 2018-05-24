@@ -28,6 +28,10 @@
       <button ion-button block color="bigmomma" (click)="presentActionSheet()">Don't have an account? Sign Up now</button>
       <div *ngIf="userProfile">
       <p>{{userProfile.email}}</p>
+      <p>{{userProfile.id}}</p>
+      <p>{{userProfile.first_name}}</p> 
+      <p>{{userProfile.picture}}</p>
+
         
       </div>
     </div>
