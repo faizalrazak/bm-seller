@@ -35,10 +35,8 @@ facebookLogin(){
   	.then(profile =>{
   		this.userProfile={
   						  	email: profile['email'],
-	                        password : profile['id'],
-	                        first_name: profile['first_name'],
-	                        picture: profile['picture']['data']['url'],
-	                        name: profile['name']
+	                        password : profile['id']
+	                        
   		}
   	} )
   }

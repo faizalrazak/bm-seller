@@ -92,6 +92,30 @@ return this.http
       .map(res => res.json());
   }
 
+  registerUser(details) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      console.log(details);
+      this.http
+        .post(
+          "https://bigmomma.herokuapp.com/api/user/register",
+          JSON.stringify(details),
+          { headers: headers }
+        )
+        .subscribe(
+          res => {
+            let data = res.json();
+            console.log(data);
+            resolve(data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+  }
+
   // getUser() {
   //   return new Promise((resolve, reject) => {
   //     let headers = new Headers();
