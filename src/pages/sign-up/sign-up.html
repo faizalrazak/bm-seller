@@ -14,33 +14,35 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content >
 
-	<img src="assets/imgs/Page 1.png">
+	
+  <img src="assets/imgs/loginBg.png">
 	
 
-	<div padding text-center>
+	<div padding text-center class="top">
+      <img src="assets/imgs/logo-bigmomma.png" class="logo">
       <button ion-button block color="bigmomma" (click)="facebookLogin()">Sign Up with Facebook</button>
-      <button ion-button block color="bigmomma" (click)="verification()">Sign Up with Google</button>
+      <button ion-button block color="bigmomma" (click)="doGoogleLogin()">Sign Up with Google</button>
+      <a style="color: #000000;"> Already have an account?</a><b style="color: #000000;" (click)="login()">Log In</b>      
+  </div>
 
-      
-      <a style="color: #000000;"> Already have an account?//////////// </a><b style="color: #000000;" (click)="login()">Log In</b>
-      
-
-    </div>
     <div style="text-align: center" id="footer">
     <a style="color: #000000;"> By continuing, I confirm that I have read and agreed to the <b style="color: #000000;" (click)="inAppButtonClick()">Terms of Use & Conditions.</b>
   and <b style="color: #000000;" (click)="inAppButtonClick()">Privacy Policy</b></a>
 </div>
- <div *ngIf="userProfile">
-      <p>{{userProfile.email}}</p>
-      <p>{{userProfile.id}}</p>
-      <p>{{userProfile.first_name}}</p> 
-      <p>{{userProfile.picture}}</p>
-      <p>{{userProfile.name}}</p>
 
-        
-      </div>
+<div *ngIf="fbProfile">
+  <img src="fbProfile.picture">    
+    <p>{{fbProfile.email}}</p>
+    <p>{{fbProfile.name}}</p>
+    <p>{{fbProfile.first_name}}</p>
+    <p>{{fbProfile.password}}</p>
+</div>
+
+<div>
+  <p>{{user}}</p>
+</div>
 
 
 </ion-content>

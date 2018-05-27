@@ -1,7 +1,10 @@
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { HttpProvider } from '../../providers/http/http';
+import { GooglePlus } from '@ionic-native/google-plus';
+
 
 
 
@@ -14,86 +17,94 @@ import { HttpProvider } from '../../providers/http/http';
 
 @IonicPage()
 @Component({
-  selector: 'page-sign-up',
-  templateUrl: 'sign-up.html',
+  selector: "page-sign-up",
+  templateUrl: "sign-up.html"
 })
 export class SignUpPage {
+  fbProfile: any;
+
 
  
 	userProfile: any = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: Facebook,
   	public httpprovider: HttpProvider, public loadingCtrl: LoadingController, 
-  	private toastCtrl: ToastController) {
+  	private toastCtrl: ToastController, public googlePlus: GooglePlus) {
 
   }
+
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUpPage');
+    console.log("ionViewDidLoad SignUpPage");
   }
 
-  facebookLogin(){
-  	let loading = this.loadingCtrl.create({
-	    spinner: 'ios',
-	    content: 'Loading Please Wait...'
-	  });
+   doGoogleLogin(){
 
-  loading.present()
-   this.fb.login(['public_profile', 'user_friends', 'email'])
-  .then((res: FacebookLoginResponse) => {
-
-  	this.fb.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture)', [])
-  	.then(profile =>{
-  		this.userProfile={
-  						  	        email: profile['email'],
-	                        password : profile['id'],
-	                        first_name: profile['first_name'],
-	                        picture: profile['picture']['data']['url'],
-	                        name: profile['name'],
-	                        category: profile['2'],
-	                        phone_number: profile['0145002596']
-	                    }
-
-	   
-	   this.httpprovider.registerUser(this.userProfile).then((result) => {
-       ;
-
-       let response = result;
-       loading.dismiss();
-
-       console.log(response);
-       if(response == 'Email already exists')
-       { console.log('lalu')
-         let toast = this.toastCtrl.create({
-          message: 'Email already exists',
-           duration: 3000,
-          position: 'bottom'
-
-  });
-                   toast.present();
-
-       }
-       else{
-         // this.navCtrl.push(VerificationPage,{email:this.todo.value.email});
-       }
-                  
-     },
-         (err) => {
-         console.log('lalu');
-         console.log(err);
-     });
-
- } 
-  	 )
+     
+    let nav = this.navCtrl;
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+    
+    this.googlePlus.login({
+      'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
+      'webClientId': 'AIzaSyBJbbiT7oGzwRMRmziofdTCj4o9S3Xj7HY', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'offline': true
+    })
+    .then((user) => {
+      console.log(user)
+      
+    }, (error) => {
+      loading.dismiss();
+    });
   }
-  	
-  	
+      
 
-  	)
-  .catch(e => console.log('Error logging into Facebook', e));
-   loading.dismiss();
-// this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
 
-}
+  facebookLogin() {
+    this.fb
+      .login(["public_profile", "user_friends", "email"])
+      .then((res: FacebookLoginResponse) => {
+        this.fb
+          .api("me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture)",[]).then(
+            profile => {
+              this.fbProfile = {
+                email: profile["email"],
+                password: profile["id"],
+                first_name: profile["first_name"],
+                picture: profile["picture"]["data"]["url"],
+                name: profile["name"]
+                
+              }
 
+              let data = {
+                email: this.fbProfile.email,
+                password: this.fbProfile.password,
+                name: this.fbProfile.name,
+                category: "2",
+                phone_number: "0197397343"
+              };
+
+              this.httpprovider.registerFbUser(data).then(
+                result => {
+                  console.log(result)
+                  let toast = this.toastCtrl.create({
+                    message: 'Successfully Register with Facebook',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+    
+                  toast.present()
+                },
+                err => {
+                  console.log(err);
+                }
+              );
+          });
+      })
+      .catch(e => console.log("Error logging into Facebook", e));
+  }
+
+  
 }

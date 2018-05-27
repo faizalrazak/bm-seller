@@ -42,6 +42,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { ComponentsModule } from '../components/components.module';
 import { Camera } from '@ionic-native/camera';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
@@ -120,7 +121,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpProvider,
     Camera,
-    Facebook
+    Facebook,
+    GooglePlus
   ]
 })
 export class AppModule {}
