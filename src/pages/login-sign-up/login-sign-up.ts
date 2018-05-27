@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
 import { LoginPage } from '../login/login';
 import { SignUpPage } from '../sign-up/sign-up';
 
@@ -19,6 +18,7 @@ import { SignUpPage } from '../sign-up/sign-up';
 })
 export class LoginSignUpPage {
 
+  fbProfile:any
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -35,4 +35,5 @@ export class LoginSignUpPage {
 
   }
 
+  
 }

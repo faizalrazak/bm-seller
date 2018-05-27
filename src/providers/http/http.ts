@@ -1,33 +1,52 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Http, Headers } from "@angular/http";
+import "rxjs/add/operator/map";
 
-/*
-  Generated class for the HttpProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class HttpProvider {
-
   constructor(public http: Http) {
-    console.log('Hello HttpProvider Provider');
+    console.log("Hello HttpProvider Provider");
   }
 
- createMenu(details) {
+  registerFbUser(details) {
     return new Promise((resolve, reject) => {
-
       let headers = new Headers();
-      
       headers.append("Content-Type", "application/json");
-     
+      console.log("here 12")
+      console.log(details.email);
+      this.http
+        .post(
+          "https://bigmomma.herokuapp.com/api/user/register",
+          JSON.stringify(details),
+          { headers: headers }
+        )
+        .subscribe(
+          res => {
+      console.log("where 12")
+            
+            let data = res.json();
+            console.log(data);
+            resolve(data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+  }
+
+  createMenu(details) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      headers.append("Content-Type", "application/json");
+
       this.http
         .post(
           "https://bigmomma.herokuapp.com/api/main/create",
-          JSON.stringify(details), { headers: headers }
-          
+          JSON.stringify(details),
+          { headers: headers }
         )
         .subscribe(
           res => {
@@ -44,16 +63,15 @@ export class HttpProvider {
 
   createBeverage(details) {
     return new Promise((resolve, reject) => {
-
       let headers = new Headers();
-      
+
       headers.append("Content-Type", "application/json");
-     
+
       this.http
         .post(
           "https://bigmomma.herokuapp.com/api/beverage/create",
-          JSON.stringify(details), { headers: headers }
-          
+          JSON.stringify(details),
+          { headers: headers }
         )
         .subscribe(
           res => {
@@ -68,8 +86,8 @@ export class HttpProvider {
     });
   }
 
-getMains() {
-return this.http
+  getMains() {
+    return this.http
       .get(
         "https://bigmomma.herokuapp.com/api/restaurant/mains?restaurant_id=1"
       )
@@ -77,15 +95,15 @@ return this.http
   }
 
   getBeverages() {
-return this.http
+    return this.http
       .get(
         "https://bigmomma.herokuapp.com/api/restaurant/beverages?restaurant_id=1"
       )
       .map(res => res.json());
   }
 
-   myRider() {
-return this.http
+  myRider() {
+    return this.http
       .get(
         "https://bigmomma.herokuapp.com/api/restaurant/riders?restaurant_id=1"
       )
@@ -132,7 +150,6 @@ return this.http
   //       "Bearer " + window.localStorage.getItem("")
   //     );
 
-     
   //     this.http
   //       .post(
   //         "http://bigmomma.herokuapp.com/api/restaurant/edit?id=1",
@@ -154,7 +171,7 @@ return this.http
 
   OpenCloseRest(open) {
     let data = {
-      restaurant_id : "1",
+      restaurant_id: "1",
       restOpen: open
     };
 
@@ -162,13 +179,10 @@ return this.http
       let headers = new Headers();
       headers.append("Content-Type", "application/json");
 
-      
       this.http
-        .post(
-          "http://bigmomma.herokuapp.com/api/restaurant/edit?id=1",
-          data,
-          { headers: headers }
-        )
+        .post("http://bigmomma.herokuapp.com/api/restaurant/edit?id=1", data, {
+          headers: headers
+        })
         .subscribe(
           res => {
             let data = res.json();
@@ -181,5 +195,4 @@ return this.http
         );
     });
   }
-
 }
