@@ -5,7 +5,7 @@
     </button>
     <ion-title>My Restaurant</ion-title>
     <ion-buttons end>
-        <button ion-button icon-only (click)="editRestaurant()">
+        <button ion-button icon-only (click)="presentProfileModal()">
           <ion-icon ios="ios-redo" md="md-redo"></ion-icon>
         </button>
       </ion-buttons>
@@ -16,11 +16,9 @@
   <div style="height: 20%;">
     <img src="assets/imgs/res_bg.png">
   </div>
-<<<<<<< HEAD
+
   <ion-toggle [(ngModel)]="open" (ionChange)="OpenRest(rest)" checked="open" class="open"></ion-toggle>
-=======
-  <!-- <ion-toggle [(ngModel)]="open" (ionChange)="OpenRest(rest)" checked="open"></ion-toggle> -->
->>>>>>> 27e16ffba27bbd41d0685c95a72c782cc2db4718
+
 
  <!--  <ion-toggle  [(ngModel)]="open" href="#" class="open" *ngIf= "open" (click)="OpenCloseRest()"></ion-toggle> -->
 
@@ -30,9 +28,9 @@
   <div class="detail">
     <ion-item no-lines no-padding>
       <ion-label>
-        Restoran Tanjung
+        {{RestName}}
       </ion-label>
-     <ion-icon ios="ios-create" md="md-create" item-end (click)="editRestaurant()"></ion-icon>
+     <ion-icon ios="ios-create" md="md-create" item-end (click)="presentProfileModal()"></ion-icon>
     </ion-item>
 
     <div class="content">
@@ -49,7 +47,7 @@
           30 min
         </ion-badge>
       </ion-row>
-      <p>10:00 AM - 5:00 PM</p>
+      <p>{{RestOpenHour}} - {{RestCloseHour}}</p>
       <div class="box-below">
         Discount 15% for all purchases! Just enter Coupon Code M1234
       </div>
@@ -60,17 +58,12 @@
     <div>
       <ion-segment [(ngModel)]="restaurants" color="bigmomma" style="background: white">
         <ion-segment-button value="menu">
-
-          Mains
-       
-           
-         <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addMenu()"></ion-icon>
+          Mains                  
+         <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addMenuModal()"></ion-icon>
         </ion-segment-button>
-
-        <ion-segment-button value="beverage">
-          
+        <ion-segment-button value="beverage">       
           Beverages
-          <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addBeverages()"></ion-icon>
+          <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addBeverageModal()"></ion-icon>
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -83,8 +76,8 @@
           <ion-avatar item-start>
             <img src="assets/imgs/person.png">
           </ion-avatar>
-          <h2>{{main.name}}</h2>
-          <p>RM{{main.price}}</p>
+          <h2>{{main.data.name}}</h2>
+          <p>RM{{main.data.price}}</p>
           <ion-icon ios="ios-create" md="md-create" item-end (click)="editMenu()"></ion-icon>
         </ion-item>
       </li>
@@ -97,8 +90,8 @@
           <ion-avatar item-start>
             <img src="assets/imgs/person.png">
           </ion-avatar>
-          <h2>{{beverage.name}}</h2>
-          <p>RM{{beverage.price}}</p>
+          <h2>{{beverage.data.name}}</h2>
+          <p>RM{{beverage.data.price}}</p>
           <ion-icon name="create" item-end (click)="editMenu()"></ion-icon>
         </ion-item>
           </li>

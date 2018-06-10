@@ -1,0 +1,16 @@
+page-verification {
+	.box{
+	background-color: white;
+    width: 320px;
+    height: 40px;
+    border:1px solid black;
+    margin-top: 30px;
+    
+	}
+
+	.box > div > a{
+		padding:5px;
+		color: grey;
+	}
+
+}

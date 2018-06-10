@@ -25,9 +25,8 @@ import { NotificationsPage } from '../pages/notifications/notifications';
 import { LoginPage } from '../pages/login/login';
 import { AddBeveragesPage } from '../pages/add-beverages/add-beverages';
 import { SignUpPage } from '../pages/sign-up/sign-up';
-
-
-
+import { VerificationPage } from '../pages/verification/verification';
+import { VerificationCodePage } from '../pages/verification-code/verification-code';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -73,6 +72,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     LoginPage,
     AddBeveragesPage,
     SignUpPage,
+    VerificationPage,
+    VerificationCodePage,
     MapsPage
     
   ],
@@ -112,6 +113,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     LoginPage,
     AddBeveragesPage,
     SignUpPage,
+    VerificationPage,
+    VerificationCodePage,
     MapsPage
   ],
   providers: [

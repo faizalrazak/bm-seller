@@ -29,26 +29,26 @@ export class RiderPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RiderPage');
 
-    let loading = this.loadingCtrl.create({
-    spinner: 'ios',
-    content: 'Please Wait...'
-  });
+  //   let loading = this.loadingCtrl.create({
+  //   spinner: 'ios',
+  //   content: 'Please Wait...'
+  // });
 
-  loading.present();
-    this.httpprovider.myRider().subscribe(
-     response => {
-       console.log(response)
-       this.riders=response.data
+  // loading.present();
+  //   this.httpprovider.myRider().subscribe(
+  //    response => {
+  //      console.log(response)
+  //      this.riders=response.data
        
-     },
-     err => {
-       console.log(err);
-     },
-     ()=>{
-     console.log('List of riders')
-     loading.dismiss();
-   }
-   );
+  //    },
+  //    err => {
+  //      console.log(err);
+  //    },
+  //    ()=>{
+  //    console.log('List of riders')
+  //    loading.dismiss();
+  //  }
+  //  );
   }
 
   selectRider(){

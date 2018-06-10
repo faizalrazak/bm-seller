@@ -5,6 +5,9 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { HttpProvider } from '../../providers/http/http';
 import { GooglePlus } from '@ionic-native/google-plus';
 
+import { VerificationPage } from '../verification/verification';
+
+
 
 
 
@@ -23,13 +26,14 @@ import { GooglePlus } from '@ionic-native/google-plus';
 export class SignUpPage {
   fbProfile: any;
 
-
- 
-	userProfile: any = null;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private fb: Facebook,
-  	public httpprovider: HttpProvider, public loadingCtrl: LoadingController, 
-  	private toastCtrl: ToastController, public googlePlus: GooglePlus) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private fb: Facebook,
+  	public httpprovider: HttpProvider, 
+    public loadingCtrl: LoadingController, 
+  	private toastCtrl: ToastController, 
+    public googlePlus: GooglePlus) {
 
   }
 
@@ -48,8 +52,8 @@ export class SignUpPage {
     loading.present();
     
     this.googlePlus.login({
-      'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
-      'webClientId': 'AIzaSyBJbbiT7oGzwRMRmziofdTCj4o9S3Xj7HY', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'scopes': ['email'], // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
+      'webClientId': '187108437462-rubhqgntbvp8mhrns3973vh1646k6aqj.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
       'offline': true
     })
     .then((user) => {
@@ -57,12 +61,18 @@ export class SignUpPage {
       
     }, (error) => {
       loading.dismiss();
+      console.log('error sign up with google')
     });
   }
       
 
 
-  facebookLogin() {
+  facebookSignUp() {
+    let nav = this.navCtrl;
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
     this.fb
       .login(["public_profile", "user_friends", "email"])
       .then((res: FacebookLoginResponse) => {
@@ -72,11 +82,9 @@ export class SignUpPage {
               this.fbProfile = {
                 email: profile["email"],
                 password: profile["id"],
-                first_name: profile["first_name"],
-                picture: profile["picture"]["data"]["url"],
-                name: profile["name"]
-                
+                name: profile["name"]                
               }
+
 
               let data = {
                 email: this.fbProfile.email,
@@ -86,16 +94,18 @@ export class SignUpPage {
                 phone_number: "0197397343"
               };
 
-              this.httpprovider.registerFbUser(data).then(
+              this.httpprovider.registerUser(data).then(
                 result => {
                   console.log(result)
                   let toast = this.toastCtrl.create({
-                    message: 'Successfully Register with Facebook',
+                    message: 'Please fill in your phone number to complete the registration',
                      duration: 3000,
                     position: 'bottom'
                   });
-    
+                  loading.dismiss();
+                  
                   toast.present()
+                  this.navCtrl.push(VerificationPage,{});
                 },
                 err => {
                   console.log(err);
@@ -103,7 +113,24 @@ export class SignUpPage {
               );
           });
       })
-      .catch(e => console.log("Error logging into Facebook", e));
+      .catch(
+        e => {
+          console.log("Error logging into Facebook", e)
+
+          let toast = this.toastCtrl.create({
+                    message: 'Error sign up with facebook',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+          toast.present()
+
+
+        }
+
+        
+
+        
+        );
   }
 
   

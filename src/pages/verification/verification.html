@@ -1,0 +1,36 @@
+<!--
+  Generated template for the VerificationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="bigmomma">
+    <button ion-button menuToggle>
+      <ion-icon ios="ios-close" md="md-close"></ion-icon>
+    </button>
+    <ion-title align="center">Sign Up</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+	<h4 align="center">Thank you for registering with us!</h4>
+	<p align="center">Please enter your phone number to verify your account.</p>
+
+	
+   <!--  <div class="box"> -->
+    	<ion-item class="box">
+<ion-input type="number" max="9" placeholder="Your Phone Number"></ion-input>
+<a clear item-right (click)="clearInput()">X</a>
+</ion-item>
+    	<!-- <button style="float:right;" >
+      <ion-icon position="end" ios="ios-close" md="md-close"></ion-icon>
+    </button>
+    <ion-input></ion-input> -->
+	<!-- </div> -->
+  
+
+	 <button style="margin-top:25px;" ion-button block color="bigmomma" (click)="verificationCode()">Send Code</button>
+</ion-content>

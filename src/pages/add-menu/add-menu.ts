@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { HttpProvider } from '../../providers/http/http';
 
@@ -21,21 +21,80 @@ import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
   templateUrl: 'add-menu.html',
 })
 export class AddMenuPage {
+  restaurantInfo:any;
+  RestId:any;
 	base64Image:any;
+
+  mainCategories:any;
+
+  mainAddOn:any;
 
   input= {
    rest_id:'',
   name:'',
+  category:'',
   price:'',
   food_image:''
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera,
-    public httpprovider: HttpProvider, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private camera: Camera,
+    public httpprovider: HttpProvider, 
+    public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController) {
   }
 
 ionViewDidLoad() {
   console.log('ionViewDidLoad AddMenuPage');
+  let loading = this.loadingCtrl.create({
+    spinner: 'ios',
+    content: 'Please Wait...'
+  });
+
+  loading.present();
+  this.httpprovider.getRestaurantInfo().then(
+     (response) => {
+       console.log(response)
+       
+        this.restaurantInfo=response
+        this.RestId=this.restaurantInfo.data.id 
+        console.log(this.RestId)
+
+        this.httpprovider.getCategoryMain().subscribe(
+     response => {
+       console.log(response)
+       this.mainCategories=response.data
+       loading.dismiss();
+     },
+     err => {
+       console.log(err);
+     },
+     ()=>{
+     console.log('List of categories')
+   }
+   );
+
+        this.httpprovider.getAddOn().subscribe(
+     response => {
+       console.log(response)
+       this.mainAddOn=response.data
+       loading.dismiss();
+     },
+     err => {
+       console.log(err);
+     },
+     ()=>{
+     console.log('List of categories')
+   }
+   );
+
+        
+     },
+     err => {
+       console.log(err);
+     },
+   );
   }
 
 openCamera(){
@@ -65,8 +124,9 @@ addMenuForm(){
   loading.present();
    
    let food = {
-       restaurant_id:"1",
+       restaurant_id:this.RestId,
        name: this.input.name,
+       categories:this.input.category,
       price : this.input.price,
       food_image:"test"
       }
@@ -77,13 +137,27 @@ addMenuForm(){
   
   
 
-     this.httpprovider.createMenu(food).then((result) => {
+     this.httpprovider.createMenu(food, this.RestId)
+     .then((result) => {
+      let toast = this.toastCtrl.create({
+        message:'New main successfully added' ,
+        duration: 3000,
+        position: 'bottom'
+      });
        loading.dismiss();
-      this.navCtrl.setRoot(MyRestaurantPage);    
+      toast.present();
+      
+     this.navCtrl.pop();
+
+     
      },
          (err) => {
          console.log(err);
      });
  }
+
+ back(){
+    this.navCtrl.pop();
+  }
 }
 

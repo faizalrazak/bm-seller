@@ -5,28 +5,165 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class HttpProvider {
+  token: any;
   constructor(public http: Http) {
     console.log("Hello HttpProvider Provider");
   }
 
-  registerFbUser(details) {
+  createMenu(details, restaurantId) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
+
       headers.append("Content-Type", "application/json");
-      console.log("here 12")
-      console.log(details.email);
+
       this.http
         .post(
-          "https://bigmomma.herokuapp.com/api/user/register",
+          "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/mains",
           JSON.stringify(details),
           { headers: headers }
         )
         .subscribe(
           res => {
-      console.log("where 12")
-            
+            let data = res;
+            console.log(data);
+            resolve(data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+  }
+
+  createBeverage(details, restaurantId) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      headers.append("Content-Type", "application/json");
+
+      this.http
+        .post(
+          "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/beverages" ,
+          JSON.stringify(details),
+          { headers: headers }
+        )
+        .subscribe(
+          res => {
+            let data = res;
+            console.log(data);
+            resolve(data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+  }
+
+  getOwnerInfo(){
+   return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append(
+        "Authorization",
+        "Bearer " + window.localStorage.getItem("token")
+      );
+
+      this.http
+        .get("https://bigmomma.herokuapp.com/api/restaurant-owner", {
+          headers: headers
+        })
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            resolve(data.data);
+            console.log("data");
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+}
+
+getRestaurantInfo(){
+   return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append(
+        "Authorization",
+        "Bearer " + window.localStorage.getItem("token")
+      );
+      console.log(headers)
+      this.http
+        .get("https://bigmomma.herokuapp.com/api/restaurant", {
+          headers: headers
+        })
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            resolve(data.data);
+            console.log("data");
+          },
+          err => {
+            console.log(err)
+            reject(err);
+          }
+        );
+    });
+}
+
+getCategoryRest() {
+    return this.http
+      .get(
+        "https://bigmomma.herokuapp.com/api/categories"
+      )
+      .map(res => res.json());
+  }
+
+getCategoryMain() {
+    return this.http
+      .get(
+        "https://bigmomma.herokuapp.com/api/main-types"
+      )
+      .map(res => res.json());
+  }
+
+  getCategoryBev() {
+    return this.http
+      .get(
+        "https://bigmomma.herokuapp.com/api/beverage-types"
+      )
+      .map(res => res.json());
+  }
+
+   getAddOn() {
+    return this.http
+      .get(
+        "https://bigmomma.herokuapp.com/api/add-ons"
+      )
+      .map(res => res.json());
+  }
+
+updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address,  restaurantId) {
+    console.log(restaurantId)
+    let data = {
+      name:name,
+      location: location,
+      unit_no: unit_no,
+      address: address,
+      opening_hour: opening_hour,
+      closing_hour: closing_hour
+    };
+    return new Promise((resolve, reject) => {
+      
+      this.http
+        .put(
+          "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"",
+          data,
+        )
+        .subscribe(
+          res => {
             let data = res.json();
-            console.log(data);
+            console.log("data");
             resolve(data);
           },
           err => {
@@ -36,79 +173,29 @@ export class HttpProvider {
     });
   }
 
-  createMenu(details) {
-    return new Promise((resolve, reject) => {
-      let headers = new Headers();
-
-      headers.append("Content-Type", "application/json");
-
-      this.http
-        .post(
-          "https://bigmomma.herokuapp.com/api/main/create",
-          JSON.stringify(details),
-          { headers: headers }
-        )
-        .subscribe(
-          res => {
-            let data = res;
-            console.log(data);
-            resolve(data);
-          },
-          err => {
-            reject(err);
-          }
-        );
-    });
-  }
-
-  createBeverage(details) {
-    return new Promise((resolve, reject) => {
-      let headers = new Headers();
-
-      headers.append("Content-Type", "application/json");
-
-      this.http
-        .post(
-          "https://bigmomma.herokuapp.com/api/beverage/create",
-          JSON.stringify(details),
-          { headers: headers }
-        )
-        .subscribe(
-          res => {
-            let data = res;
-            console.log(data);
-            resolve(data);
-          },
-          err => {
-            reject(err);
-          }
-        );
-    });
-  }
-
-  getMains() {
+  getMains(restaurantId) {
     return this.http
       .get(
-        "https://bigmomma.herokuapp.com/api/restaurant/mains?restaurant_id=1"
+        "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/mains"
       )
       .map(res => res.json());
   }
 
-  getBeverages() {
+  getBeverages(restaurantId) {
     return this.http
       .get(
-        "https://bigmomma.herokuapp.com/api/restaurant/beverages?restaurant_id=1"
+        "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/beverages"
       )
       .map(res => res.json());
   }
 
-  myRider() {
-    return this.http
-      .get(
-        "https://bigmomma.herokuapp.com/api/restaurant/riders?restaurant_id=1"
-      )
-      .map(res => res.json());
-  }
+  // myRider(restaurantId) {
+  //   return this.http
+  //     .get(
+  //       "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/riders"
+  //     )
+  //     .map(res => res.json());
+  // }
 
   registerUser(details) {
     return new Promise((resolve, reject) => {
@@ -134,64 +221,34 @@ export class HttpProvider {
     });
   }
 
-  // getUser() {
-  //   return new Promise((resolve, reject) => {
-  //     let headers = new Headers();
-  //     headers.append(
-  //       "Authorization",
-  //       "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9iaWdtb21tYS5oZXJva3VhcHAuY29tL2FwaS9zZWxsZXIvbG9naW4iLCJpYXQiOjE1MjY5OTU2MDUsImV4cCI6MTU1ODUzMTYwNSwibmJmIjoxNTI2OTk1NjA1LCJqdGkiOiJLQ3VKbmphZ3diejUwYjdJIn0.k-PrQc_7sCNUJ99cv_AUkHWbBsOCLx5gJ_M8ZsiH4EM"
-  //     );
+  loginUser(details) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      console.log(details);
+      this.http
+        .post(
+          "https://bigmomma.herokuapp.com/api/seller/login",
+          JSON.stringify(details),
+          { headers: headers }
+        )
+        .subscribe(
+          res => {
+            let data = res.json();
+            this.token = data.token;
+            console.log(this.token);
+            window.localStorage.setItem("token", this.token);
+            console.log(window.localStorage);
+            resolve(data);
 
-  //     this.http
-  //       .get("https://bigmomma.herokuapp.com/api/restaurant/details", {
-  //         headers: headers
-  //       })
-  //       .map(res => res.json())
-  //       .subscribe(
-  //         data => {
-  //           resolve(data.data);
-  //           console.log("data");
-  //         },
-  //         err => {
-  //           reject(err);
-  //         }
-  //       );
-  //   });
-  // }
-
-  // restaurantSetting(name, location, unit_no, address, operation_hours ) {
-  //   let data = {
-  //     rest_name: name,
-  //     rest_location: location,
-  //     rest_unitNo: unit_no,
-  //     rest_address: address,
-  //     rest_operationHour: operation_hours
-  //   };
-  //   return new Promise((resolve, reject) => {
-  //     let headers = new Headers();
-  //     headers.append(
-  //       "Authorization",
-  //       "Bearer " + window.localStorage.getItem("")
-  //     );
-
-  //     this.http
-  //       .post(
-  //         "http://bigmomma.herokuapp.com/api/restaurant/edit?id=1",
-  //         data,
-  //         { headers: headers }
-  //       )
-  //       .subscribe(
-  //         res => {
-  //           let data = res.json();
-  //           console.log("data");
-  //           resolve(data);
-  //         },
-  //         err => {
-  //           reject(err);
-  //         }
-  //       );
-  //   });
-  // }
+            resolve(res.json());
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+  }
 
   OpenCloseRest(open) {
     let data = {

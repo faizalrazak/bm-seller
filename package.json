@@ -76,10 +76,10 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-whitelist": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "myreversedclientid"
-      }
+        "187108437462-rubhqgntbvp8mhrns3973vh1646k6aqj.apps.googleusercontent.com": "myreversedclientid"
+      },
+      "cordova-plugin-whitelist": {}
     },
     "platforms": [
       "android"

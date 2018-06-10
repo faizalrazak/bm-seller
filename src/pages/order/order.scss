@@ -1,20 +1,61 @@
 page-order {
-    .label{
-        height: 50px;
-        text-align: center;
-    }
+    
+.dotCancel 
+{
+  height: 10px;
+  width: 10px;
+  background-color: #FF4500;
+  border-radius: 15%;
+  display: inline-block;
+}
 
-    .order{
-        padding: 5px 20px;
-        height: 100px;
-        background: white;
-        border-left: solid #F5A623;
-    }
+.dotDeliver 
+{
+  height: 10px;
+  width: 10px;
+  background-color: greenyellow;
+  border-radius: 15%;
+  display: inline-block;
+}
 
-    .past-order{
-        padding: 5px 20px;
-        height: 100px;
-        background: white;
-        border-left: solid greenyellow;
-    }
+.dotOtw 
+{
+  height: 10px;
+  width: 10px;
+  background-color: #1e90ff;
+  border-radius: 15%;
+  display: inline-block;
+}
+
+.dot 
+{
+  height: 10px;
+  width: 10px;
+  background-color: #FFD700;
+  border-radius: 15%;
+  display: inline-block;
+}
+
+.label
+{
+    height: 50px;
+    text-align: center;
+}
+
+.order
+{
+    padding: 5px 20px;
+    height: 100px;
+    background: white;
+    border-left: solid #F5A623;
+}
+
+.past-order
+{
+    padding: 5px 20px;
+    height: 100px;
+    background: white;
+    border-left: solid greenyellow;
+}
+
 }

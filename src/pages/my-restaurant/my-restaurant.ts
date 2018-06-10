@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 
 
@@ -22,6 +22,12 @@ import { AddBeveragesPage } from '../add-beverages/add-beverages';
   templateUrl: 'my-restaurant.html',
 })
 export class MyRestaurantPage {
+  
+  restaurantInfo:any;
+  RestId:any;
+  RestName:any;
+  RestOpenHour:any;
+  RestCloseHour:any;
   mains:any;
   beverages:any;
   restaurants:any;
@@ -34,8 +40,14 @@ export class MyRestaurantPage {
    
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-    public httpprovider: HttpProvider, public loadingCtrl: LoadingController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public httpprovider: HttpProvider, 
+    public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
+    private toastCtrl: ToastController, 
+    ) {
     this.restaurants = 'menu'
     this.checked = 'true'
   }
@@ -50,53 +62,96 @@ export class MyRestaurantPage {
 
   loading.present();
 
-    this.httpprovider.getBeverages().subscribe(
-     response => {
+     this.httpprovider.getRestaurantInfo().then(
+     (response) => {
        console.log(response)
-       this.beverages=response.data
        
-     },
-     err => {
-       console.log(err);
+        this.restaurantInfo=response
+        this.RestId=this.restaurantInfo.data.id
+        this.RestName=this.restaurantInfo.data.name
+        this.RestOpenHour=this.restaurantInfo.data.opening_hour
+        this.RestCloseHour=this.restaurantInfo.data.closing_hour 
+
+        this.httpprovider.getBeverages(this.RestId).subscribe(
+      response => {
+        console.log(response)
+        this.beverages=response.data
        
-     },
-     ()=>{
-     console.log('List of beverages')
+         },
+           err => {
+           console.log(err);
+       
+            },
+              ()=>{
+              console.log('List of beverages')
      
    }
    );
-   
-    this.httpprovider.getMains().subscribe(
-     response => {
-       console.log(response)
-       this.mains=response.data
+        this.httpprovider.getMains(this.RestId).subscribe(
+      response => {
+        console.log(response)
+        this.mains=response.data
        
-     },
-     err => {
-       console.log(err);
-       loading.dismiss();
+         },
+           err => {
+           console.log(err);
+           loading.dismiss();
+
      },
      ()=>{
      console.log('List of menus')
      loading.dismiss();
    }
+   );   
+     },
+     err => {
+       console.log(err);
+       let toast = this.toastCtrl.create({
+                    message: 'You do not set any restaurant yet',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+          toast.present()
+          loading.dismiss();
+     },
    );
   }
 
-  editRestaurant(){
-    this.navCtrl.push(EditRestaurantPage)
-  }
+  presentProfileModal() {
+   let profileModal = this.modalCtrl.create(EditRestaurantPage);
+   profileModal.onDidDismiss(() => {
+
+      this.ionViewDidLoad();
+
+    });
+   profileModal.present();
+
+ }
+
+ addMenuModal() {
+   let profileModal = this.modalCtrl.create(AddMenuPage);
+   profileModal.onDidDismiss(() => {
+
+      this.ionViewDidLoad();
+
+    });
+   profileModal.present();
+
+ }
+
+ addBeverageModal() {
+   let profileModal = this.modalCtrl.create(AddBeveragesPage);
+   profileModal.onDidDismiss(() => {
+
+      this.ionViewDidLoad();
+
+    });
+   profileModal.present();
+
+ }
 
   editMenu(){
     this.navCtrl.push(EditMenuPage)
-  }
-
-  addMenu(){
-    this.navCtrl.push(AddMenuPage)
-  }
-
-  addBeverages(){
-    this.navCtrl.push(AddBeveragesPage)
   }
 
 

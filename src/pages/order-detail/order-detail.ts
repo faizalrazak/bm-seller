@@ -24,7 +24,8 @@ export class OrderDetailPage {
   base64Image:any;
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, 
-    public navParams: NavParams, public actionSheetCtrl: ActionSheetController, private camera: Camera) {
+    public navParams: NavParams, public actionSheetCtrl: ActionSheetController, 
+    private camera: Camera) {
   }
 
   ionViewDidLoad() {

@@ -8,6 +8,11 @@
 
   <ion-navbar color="bigmomma">
     <ion-title>Mains</ion-title>
+    <ion-buttons start>
+        <button ion-button icon-only (click)="back()">
+          <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" ></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -16,14 +21,15 @@
 <ion-content style="background: #E9E9E9">
 
   <div class="detail">
-    <ion-list no-margin>
+    <ion-list no-margin no-lines>
+
       <ion-item>
         <ion-row>
-          <ion-col col-6 no-padding>
+          <ion-col col-6>
             <p style="margin-top: 15px">Food Name</p>
           </ion-col>
-          <ion-col  col-6 no-padding class="item-right">
-            <ion-item no-lines>
+          <ion-col  col-6>
+            <ion-item no-padding>
             <ion-input placeholder="e.g. Nasi Lemak"  [(ngModel)]="input.name" 
             name="name"></ion-input>
           </ion-item>
@@ -33,16 +39,25 @@
 
       <ion-item>
         <ion-row>
-          <ion-col col-6 no-padding>
+          <ion-col col-12 no-padding>
             <p style="margin-top: 15px">Category</p>
           </ion-col>
-          <ion-col col-6 no-padding class="item-right">
-            <ion-item no-lines>
-            <ion-input placeholder="e.g. Malay's Food"></ion-input>
-          </ion-item>
-          </ion-col>
+          <!-- <ion-col col-12 no-padding class="item-right">
+            <ion-item>
+              <ion-label>Select Category</ion-label>
+                <ion-select  [(ngModel)]="category" multiple="true">
+                  <ion-option *ngFor="let category of mainCategories" value="{{category.id}}">{{category.type}}</ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-col> -->
         </ion-row>
       </ion-item>
+      <ion-item>
+              <ion-label>Select Category</ion-label>
+                <ion-select  [(ngModel)]="input.category" multiple="true">
+                  <ion-option *ngFor="let category of mainCategories" value="{{category.id}}">{{category.type}}</ion-option>
+                </ion-select>
+            </ion-item>
 
       <ion-item>
         <ion-row>
@@ -87,7 +102,7 @@
 
   <div class="image-div">
     <img (click)="openCamera()" class="food-image" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!base64Image">
-    <!-- <img (click)="openCamera()" class="food-image" src="{{user.user_image}}" *ngIf="user.user_image"> -->
+    <img (click)="openCamera()" class="food-image" src="{{base64Image}}" *ngIf="base64Image">
     <div>
       <ion-row align-items-center justify-content-center>
         <p padding>Sold Out</p>

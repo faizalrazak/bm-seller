@@ -32,11 +32,11 @@
   <div class="first-box">
     <ion-row>
       <ion-col col-6 style="font-weight: bold">Company Name</ion-col>
-      <ion-col col-6>Tanjung</ion-col>
+      <ion-col col-6>{{RestName}}</ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-12 style="font-weight: bold">Address</ion-col>
-      <ion-col col-12>57, Jalan TSJ 20, Taman Sri Jelok, 43000 Kajang, Selangor, Malaysia.</ion-col>
+      <ion-col col-12>{{RestAddress}}</ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-12 style="font-weight: bold">About</ion-col>
@@ -44,14 +44,27 @@
     </ion-row>
     <ion-row>
       <ion-col col-6 style="font-weight: bold">SSM Registeration No.</ion-col>
-      <ion-col col-6>123456-P</ion-col>
+      <ion-col col-6>{{RestSSMNo}}</ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-6 style="font-weight: bold">GST ID (If Applicable)</ion-col>
-      <ion-col col-6>09CBD7382</ion-col>
+      <ion-col col-12 style="font-weight: bold">Category</ion-col>
+      <ion-col col-12>Halal</ion-col>
     </ion-row>
-    <ion-row no-padding (click)="rider()">
+    <!-- <ion-row no-padding (click)="rider()">
       <button ion-item no-lines>My Rider</button>
+    </ion-row> -->
+    <ion-row>
+      <ion-col col-6>
+        <ion-item no-lines no-padding>
+          <ion-label  style="font-weight: bold"  stacked>My Rider</ion-label>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-6>
+        <ion-item no-lines no-padding >
+         <ion-icon item-right ios="ios-arrow-dropright" md="md-arrow-dropright" (click)="rider()"></ion-icon>
+        </ion-item>
+      </ion-col>
     </ion-row>
   </div>
 
@@ -64,19 +77,19 @@
   <div class="first-box">
     <ion-row>
       <ion-col col-6>First Name</ion-col>
-      <ion-col col-6>Nurul Izwan</ion-col>
+      <ion-col col-6>{{ownerName}}</ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-6>Last Name</ion-col>
-      <ion-col col-6>Dahlan</ion-col>
+      <ion-col col-6>{{ownerName}}</ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-6>Email Address</ion-col>
-      <ion-col col-6>nurulizwan@gmail.com</ion-col>
+      <ion-col col-6>{{ownerEmail}}</ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-6>Phone Number</ion-col>
-      <ion-col col-6>+0698151125</ion-col>
+      <ion-col col-6>+{{ownerPhoneNo}}</ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-6>Date Of Birth</ion-col>
