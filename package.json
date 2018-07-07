@@ -28,6 +28,7 @@
     "@ionic-native/facebook": "^4.7.0",
     "@ionic-native/geolocation": "^4.7.0",
     "@ionic-native/google-plus": "^4.7.0",
+    "@ionic-native/native-storage": "^4.9.0",
     "@ionic-native/splash-screen": "4.6.0",
     "@ionic-native/status-bar": "4.6.0",
     "@ionic/storage": "2.1.3",
@@ -39,16 +40,19 @@
     "cordova-plugin-facebook4": "^2.1.0",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-googlemaps": "^2.2.9",
-    "cordova-plugin-googleplus": "^5.3.0",
+    "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.2.0",
+    "cordova-plugin-nativestorage": "^2.3.1",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "ionic-angular": "3.9.2",
     "ionic2-rating": "^1.2.2",
     "ionicons": "3.0.0",
+    "platform": "1.3.5",
     "rxjs": "5.5.8",
     "sw-toolbox": "3.6.0",
+    "whitelist": "^1.0.2",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
@@ -77,12 +81,11 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-googleplus": {
-        "187108437462-rubhqgntbvp8mhrns3973vh1646k6aqj.apps.googleusercontent.com": "myreversedclientid"
+        "REVERSED_CLIENT_ID": "THE_CLIENT_ID_YOU_JUST_"
       },
-      "cordova-plugin-whitelist": {}
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-nativestorage": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }

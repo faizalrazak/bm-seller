@@ -37,7 +37,7 @@
 
       <ion-col col-6>
         <ion-item no-lines text-wrap>
-          <ion-input [(ngModel)]="restName"   placeholder={{restName}}></ion-input>
+          <ion-textarea [(ngModel)]="restName"   placeholder={{restName}}></ion-textarea>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -85,15 +85,18 @@
     </ion-row>
 
     <ion-row>
-      <ion-col col-6>
+      <ion-col col-12>
         <ion-item no-lines>
           <ion-label  style="font-weight: bold"  stacked>Category</ion-label>
         </ion-item>
       </ion-col>
 
-      <ion-col col-6>
+      <ion-col col-12>
         <ion-item no-lines>
-          <ion-textarea   placeholder="Malay, Halal"></ion-textarea>
+          <ion-label>Select Category</ion-label>
+  <ion-select  [(ngModel)]="restCategory" multiple="true">
+    <ion-option *ngFor="let category of restCategories" value="{{category.id}}">{{category.category}}</ion-option>
+  </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>

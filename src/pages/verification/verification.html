@@ -30,6 +30,12 @@
     </button>
     <ion-input></ion-input> -->
 	<!-- </div> -->
+
+  <div *ngIf="user">
+    <p>{{user.email}}</p>
+    <p>{{user.name}}</p>
+
+</div>
   
 
 	 <button style="margin-top:25px;" ion-button block color="bigmomma" (click)="verificationCode()">Send Code</button>

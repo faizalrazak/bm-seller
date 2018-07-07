@@ -5,4 +5,5 @@
     <string name="activity_name">@string/launcher_name</string>
     <string name="fb_app_id">363438337479928</string>
     <string name="fb_app_name">BM Seller</string>
+    <string name="server_client_id">918701416859-3kjkp562k3qcjuhssreuk00b4vj3dnip.apps.googleusercontent.com</string>
 </resources>

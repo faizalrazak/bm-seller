@@ -12,6 +12,7 @@ import { FindRiderPage } from '../pages/find-rider/find-rider';
 import { MessageRoomPage } from '../pages/message-room/message-room';
 import { EditRestaurantPage } from '../pages/edit-restaurant/edit-restaurant';
 import { EditMenuPage } from '../pages/edit-menu/edit-menu';
+import { EditBeveragePage } from '../pages/edit-beverage/edit-beverage';
 import { MapsPage } from '../pages/maps/maps'
 import { CurrentOrderDetailPage } from '../pages/current-order-detail/current-order-detail';
 import { AddMenuPage } from '../pages/add-menu/add-menu';
@@ -27,6 +28,8 @@ import { AddBeveragesPage } from '../pages/add-beverages/add-beverages';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { VerificationPage } from '../pages/verification/verification';
 import { VerificationCodePage } from '../pages/verification-code/verification-code';
+import { RegisterRestaurantPage } from '../pages/register-restaurant/register-restaurant';
+
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -41,6 +44,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { ComponentsModule } from '../components/components.module';
 import { Camera } from '@ionic-native/camera';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -60,6 +64,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     MessageRoomPage,
     EditRestaurantPage,
     EditMenuPage,
+    EditBeveragePage,
     CurrentOrderDetailPage,
     AddMenuPage,
     LoginSignUpPage,
@@ -74,6 +79,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     SignUpPage,
     VerificationPage,
     VerificationCodePage,
+    RegisterRestaurantPage,
     MapsPage
     
   ],
@@ -101,6 +107,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     MessageRoomPage,
     EditRestaurantPage,
     EditMenuPage,
+    EditBeveragePage,
     CurrentOrderDetailPage,
     AddMenuPage,
     LoginSignUpPage,
@@ -115,6 +122,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     SignUpPage,
     VerificationPage,
     VerificationCodePage,
+    RegisterRestaurantPage,
     MapsPage
   ],
   providers: [
@@ -125,6 +133,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     HttpProvider,
     Camera,
     Facebook,
+    NativeStorage,
     GooglePlus
   ]
 })

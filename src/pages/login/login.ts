@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { HttpProvider } from '../../providers/http/http';
+import { GooglePlus } from '@ionic-native/google-plus';
+
 
 import { HomePage } from '../home/home';
 
@@ -31,7 +33,8 @@ export class LoginPage {
   	private fb: Facebook,
   	public toastCtrl:ToastController,
     public httpprovider: HttpProvider,
-    public loadingCtrl: LoadingController 
+    public loadingCtrl: LoadingController,
+    public googlePlus: GooglePlus
 
     ) {
   }
@@ -40,8 +43,59 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-facebookLogin() {
+  doGoogleLogin(){
+
+     
     let nav = this.navCtrl;
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+    
+    this.googlePlus.login({
+      'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
+      'webClientId': '918701416859-3kjkp562k3qcjuhssreuk00b4vj3dnip.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'offline': true
+    })
+    .then((user) => {
+      console.log("user = "+user)
+      console.log("password = "+user.userId)
+
+      let data={
+        email:user.email,
+        name:user.displayName,
+        password:user.userId,
+
+
+      }
+      console.log("Name="+user.displayName)
+      console.log("Email="+user.email)
+      console.log("Password="+user.userId)
+
+      this.httpprovider.loginUser(data).then(
+                result => {
+                  console.log(result)
+                  let toast = this.toastCtrl.create({
+                    message: 'Successfully login',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+                  loading.dismiss();
+                  
+                  toast.present()
+                  this.navCtrl.setRoot(HomePage,{});
+                },
+                err => {
+                  console.log(err);
+                });
+
+    }, (error) => {
+      loading.dismiss();
+    });
+  }
+
+facebookLogin() {
+  let nav = this.navCtrl;
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -62,7 +116,9 @@ facebookLogin() {
               let data = {
                 email: this.fbProfile.email,
                 password: this.fbProfile.password,
-              };
+                // email: "amir@gmail.com",
+                // password: "123456",
+              }
 
               this.httpprovider.loginUser(data).then(
                 result => {
@@ -72,12 +128,14 @@ facebookLogin() {
                      duration: 3000,
                     position: 'bottom'
                   });
-                  loading.dismiss();
+                  
                   
                   toast.present()
                   this.navCtrl.setRoot(HomePage,{});
+                  loading.dismiss();
                 },
                 err => {
+                  loading.dismiss();
                   console.log(err);
                 }
               );
@@ -92,9 +150,10 @@ facebookLogin() {
         );
 
       let data = {
-                email: "amirizzuddin27@gmail.com",
-                password: "Butuhang27!",
+                email: "amir@gmail.com",
+                password: "123456",
               };
+
 
       this.httpprovider.loginUser(data).then(
                 result => {
@@ -104,9 +163,10 @@ facebookLogin() {
                      duration: 3000,
                     position: 'bottom'
                   });
-                  loading.dismiss();
+                  
                   
                   toast.present()
+                  loading.dismiss();
                   this.navCtrl.setRoot(HomePage,{});
                 },
                 err => {

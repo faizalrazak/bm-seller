@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
+import { AlertController } from 'ionic-angular';
 
 
 import { EditRestaurantPage } from '../edit-restaurant/edit-restaurant';
 import { EditMenuPage } from '../edit-menu/edit-menu';
+import { EditBeveragePage } from '../edit-beverage/edit-beverage';
 import { AddMenuPage } from '../add-menu/add-menu';
 import { AddBeveragesPage } from '../add-beverages/add-beverages';
 
@@ -22,23 +24,19 @@ import { AddBeveragesPage } from '../add-beverages/add-beverages';
   templateUrl: 'my-restaurant.html',
 })
 export class MyRestaurantPage {
+
+  toggleValue: boolean;
   
   restaurantInfo:any;
   RestId:any;
   RestName:any;
+  restCategory:any;
   RestOpenHour:any;
   RestCloseHour:any;
   mains:any;
   beverages:any;
   restaurants:any;
-  checked:any;
-
-   restaurant = {
-    
-    open: "",
-    id:""
-   
-  };
+  open:any;
 
   constructor(
     public navCtrl: NavController, 
@@ -46,14 +44,17 @@ export class MyRestaurantPage {
     public httpprovider: HttpProvider, 
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
-    private toastCtrl: ToastController, 
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController 
     ) {
     this.restaurants = 'menu'
-    this.checked = 'true'
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyRestaurantPage');
+
+    // this.open =  window.localStorage.getItem('open')  ? window.localStorage.getItem('open') : false  
+
 
     let loading = this.loadingCtrl.create({
     spinner: 'ios',
@@ -69,8 +70,16 @@ export class MyRestaurantPage {
         this.restaurantInfo=response
         this.RestId=this.restaurantInfo.data.id
         this.RestName=this.restaurantInfo.data.name
+        this.restCategory=this.restaurantInfo.data.category
         this.RestOpenHour=this.restaurantInfo.data.opening_hour
-        this.RestCloseHour=this.restaurantInfo.data.closing_hour 
+        this.RestCloseHour=this.restaurantInfo.data.closing_hour
+        this.open=this.restaurantInfo.data.open
+
+        if(this.open == 1) {
+          this.toggleValue = true
+        } else {
+          this.toggleValue = false
+        }
 
         this.httpprovider.getBeverages(this.RestId).subscribe(
       response => {
@@ -115,7 +124,12 @@ export class MyRestaurantPage {
           loading.dismiss();
      },
    );
+
+
+      
   }
+
+ 
 
   presentProfileModal() {
    let profileModal = this.modalCtrl.create(EditRestaurantPage);
@@ -135,9 +149,16 @@ export class MyRestaurantPage {
       this.ionViewDidLoad();
 
     });
+   
    profileModal.present();
 
  }
+
+ // addMenuModal() {
+ //    this.navCtrl.push(AddMenuPage, {});
+ //  }
+
+ 
 
  addBeverageModal() {
    let profileModal = this.modalCtrl.create(AddBeveragesPage);
@@ -150,26 +171,206 @@ export class MyRestaurantPage {
 
  }
 
-  editMenu(){
-    this.navCtrl.push(EditMenuPage)
+  editMenu(menuId){
+    this.navCtrl.push(EditMenuPage, menuId)
+  }
+
+  editBeverage(beverageId){
+    
+    this.navCtrl.push(EditBeveragePage, beverageId )
+  }
+
+  openCloseRestaurant(openState) {
+    let loading = this.loadingCtrl.create({
+      spinner: 'ios',
+      content: 'Please Wait...'
+    });
+
+    loading.present();
+
+    this.httpprovider.openRest(this.RestId, openState).then(
+      result => {
+        loading.dismiss(); 
+      },
+      err => {
+        console.log(err);
+      }
+      );
   }
 
 
 
   OpenRest(){
-     
-    let rest={
-     restaurant_id : "1",
-     open : this.restaurant.open
-    } 
+    console.log(this.toggleValue)
 
-    this.httpprovider.OpenCloseRest(rest).then(
-      result => {
-           
-      },
-      err => {
+    if(this.toggleValue == false) {
+      this.open = 0
+
+      let prompt = this.alertCtrl.create({
+        message: "Are you sure to close restaurant?",
+        buttons: [
+          {
+            text: 'Cancel',
+            role:'cancel',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Confirm',
+            handler: data => {
+
+              this.openCloseRestaurant(this.open)
+              this.navCtrl.pop
+               let toast = this.toastCtrl.create({
+          message:'Restaurant close' ,
+          duration: 3000,
+          position: 'bottom'
+        });
         
-      }
-    );
-  }
+        toast.present();
+            }
+          }
+        ]
+      });
+      prompt.present();
+    } else {
+      this.open = 1
+      let prompt = this.alertCtrl.create({
+        message: "Are you sure to open restaurant?",
+        buttons: [
+          {
+            text: 'Cancel',
+            role:'cancel',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Confirm',
+            handler: data => {
+              this.openCloseRestaurant(this.open)
+              this.navCtrl.pop
+              let toast = this.toastCtrl.create({
+          message:'Restaurant open' ,
+          duration: 3000,
+          position: 'bottom'
+        });
+        
+        toast.present();
+
+            }
+          }
+        ]
+      });
+      prompt.present();
+    }
+
+
+    // if(this.open == 0){
+
+    //   if(this.toggleValue = true){
+    //   let prompt = this.alertCtrl.create({
+    //     message: "Are you sure to open restaurant?",
+    //     buttons: [
+    //       {
+    //         text: 'Cancel',
+    //         handler: data => {
+    //           console.log('Cancel clicked');
+    //           this.navCtrl.setRoot(MyRestaurantPage);
+    //         }
+    //       },
+    //       {
+    //         text: 'Confirm',
+    //         handler: data => {
+       
+    //           let loading = this.loadingCtrl.create({
+    //             spinner: 'ios',
+    //             content: 'Please Wait...'
+    //           });
+
+    //           loading.present();
+
+    //             this.httpprovider.openRest(this.RestId,this.open).then(
+    //             result => {
+    //               let toast = this.toastCtrl.create({
+    //                   message:'Restaurant open' ,
+    //                   duration: 3000,
+    //                   position: 'bottom'
+    //                 });
+    //                 loading.dismiss(); 
+    //                 toast.present();
+    //                 this.open=1;
+    //                 this.navCtrl.setRoot(MyRestaurantPage);
+
+      
+           
+    //             },
+    //             err => {
+    //                console.log(err);
+    //                    }
+    //               );
+    //         }
+    //       }
+    //     ]
+    //   });
+    //   prompt.present();
+    // }
+
+    // }
+    // else{
+
+    //   if(this.toggleValue = true){
+    //   let prompt = this.alertCtrl.create({
+    //     message: "Are you sure to close restaurant?",
+    //     buttons: [
+    //       {
+    //         text: 'Cancel',
+    //         handler: data => {
+    //           console.log('Cancel clicked');
+    //           this.navCtrl.setRoot(MyRestaurantPage);
+    //         }
+    //       },
+    //       {
+    //         text: 'Confirm',
+    //         handler: data => {
+       
+    //           let loading = this.loadingCtrl.create({
+    //             spinner: 'ios',
+    //             content: 'Please Wait...'
+    //           });
+
+    //           loading.present();
+
+    //             this.httpprovider.closeRest(this.RestId,this.open).then(
+    //             result => {
+    //               let toast = this.toastCtrl.create({
+    //                   message:'Restaurant close' ,
+    //                   duration: 3000,
+    //                   position: 'bottom'
+    //                 });
+    //                 loading.dismiss(); 
+    //                 toast.present();
+    //                 this.open=0;
+    //                 this.navCtrl.setRoot(MyRestaurantPage);
+
+      
+           
+    //             },
+    //             err => {
+    //                console.log(err);
+    //                    }
+    //               );
+    //         }
+    //       }
+    //     ]
+    //   });
+    //   prompt.present();
+    // }
+
+    // }
+     
+   
+   }
+ 
 }

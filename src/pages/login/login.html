@@ -22,7 +22,7 @@
 	<div padding text-center class="top">
       <img src="assets/imgs/logo-bigmomma.png" class="logo">
       <button ion-button block color="bigmomma" (click)="facebookLogin()">Log In with Facebook</button>
-      <button ion-button block color="bigmomma" (click)="presentActionSheet()">Log In with Google</button>
+      <button ion-button block color="bigmomma" (click)="doGoogleLogin()">Log In with Google</button>
 
       <p align="center" >Forgot Password?</p>
 
@@ -35,6 +35,13 @@
         
       </div>
     </div>
+
+    <div *ngIf="fbProfile">
+  <img src="fbProfile.picture"> 
+    <p>nEW</p>   
+    <p>{{fbProfile.email}}</p>
+    <p>{{fbProfile.password}}</p>
+</div>
 
 
 </ion-content>

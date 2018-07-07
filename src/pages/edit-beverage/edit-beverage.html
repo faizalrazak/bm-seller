@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="bigmomma">
-    <ion-title>Mains</ion-title>
+    <ion-title>Beverages</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,9 +19,9 @@
     <ion-list no-margin>
       
             <ion-item no-lines >
-            <ion-label item-start color="black" fixed>Food Name</ion-label>
+            <ion-label item-start color="black" fixed>Beverage Name</ion-label>
             
-            <ion-input [(ngModel)]="mainsName"></ion-input>
+            <ion-input  [(ngModel)]="beveragesName"></ion-input>
             
             </ion-item>
        
@@ -32,35 +32,12 @@
       </ion-item>
       <ion-item no-lines>
         <ion-label item-start color="black" fixed>Price(RM)</ion-label>
-            <ion-input type="number" [(ngModel)]="mainsPrice"></ion-input>
+            <ion-input type="number" [(ngModel)]="beveragesPrice"></ion-input>
       
       </ion-item>
-      <ion-item no-lines>
-        <ion-row>
-          <ion-col col-6 no-padding>
-            <p>Add-On</p>
-          </ion-col>
-          <ion-col col-6 no-padding class="item-right" text-wrap>
-            <p>+ Add More</p>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-      <!-- <ion-item>
-        <ion-label>10 Days [ RM 10.00 ]</ion-label>
-        <ion-radio value="1"></ion-radio>
-      </ion-item> -->
     </ion-list>
-    <ion-list radio-group>
-      <ion-item class="radio-item">
-        <ion-label>Telur Mata [ RM 1.50 ]</ion-label>
-        <ion-radio checked="true" value="telurmata"></ion-radio>
-      </ion-item>
-
-      <ion-item class="radio-item">
-        <ion-label>Ayam Goreng [ RM 3.00 ]</ion-label>
-        <ion-radio value="ayamgoreng"></ion-radio>
-      </ion-item>
-    </ion-list>
+  </div>
+  <div>
   </div>
   <div class="image-div">
     <img (click)="openCamera()" class="food-image" src="assets/imgs/logo.png" alt="">

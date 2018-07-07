@@ -23,7 +23,7 @@
 	<div padding text-center class="top">
       <img src="assets/imgs/logo-bigmomma.png" class="logo">
       <button ion-button block color="bigmomma" (click)="facebookSignUp()">Sign Up with Facebook</button>
-      <button ion-button block color="bigmomma" (click)="doGoogleLogin()">Sign Up with Google</button>
+      <button ion-button block color="bigmomma" (click)="doGoogleSignUp()">Sign Up with Google</button>
       <a style="color: #000000;"> Already have an account?</a><b style="color: #000000;" (click)="login()">Log In</b>      
   </div>
 
@@ -33,11 +33,21 @@
 </div>
 
 <div *ngIf="fbProfile">
-  <img src="fbProfile.picture">    
+  <!-- <img src="fbProfile.picture">    
     <p>{{fbProfile.email}}</p>
     <p>{{fbProfile.name}}</p>
     <p>{{fbProfile.first_name}}</p>
-    <p>{{fbProfile.password}}</p>
+    <p>{{fbProfile.password}}</p> -->
+    <p>new</p>
+    <p>{{data.email}}</p>
+    <p>{{data.password}}</p>
+
+</div>
+
+<div *ngIf="user">
+    <p>{{user}}</p>
+    <p>{{user.name}}</p>
+
 </div>
 
 <div>

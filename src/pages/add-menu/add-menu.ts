@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, ViewController } 
+from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { HttpProvider } from '../../providers/http/http';
 
@@ -34,6 +35,7 @@ export class AddMenuPage {
   name:'',
   category:'',
   price:'',
+  addOnMain:'',
   food_image:''
   };
 
@@ -42,7 +44,10 @@ export class AddMenuPage {
     private camera: Camera,
     public httpprovider: HttpProvider, 
     public loadingCtrl: LoadingController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    public viewCtrl: ViewController) {
+
+    
   }
 
 ionViewDidLoad() {
@@ -65,13 +70,12 @@ ionViewDidLoad() {
      response => {
        console.log(response)
        this.mainCategories=response.data
-       loading.dismiss();
      },
      err => {
        console.log(err);
      },
      ()=>{
-     console.log('List of categories')
+     console.log('List of mains categories')
    }
    );
 
@@ -85,7 +89,7 @@ ionViewDidLoad() {
        console.log(err);
      },
      ()=>{
-     console.log('List of categories')
+     console.log('List of mains add-on')
    }
    );
 
@@ -127,8 +131,9 @@ addMenuForm(){
        restaurant_id:this.RestId,
        name: this.input.name,
        categories:this.input.category,
-      price : this.input.price,
-      food_image:"test"
+       add_ons:this.input.addOnMain,
+       price : this.input.price,
+       food_image:"test"
       }
 
 
@@ -157,7 +162,8 @@ addMenuForm(){
  }
 
  back(){
-    this.navCtrl.pop();
+   
+    this.viewCtrl.dismiss();
   }
 }
 

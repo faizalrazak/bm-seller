@@ -14,6 +14,8 @@ import { LoginSignUpPage } from '../pages/login-sign-up/login-sign-up';
 import { SubscriptionPage } from '../pages/subscription/subscription';
 import { TermsConditionsPage } from '../pages/terms-conditions/terms-conditions';
 import { NotificationsPage } from '../pages/notifications/notifications';
+import { RegisterRestaurantPage } from '../pages/register-restaurant/register-restaurant';
+
 
 
 
@@ -40,11 +42,13 @@ export class MyApp {
       { title: 'My Restaurant', component: MyRestaurantPage },
       { title: 'Orders', component: OrderPage },
       { title: 'Subscription', component: SubscriptionPage },
-      // { title: 'Profile', component: ProfilePage }, 
+       
       { title: 'Notification', component: NotificationsPage },
       { title: 'About Us', component: AboutUsPage },
       { title: 'Privacy Policy', component: PrivacyPolicyPage },
       { title: 'Term and Conditions', component: TermsConditionsPage },
+      { title: 'Register Restaurant', component: RegisterRestaurantPage }, 
+
     ];
 
   }
@@ -55,7 +59,31 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      // if (window.localStorage.getItem('token') ) {
+        
+      //     this.http.getGoalHome().then((response)=>{
+      //       console.log(response);
+      //       let data = response
+      //       if (response || response == "Goal Completed"){
+      //       // this.rootPage = TabsPage;
+      //       this.rootPage = TabsPage;
+
+      //       } else {
+      //         // this.rootPage = AddGoalPage; 
+      //         this.rootPage = TutorialPage; 
+      //       }
+
+      //     })
+              
+
+      // } else {
+      //   this.rootPage = TutorialPage;
+
+
+      // }
     });
+    
   }
 
   openProfile() {

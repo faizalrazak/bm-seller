@@ -84,17 +84,18 @@
         </ion-row>
       </ion-item>
     </ion-list>
-    <ion-list radio-group>
+    <ion-item>
+              <ion-label>Select Add On</ion-label>
+                <ion-select  [(ngModel)]="input.addOnMain" multiple="true">
+                  <ion-option *ngFor="let addOn of mainAddOn"  value="{{addOn.id}}">{{addOn.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+    <!-- <ion-list radio-group >
       <ion-item class="radio-item">
-        <ion-label>Telur Mata [ RM 1.50 ]</ion-label>
-        <ion-radio checked="true" value="telurmata"></ion-radio>
+        <ion-label ></ion-label>
+        <ion-radio checked="true" value="telurmata" value=></ion-radio>
       </ion-item>
-
-      <ion-item class="radio-item">
-        <ion-label>Ayam Goreng [ RM 3.00 ]</ion-label>
-        <ion-radio value="ayamgoreng"></ion-radio>
-      </ion-item>
-    </ion-list>
+    </ion-list> -->
   </div>
   
 

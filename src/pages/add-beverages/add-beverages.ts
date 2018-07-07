@@ -25,11 +25,15 @@ export class AddBeveragesPage {
   RestId:any;
   beverageCategories:any;
   base64Image:any;
+  mainAddOn:any;
+  
 	input= {
    rest_id:'',
   name:'',
+  category:'',
   price:'',
   drink_image:''
+  
   };
 
   constructor(
@@ -57,26 +61,29 @@ export class AddBeveragesPage {
         this.RestId=this.restaurantInfo.data.id 
         console.log(this.RestId)
 
+
+
         this.httpprovider.getCategoryBev().subscribe(
      response => {
        console.log(response)
        this.beverageCategories=response.data
-       loading.dismiss();
      },
      err => {
        console.log(err);
      },
      ()=>{
      console.log('List of categories')
-   }
-   );
+  loading.dismiss();
 
-        
+   }
+   );   
      },
      err => {
        console.log(err);
      },
    );
+
+
   }
 
   addBeverageForm(){
@@ -91,8 +98,11 @@ export class AddBeveragesPage {
    let beverage = {
        restaurant_id:this.RestId,
        name: this.input.name,
+       categories:this.input.category,
       price : this.input.price,
       drink_image:"test"
+       
+
       }
 
 

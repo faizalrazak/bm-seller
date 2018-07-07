@@ -17,7 +17,9 @@
     <img src="assets/imgs/res_bg.png">
   </div>
 
-  <ion-toggle [(ngModel)]="open" (ionChange)="OpenRest(rest)" checked="open" class="open"></ion-toggle>
+  
+
+  <ion-toggle [(ngModel)]="toggleValue"(ionChange)="OpenRest()" class="open"></ion-toggle>
 
 
  <!--  <ion-toggle  [(ngModel)]="open" href="#" class="open" *ngIf= "open" (click)="OpenCloseRest()"></ion-toggle> -->
@@ -35,7 +37,7 @@
 
     <div class="content">
  
-      <small>Malaysian, Western, Halal, Indonesian</small>
+      <small>{{restCategory}}</small>
 
       <ion-row class="rating">
         <ion-icon name="star"></ion-icon>
@@ -78,7 +80,7 @@
           </ion-avatar>
           <h2>{{main.data.name}}</h2>
           <p>RM{{main.data.price}}</p>
-          <ion-icon ios="ios-create" md="md-create" item-end (click)="editMenu()"></ion-icon>
+          <ion-icon ios="ios-create" md="md-create" item-end (click)="editMenu(main.data.id)"></ion-icon>
         </ion-item>
       </li>
       </ion-list>
@@ -92,7 +94,7 @@
           </ion-avatar>
           <h2>{{beverage.data.name}}</h2>
           <p>RM{{beverage.data.price}}</p>
-          <ion-icon name="create" item-end (click)="editMenu()"></ion-icon>
+          <ion-icon name="create" item-end (click)="editBeverage(beverage.data.id)"></ion-icon>
         </ion-item>
           </li>
       </ion-list>
