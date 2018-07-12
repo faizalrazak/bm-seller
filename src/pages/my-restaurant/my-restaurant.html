@@ -5,6 +5,9 @@
     </button>
     <ion-title>My Restaurant</ion-title>
     <ion-buttons end>
+      <button ion-button icon-only (click)="presentProfileModal()">
+        <ion-icon ios="ios-create" md="md-create" item-end ></ion-icon>
+        </button>
         <button ion-button icon-only (click)="presentProfileModal()">
           <ion-icon ios="ios-redo" md="md-redo"></ion-icon>
         </button>
@@ -19,12 +22,6 @@
 
   
 
-  <ion-toggle [(ngModel)]="toggleValue"(ionChange)="OpenRest()" class="open"></ion-toggle>
-
-
- <!--  <ion-toggle  [(ngModel)]="open" href="#" class="open" *ngIf= "open" (click)="OpenCloseRest()"></ion-toggle> -->
-
-
 
 
   <div class="detail">
@@ -32,7 +29,9 @@
       <ion-label>
         {{RestName}}
       </ion-label>
-     <ion-icon ios="ios-create" md="md-create" item-end (click)="presentProfileModal()"></ion-icon>
+  <ion-toggle [(ngModel)]="toggleValue"(ionChange)="OpenRest()" class="open" class="toggle-small" toggle-class="toggle-calm"></ion-toggle>
+
+     
     </ion-item>
 
     <div class="content">

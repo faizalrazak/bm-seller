@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HttpProvider } from '../providers/http/http';
+
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
@@ -31,9 +33,16 @@ export class MyApp {
   rootPage: any = LoginSignUpPage;
 
   pages: Array<{title: string, component: any}>;
+  ownerInfo:any;
+  ownerName:any;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, 
-    public splashScreen: SplashScreen) {
+  constructor(
+    public platform: Platform, 
+    public statusBar: StatusBar, 
+    public splashScreen: SplashScreen,
+    public loadingCtrl: LoadingController,
+    public httpprovider: HttpProvider,
+    ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -59,32 +68,31 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
-      // if (window.localStorage.getItem('token') ) {
-        
-      //     this.http.getGoalHome().then((response)=>{
-      //       console.log(response);
-      //       let data = response
-      //       if (response || response == "Goal Completed"){
-      //       // this.rootPage = TabsPage;
-      //       this.rootPage = TabsPage;
-
-      //       } else {
-      //         // this.rootPage = AddGoalPage; 
-      //         this.rootPage = TutorialPage; 
-      //       }
-
-      //     })
-              
-
-      // } else {
-      //   this.rootPage = TutorialPage;
-
-
-      // }
     });
+    if (window.localStorage.getItem('token') ){
+    let loading = this.loadingCtrl.create({
+    spinner: 'ios',
+    content: 'Please Wait...'
+  });
+
+  loading.present();
+
+     this.httpprovider.getOwnerInfo().then(
+     (response) => {
+       console.log(response)
+       
+        this.ownerInfo=response
+        this.ownerName=this.ownerInfo.name
+        loading.dismiss();
+ 
+     },
+     err => {
+       console.log(err);
+            },
+   );
     
   }
+}
 
   openProfile() {
     // Reset the content nav to have just this page

@@ -40,7 +40,8 @@ export class SignUpPage {
     public loadingCtrl: LoadingController, 
   	private toastCtrl: ToastController,
     public nativeStorage: NativeStorage, 
-    public googlePlus: GooglePlus) {
+    public googlePlus: GooglePlus
+    ) {
 
   }
 
