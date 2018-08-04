@@ -27,7 +27,8 @@
        
       <ion-item no-lines>
         <ion-label item-start color="black" fixed>Category</ion-label>
-            <ion-input value={{categories}}></ion-input>
+            <ion-input value={{categories}}>
+            </ion-input>
         
       </ion-item>
       <ion-item no-lines>
@@ -63,17 +64,18 @@
     </ion-list>
   </div>
   <div class="image-div">
-    <img (click)="openCamera()" class="food-image" src="assets/imgs/logo.png" alt="">
+    <img (click)="openCamera()" class="food-image" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!mainsImg">
+    <img (click)="openCamera()" class="food-image" src="{{mainsImg}}" *ngIf="mainsImg">
     
     <div>
       <ion-row align-items-center justify-content-center>
         <p padding>Sold Out</p>
-        <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
+        <ion-toggle [(ngModel)]="soldValue"></ion-toggle>
       </ion-row>
     </div>
   </div>
   <div padding>
-    <button ion-button color="bigmomma" full block (click)="updateForm()">save</button>
+    <button ion-button color="bigmomma" full block (click)="updateForm()">Save</button>
   </div>
 
 </ion-content>

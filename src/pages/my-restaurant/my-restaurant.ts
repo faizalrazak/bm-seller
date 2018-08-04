@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { AlertController } from 'ionic-angular';
-
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { EditRestaurantPage } from '../edit-restaurant/edit-restaurant';
 import { EditMenuPage } from '../edit-menu/edit-menu';
@@ -26,17 +26,23 @@ import { AddBeveragesPage } from '../add-beverages/add-beverages';
 export class MyRestaurantPage {
 
   toggleValue: boolean;
-  
+  imageLink="http://api.bigmomma.com.my/uploads/"
   restaurantInfo:any;
   RestId:any;
   RestName:any;
+  restImage:any;
   restCategory:any;
   RestOpenHour:any;
   RestCloseHour:any;
   mains:any;
   beverages:any;
+  bevImg:any;
   restaurants:any;
   open:any;
+
+  message:string;
+  image:string;
+  url:string;
 
   constructor(
     public navCtrl: NavController, 
@@ -45,7 +51,8 @@ export class MyRestaurantPage {
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController 
+    private alertCtrl: AlertController,
+    private socialSharing: SocialSharing 
     ) {
     this.restaurants = 'menu'
   }
@@ -69,6 +76,7 @@ export class MyRestaurantPage {
        
         this.restaurantInfo=response
         this.RestId=this.restaurantInfo.data.id
+        this.restImage=this.imageLink+this.restaurantInfo.data.restaurant_image
         this.RestName=this.restaurantInfo.data.name
         this.restCategory=this.restaurantInfo.data.category
         this.RestOpenHour=this.restaurantInfo.data.opening_hour
@@ -85,7 +93,6 @@ export class MyRestaurantPage {
       response => {
         console.log(response)
         this.beverages=response.data
-       
          },
            err => {
            console.log(err);
@@ -213,7 +220,10 @@ export class MyRestaurantPage {
             text: 'Cancel',
             role:'cancel',
             handler: data => {
+              this.navCtrl.setRoot(MyRestaurantPage)
+              console.log(this.toggleValue)
               console.log('Cancel clicked');
+     
             }
           },
           {
@@ -243,7 +253,10 @@ export class MyRestaurantPage {
             text: 'Cancel',
             role:'cancel',
             handler: data => {
+              this.navCtrl.setRoot(MyRestaurantPage)
+              console.log(this.toggleValue)
               console.log('Cancel clicked');
+    
             }
           },
           {
@@ -266,6 +279,14 @@ export class MyRestaurantPage {
       prompt.present();
     }
 
+   }
+
+   share(){
+     this.socialSharing.shareViaFacebook(this.message, this.image, this.url).then(() => {
+  // Sharing via email is possible
+}).catch(() => {
+  // Sharing via email is not possible
+});
    }
  
 }

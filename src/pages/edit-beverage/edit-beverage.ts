@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
 
@@ -19,13 +20,17 @@ import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
   templateUrl: 'edit-beverage.html',
 })
 export class EditBeveragePage {
+  base64Image:any;
   restaurantInfo:any;
   restId:any;
   beveragesId:any;
   beveragesInfo:any;
   beveragesName:any;
   beveragesPrice:any;
+  bevSold:any;
   beveragesCategory:any;
+  bevImg:any;
+  imageLink="http://api.bigmomma.com.my/uploads/"
   categories = "";
   
 
@@ -34,7 +39,9 @@ export class EditBeveragePage {
   	public navParams: NavParams,
   	public httpprovider: HttpProvider,
     public loadingCtrl: LoadingController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private camera: Camera,
+
     ) {
 
   	this.beveragesId=this.navParams.data
@@ -66,7 +73,9 @@ export class EditBeveragePage {
         this.beveragesInfo=response
         this.beveragesName=this.beveragesInfo.data.data.name
         this.beveragesPrice=this.beveragesInfo.data.data.price
+        this.bevImg=this.imageLink+this.beveragesInfo.data.data.drink_image
         this.beveragesCategory=this.beveragesInfo.data.categories
+        this.bevSold="1"
         for(let category of this.beveragesCategory  ) {
         	this.categories = this.categories+" - "+category.type
         }
@@ -93,6 +102,9 @@ export class EditBeveragePage {
   }
 
   updateForm(){
+        
+        console.log(this.bevImg)
+
     let loading = this.loadingCtrl.create({
     spinner: 'ios',
     content: 'Loading Please Wait...'
@@ -109,7 +121,9 @@ export class EditBeveragePage {
        this.beveragesName,
        this.beveragesPrice,
        this.beveragesId,
-       this.restId)
+       this.restId,
+       this.bevImg,
+       this.bevSold)
 
        .then((result) => {
        let toast = this.toastCtrl.create({
@@ -128,5 +142,23 @@ export class EditBeveragePage {
          console.log(err);
      });
  }
+
+ openCamera(){
+     const options: CameraOptions = {
+  quality: 70,
+  destinationType: this.camera.DestinationType.DATA_URL,
+  encodingType: this.camera.EncodingType.JPEG,
+  mediaType: this.camera.MediaType.PICTURE
+}
+
+this.camera.getPicture(options).then((imageData) => {
+ // imageData is either a base64 encoded string or a file URI
+ // If it's base64:
+ this.base64Image = 'data:image/jpeg;base64,' + imageData;
+ this.bevImg=this.base64Image
+}, (err) => {
+ // Handle error
+});
+}
 
 }

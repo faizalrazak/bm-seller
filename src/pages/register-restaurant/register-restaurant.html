@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Restaurant Registration</ion-title>
+    <ion-title text-wrap>Restaurant Registration</ion-title>
     <ion-buttons end>
         <button ion-button icon-only (click)="presentProfileModal()">
           <ion-icon ios="ios-redo" md="md-redo"></ion-icon>
@@ -17,9 +17,9 @@
 <form>
   <div class="first-row">
     <div class="acc-img circle">
-    <img (click)="openCamera()" class="food-image" src="assets/imgs/person.png" 
-    *ngIf="!base64Image">
-    <img (click)="openCamera()" class="food-image" src="{{base64Image}}" *ngIf="base64Image">
+    <img (click)="openCameraRest()" style="width:80px;height:80px;margin-top:15%" src="assets/imgs/rest.png" 
+    *ngIf="!restImage">
+    <img (click)="openCameraRest()"  src="{{restImage}}" *ngIf="restImage">
   </div>
     </div>
 
@@ -169,20 +169,20 @@
     <p>All online business owners must registered with SSM in order to operate legally in Malaysia</p>
 
     <div>
-    <img (click)="openCamera()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!base64Image">
-    <img (click)="openCamera()" class="ssmbox" src="{{base64Image}}" *ngIf="base64Image">
+    <img (click)="openCameraSsm()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!ssmImage">
+    <img (click)="openCameraSsm()" class="ssmbox" src="{{ssmImage}}" *ngIf="ssmImage">
   </div>
 
     <p>IDENTITY VERIFICATION</p>
     <P>Submit your IC photo</P>
     <div>
-    <img (click)="openCamera()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!base64Image">
-    <img (click)="openCamera()" class="ssmbox" src="{{base64Image}}" *ngIf="base64Image">
+    <img (click)="openCameraIc()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!icImage">
+    <img (click)="openCameraIc()" class="ssmbox" src="{{icImage}}" *ngIf="icImage">
   </div>
     <p>and a photo of you holding your IC for verification</p>
     <div>
-    <img (click)="openCamera()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!base64Image">
-    <img (click)="openCamera()" class="ssmbox" src="{{base64Image}}" *ngIf="base64Image">
+    <img (click)="openCameraHoldIc()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!holdIc">
+    <img (click)="openCameraHoldIc()" class="ssmbox" src="{{holdIc}}" *ngIf="holdIc">
   </div>
 
   </div>

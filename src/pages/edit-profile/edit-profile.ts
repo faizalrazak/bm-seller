@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
+
+import{ MyRestaurantPage } from '../my-restaurant/my-restaurant'
 
 
 /**
@@ -18,7 +20,11 @@ import { HttpProvider } from '../../providers/http/http';
 })
 export class EditProfilePage {
   base64Image:any;
+  imageLink="http://api.bigmomma.com.my/uploads/"
 
+  icPic:any;
+  icHoldPic:any;
+  restPic:any;
   ownerInfo:any;
   ownerId:any;
   ownerName:any;
@@ -30,6 +36,17 @@ export class EditProfilePage {
   RestName:any;
   RestAddress:any;
   RestSSMNo:any;
+  restAbout:any;
+  restCat:any;
+  ssmImage:any;
+  icImage:any;
+  icHold:any;
+  restImage:any;
+  restUnit:any;
+  restCloseHour:any;
+  restOpenHour:any;
+  location:any;
+
 
   restCategories:any;
 	
@@ -39,7 +56,9 @@ export class EditProfilePage {
   	public navParams: NavParams,
     private camera: Camera,
     public httpprovider: HttpProvider,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
+
 
   	) {
   }
@@ -73,8 +92,23 @@ export class EditProfilePage {
         this.RestId=this.restaurantInfo.data.id
         this.RestName=this.restaurantInfo.data.name
         this.RestAddress=this.restaurantInfo.data.address
+        this.restUnit=this.restaurantInfo.data.unit_no
         this.RestSSMNo=this.restaurantInfo.data.ssm_reg_no 
-        loading.dismiss();   
+        this.restAbout=this.restaurantInfo.data.about
+        this.restCat=this.restaurantInfo.categories
+        this.ssmImage=this.imageLink+this.restaurantInfo.data.ssm_verification_image
+        this.icImage=this.imageLink+this.restaurantInfo.data.ic_image
+        this.icHold=this.imageLink+this.restaurantInfo.data.user_ic_image
+        this.restImage=this.imageLink+this.restaurantInfo.data.restaurant_image
+        this.restOpenHour=this.restaurantInfo.data.opening_hour
+        this.restCloseHour=this.restaurantInfo.data.closing_hour
+        this.location=this.restaurantInfo.data.location
+
+
+        console.log(this.restCat)
+        console.log(this.restUnit)
+
+          
      },
      err => {
        console.log(err);
@@ -84,13 +118,14 @@ export class EditProfilePage {
      response => {
        console.log(response)
        this.restCategories=response.data
-       loading.dismiss();
      },
      err => {
        console.log(err);
      },
      ()=>{
      console.log('List of categories')
+       loading.dismiss();
+
    }
    );
  
@@ -101,7 +136,63 @@ export class EditProfilePage {
    );
   }
 
-  openCamera(){
+  updateForm(){
+    let loading = this.loadingCtrl.create({
+    spinner: 'ios',
+    content: 'Loading Please Wait...'
+  });
+
+  loading.present();
+  
+
+  console.log(this.restaurantInfo);
+
+       this.httpprovider.editRest(
+       this.RestName,
+       this.RestAddress,
+       this.RestSSMNo,
+       this.restAbout,
+       this.RestId,
+       this.ssmImage,
+       this.icPic,
+       this.icHoldPic,
+       this.restImage,
+       this.restUnit,
+        this.restOpenHour,
+        this.restCloseHour,
+        this.location,
+       )
+
+       .then((result) => {
+         this.httpprovider.editProfile(this.ownerName, this.ownerEmail, this.ownerPhoneNo)
+         .then((result) => {
+       let toast = this.toastCtrl.create({
+        message:'Detail successfully updated' ,
+        duration: 3000,
+        position: 'bottom'
+      });
+       loading.dismiss();
+      toast.present();
+      
+     this.navCtrl.setRoot(MyRestaurantPage);
+
+     
+     },
+         (err) => {
+         console.log(err);
+     
+   });
+
+     
+
+     
+     },
+         (err) => {
+         console.log(err);
+     });
+ }
+
+  openCameraSsm(){
      const options: CameraOptions = {
   quality: 70,
   destinationType: this.camera.DestinationType.DATA_URL,
@@ -113,6 +204,61 @@ this.camera.getPicture(options).then((imageData) => {
  // imageData is either a base64 encoded string or a file URI
  // If it's base64:
  this.base64Image = 'data:image/jpeg;base64,' + imageData;
+ this.ssmImage=this.base64Image
+}, (err) => {
+ // Handle error
+});
+}
+
+openCameraIc(){
+     const options: CameraOptions = {
+  quality: 70,
+  destinationType: this.camera.DestinationType.DATA_URL,
+  encodingType: this.camera.EncodingType.JPEG,
+  mediaType: this.camera.MediaType.PICTURE
+}
+
+this.camera.getPicture(options).then((imageData) => {
+ // imageData is either a base64 encoded string or a file URI
+ // If it's base64:
+ this.base64Image = 'data:image/jpeg;base64,' + imageData;
+ this.icImage=this.base64Image
+}, (err) => {
+ // Handle error
+});
+}
+
+openCameraHoldIc(){
+     const options: CameraOptions = {
+  quality: 70,
+  destinationType: this.camera.DestinationType.DATA_URL,
+  encodingType: this.camera.EncodingType.JPEG,
+  mediaType: this.camera.MediaType.PICTURE
+}
+
+this.camera.getPicture(options).then((imageData) => {
+ // imageData is either a base64 encoded string or a file URI
+ // If it's base64:
+ this.base64Image = 'data:image/jpeg;base64,' + imageData;
+ this.icHold=this.base64Image
+}, (err) => {
+ // Handle error
+});
+}
+
+openCameraRestImage(){
+     const options: CameraOptions = {
+  quality: 70,
+  destinationType: this.camera.DestinationType.DATA_URL,
+  encodingType: this.camera.EncodingType.JPEG,
+  mediaType: this.camera.MediaType.PICTURE
+}
+
+this.camera.getPicture(options).then((imageData) => {
+ // imageData is either a base64 encoded string or a file URI
+ // If it's base64:
+ this.base64Image = 'data:image/jpeg;base64,' + imageData;
+ this.restImage=this.base64Image
 }, (err) => {
  // Handle error
 });

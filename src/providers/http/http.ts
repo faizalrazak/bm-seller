@@ -1,16 +1,21 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
+import { Events } from "ionic-angular";
 import "rxjs/add/operator/map";
 
 @Injectable()
 export class HttpProvider {
   token: any;
-  constructor(public http: Http) {
+  profile:any;
+  constructor(
+    public http: Http,
+    public event:Events
+    ) {
     console.log("Hello HttpProvider Provider");
   }
 
-  createMenu(details, restaurantId) {
+  createMenu(food, restaurantId) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
@@ -18,8 +23,8 @@ export class HttpProvider {
 
       this.http
         .post(
-          "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/mains",
-          JSON.stringify(details),
+          "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"/mains",
+          JSON.stringify(food),
           { headers: headers }
         )
         .subscribe(
@@ -43,7 +48,7 @@ export class HttpProvider {
 
       this.http
         .post(
-          "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/beverages" ,
+          "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"/beverages" ,
           JSON.stringify(details),
           { headers: headers }
         )
@@ -69,7 +74,7 @@ export class HttpProvider {
       );
 
       this.http
-        .get("https://bigmomma.herokuapp.com/api/restaurant-owner", {
+        .get("http://api.bigmomma.com.my/api/restaurant-owner", {
           headers: headers
         })
         .map(res => res.json())
@@ -94,7 +99,7 @@ getRestaurantInfo(){
       );
       console.log(headers)
       this.http
-        .get("https://bigmomma.herokuapp.com/api/restaurant", {
+        .get("http://api.bigmomma.com.my/api/restaurant", {
           headers: headers
         })
         .map(res => res.json())
@@ -114,7 +119,7 @@ getRestaurantInfo(){
 getCategoryRest() {
     return this.http
       .get(
-        "https://bigmomma.herokuapp.com/api/categories"
+        "http://api.bigmomma.com.my/api/categories"
       )
       .map(res => res.json());
   }
@@ -122,7 +127,7 @@ getCategoryRest() {
 getCategoryMain() {
     return this.http
       .get(
-        "https://bigmomma.herokuapp.com/api/main-types"
+        "http://api.bigmomma.com.my/api/main-types"
       )
       .map(res => res.json());
   }
@@ -130,7 +135,7 @@ getCategoryMain() {
   getCategoryBev() {
     return this.http
       .get(
-        "https://bigmomma.herokuapp.com/api/beverage-types"
+        "http://api.bigmomma.com.my/api/beverage-types"
       )
       .map(res => res.json());
   }
@@ -138,12 +143,83 @@ getCategoryMain() {
    getAddOn() {
     return this.http
       .get(
-        "https://bigmomma.herokuapp.com/api/add-ons"
+        "http://api.bigmomma.com.my/api/add-ons"
       )
       .map(res => res.json());
   }
 
-updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address, category,  restaurantId) {
+  editRest(name,address,ssmNo,about,restaurantId,ssmImg,icImg,holdImg,restImg,unitNo,close,
+    open,location){
+    let data = {
+      name:name,
+      address: address,
+      ssm_reg_no: ssmNo,
+      about:about,
+      ssm_verifcation_image:ssmImg,
+      ic_image:icImg,
+      user_ic_image:holdImg,
+      restaurant_image:restImg,
+      unit_no:unitNo,
+      opening_hour:open,
+      closing_hour:close,
+      location:location
+      
+    };
+    return new Promise((resolve, reject) => {
+      
+      this.http
+        .put(
+          "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"",
+          data,
+        )
+        .subscribe(
+          res => {
+            let data = res.json();
+            console.log("data");
+            resolve(data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+
+  }
+
+  editProfile(userName,userEmail,userPhone){
+     let data = {
+      name:userName,
+      email: userEmail,
+      phone_number: userPhone,
+    };
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append(
+        "Authorization",
+        "Bearer " + window.localStorage.getItem("token")
+      );
+      
+      this.http
+        .put(
+          "http://api.bigmomma.com.my/api/user",
+          data, { headers: headers }
+        )
+        .subscribe(
+          res => {
+            let data = res.json();
+            console.log("data");
+            resolve(data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+
+  }
+
+updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address, 
+  category, restaurantId, restAbout,restImg) {
     console.log(restaurantId)
     let data = {
       name:name,
@@ -152,13 +228,15 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address, cat
       address: address,
       category_id:category,
       opening_hour: opening_hour,
-      closing_hour: closing_hour
+      closing_hour: closing_hour,
+      about: restAbout,
+      restaurant_image: restImg
     };
     return new Promise((resolve, reject) => {
       
       this.http
         .put(
-          "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"",
+          "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"",
           data,
         )
         .subscribe(
@@ -177,7 +255,7 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address, cat
   getMains(restaurantId) {
     return this.http
       .get(
-        "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/mains"
+        "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"/mains"
       )
       .map(res => res.json());
   }
@@ -185,23 +263,25 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address, cat
   showMains(restaurantId, mainsId){
     return this.http
       .get(
-        "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/mains/"+mainsId
+        "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"/mains/"+mainsId
       )
       .map(res => res.json());
   }
 
-  updateMainsInfo(name, price, mainsId,  restaurantId) {
+  updateMainsInfo(name, price, mainsId,  restaurantId, mainImg, mainSold) {
     console.log(restaurantId)
     let data = {
       name:name,
       price:price,
+      food_image:mainImg,
+      sold:mainSold
       };
       console.log(data)
     return new Promise((resolve, reject) => {
       
       this.http
         .put(
-          "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/mains/"+mainsId,
+          "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"/mains/"+mainsId,
           data,
         )
         .subscribe(
@@ -220,7 +300,7 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address, cat
   getBeverages(restaurantId) {
     return this.http
       .get(
-        "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/beverages"
+        "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"/beverages"
       )
       .map(res => res.json());
   }
@@ -228,25 +308,25 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address, cat
   showBeverages(restaurantId, beveragesId){
     return this.http
       .get(
-        "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/beverages/"+beveragesId
+        "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"/beverages/"+beveragesId
       )
       .map(res => res.json());
   }
 
-  updateBeveragesInfo(name, price, beveragesId,  restaurantId) {
+  updateBeveragesInfo(name, price, beveragesId,  restaurantId, bevImg, bevSold) {
     console.log(restaurantId)
     let data = {
       name:name,
       price:price,
+      drink_image:bevImg,
+      sold:bevSold
       };
       console.log(data)
     return new Promise((resolve, reject) => {
       
       this.http
         .put(
-          "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/beverages/"+beveragesId,
-         
-          data,
+          "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"/beverages/"+beveragesId,data,
         )
         .subscribe(
           res => {
@@ -261,13 +341,40 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address, cat
     });
   }
 
-  // myRider(restaurantId) {
-  //   return this.http
-  //     .get(
-  //       "https://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"/riders"
-  //     )
-  //     .map(res => res.json());
-  // }
+  myRider(restaurantId) {
+    console.log(restaurantId)
+    return this.http
+      .get(
+        "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"/riders"
+      )
+      .map(res => res.json());
+  }
+
+  addRider(details,restId){
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      headers.append("Content-Type", "application/json");
+
+      this.http
+        .post(
+          "http://api.bigmomma.com.my/api/restaurant/"+restId+"/rider",
+          JSON.stringify(details),
+          { headers: headers }
+        )
+        .subscribe(
+          res => {
+            let data = res;
+            console.log(data);
+            resolve(data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+
+  }
 
   registerUser(details) {
     return new Promise((resolve, reject) => {
@@ -287,7 +394,7 @@ console.log("name"+details.name)
       console.log(data.email);
       this.http
         .post(
-          "https://bigmomma.herokuapp.com/api/user/register",
+          "http://api.bigmomma.com.my/api/user/register",
           JSON.stringify(data),
           { headers: headers }
         )
@@ -315,7 +422,7 @@ console.log("name"+details.name)
       console.log(details)
       this.http
         .post(
-          "https://bigmomma.herokuapp.com/api/restaurant",
+          "http://api.bigmomma.com.my/api/restaurant",
           details,
           { headers: headers }
         )
@@ -339,7 +446,7 @@ console.log("name"+details.name)
       console.log(details);
       this.http
         .post(
-          "https://bigmomma.herokuapp.com/api/seller/login",
+          "http://api.bigmomma.com.my/api/seller/login",
           JSON.stringify(details),
           { headers: headers }
         )
@@ -348,8 +455,14 @@ console.log("name"+details.name)
             let data = res.json();
             this.token = data.token;
             console.log(this.token);
+            this.profile=data.profile.name
+            console.log(this.profile)
             window.localStorage.setItem("token", this.token);
+            window.localStorage.setItem("profile", this.profile)
             console.log(window.localStorage);
+
+            this.event.publish('username:changed', this.profile)
+            this.event.publish('token:changed', this.token)
             resolve(data);
 
             resolve(res.json());
@@ -372,7 +485,7 @@ console.log("name"+details.name)
       headers.append("Content-Type", "application/json");
 
       this.http
-        .put("http://bigmomma.herokuapp.com/api/restaurant/"+restaurantId+"", data, {
+        .put("http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"/open", data, {
           headers: headers
         })
         .subscribe(

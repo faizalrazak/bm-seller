@@ -5,7 +5,7 @@
         <ion-avatar menuClose item-start (click)="openProfile()">
           <img src="assets/imgs/person.png">
         </ion-avatar>
-        <h6>Hi, {{ownerName}}</h6>
+        <h6>Hi, {{name}}</h6>
       </ion-item>
 
     </ion-toolbar>
@@ -20,7 +20,8 @@
     </ion-list>
   </ion-content>
   <ion-footer padding>
-    <button menuClose ion-button color="bigmomma" full block (click)="loginSignUp()">Log in or sign up</button>
+    <button *ngIf="!token" menuClose ion-button color="bigmomma" full block (click)="loginSignUp()">Log in or sign up</button>
+    <button *ngIf="token" menuClose ion-button color="bigmomma" full block (click)="logout()">Logout</button>
   </ion-footer>
 
 </ion-menu>

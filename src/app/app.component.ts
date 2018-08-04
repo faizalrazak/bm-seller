@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, LoadingController } from 'ionic-angular';
+import { Nav, Platform, LoadingController, Events, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpProvider } from '../providers/http/http';
@@ -30,19 +30,33 @@ import { RegisterRestaurantPage } from '../pages/register-restaurant/register-re
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginSignUpPage;
+  rootPage: any;
+  token:any;
+  name:any;
+
 
   pages: Array<{title: string, component: any}>;
-  ownerInfo:any;
-  ownerName:any;
-
+ 
   constructor(
     public platform: Platform, 
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
     public loadingCtrl: LoadingController,
     public httpprovider: HttpProvider,
+    public event:Events,
+    private alertCtrl: AlertController,
+    
+
     ) {
+
+    event.subscribe('token:changed', token => {
+        this.token = token
+        console.log(this.token)
+      })
+      this.name = "Guest"
+      event.subscribe('username:changed', username => {
+        this.name = username
+      })
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -68,30 +82,20 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+    if(window.localStorage.getItem('token'))
+    {
+      this.rootPage = MyRestaurantPage;
+
+          
+    }else{
+      this.rootPage = LoginSignUpPage;
+    }
     });
-    if (window.localStorage.getItem('token') ){
-    let loading = this.loadingCtrl.create({
-    spinner: 'ios',
-    content: 'Please Wait...'
-  });
 
-  loading.present();
-
-     this.httpprovider.getOwnerInfo().then(
-     (response) => {
-       console.log(response)
-       
-        this.ownerInfo=response
-        this.ownerName=this.ownerInfo.name
-        loading.dismiss();
- 
-     },
-     err => {
-       console.log(err);
-            },
-   );
     
-  }
+
+    
 }
 
   openProfile() {
@@ -109,5 +113,38 @@ export class MyApp {
   loginSignUp(){
     this.nav.setRoot(LoginSignUpPage);
 
+  }
+
+  logout() {
+  let alert = this.alertCtrl.create({
+    title: 'Confirm logout',
+    message: 'Are you sure to leave?',
+    buttons: [
+      {
+        text: 'No',
+        role: 'No',
+        handler: () => {
+           this.nav.setRoot(HomePage);
+          console.log('No clicked');
+      
+
+        }
+      },
+      {
+        text: 'Yes',
+        role: 'Yes',
+        handler: () => {
+          localStorage.removeItem("token");
+           localStorage.removeItem("profile");
+           window.location.reload()
+          
+
+    
+          console.log('Yes clicked');
+        }
+      }
+    ]
+  });
+  alert.present();
   }
 }

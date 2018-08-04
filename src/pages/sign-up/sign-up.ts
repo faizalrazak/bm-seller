@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { HttpProvider } from '../../providers/http/http';
 import { GooglePlus } from '@ionic-native/google-plus';
-import { NativeStorage } from '@ionic-native/native-storage';
 
 import { VerificationPage } from '../verification/verification';
 
@@ -39,7 +38,6 @@ export class SignUpPage {
   	public httpprovider: HttpProvider, 
     public loadingCtrl: LoadingController, 
   	private toastCtrl: ToastController,
-    public nativeStorage: NativeStorage, 
     public googlePlus: GooglePlus
     ) {
 
@@ -96,52 +94,6 @@ export class SignUpPage {
                   console.log(err);
                 });
 
-
-  //     this.nativeStorage.setItem('user', {
-  //       name: user.displayName,
-  //       email: user.email,
-  //       picture: user.imageUrl,
-  //       password:user.user_id,
-  //       category: "2",
-  //       phone_number: "0197397343"
-  //     })
-
-  //     this.nativeStorage.getItem('user')
-  // .then(
-  //   data => {this.httpprovider.registerUser(data).then(
-  //               result => {
-  //                 console.log(result)
-  //                 let toast = this.toastCtrl.create({
-  //                   message: 'Please fill in your phone number to complete the registration',
-  //                    duration: 3000,
-  //                   position: 'bottom'
-  //                 });
-  //                 loading.dismiss();
-                  
-  //                 toast.present()
-  //                 this.navCtrl.push(VerificationPage,{});
-  //               },
-  //               err => {
-  //                 console.log(err);
-  //               }
-  //             );},
-  //   error => console.error(error)
-
-
-
-  // );
-
-  
-
-
-
-
-
-      // .then((res) => {
-      //   this.navCtrl.push(VerificationPage,{});
-      // }, (error) => {
-      //   console.log(error);
-      // })
     }, (error) => {
       loading.dismiss();
     });
@@ -219,31 +171,31 @@ export class SignUpPage {
 
         
         );
-      let data = {
-                email: "amir@gmail.com",
-                password: "123456",
-                name: "amir",
-                category: "2",
-                phone_number: "0197397343"
-              };
+      // let data = {
+      //           email: "amir@gmail.com",
+      //           password: "123456",
+      //           name: "amir",
+      //           category: "2",
+      //           phone_number: "0197397343"
+      //         };
 
-              this.httpprovider.registerUser(data).then(
-                result => {
-                  console.log(result)
-                  let toast = this.toastCtrl.create({
-                    message: 'Please fill in your phone number to complete the registration',
-                     duration: 3000,
-                    position: 'bottom'
-                  });
-                  loading.dismiss();
+      //         this.httpprovider.registerUser(data).then(
+      //           result => {
+      //             console.log(result)
+      //             let toast = this.toastCtrl.create({
+      //               message: 'Please fill in your phone number to complete the registration',
+      //                duration: 3000,
+      //               position: 'bottom'
+      //             });
+      //             loading.dismiss();
                   
-                  toast.present()
-                  this.navCtrl.push(VerificationPage,{});
-                },
-                err => {
-                  console.log(err);
-                }
-                );
+      //             toast.present()
+      //             this.navCtrl.push(VerificationPage,{});
+      //           },
+      //           err => {
+      //             console.log(err);
+      //           }
+      //           );
   }
 
   

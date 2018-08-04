@@ -5,7 +5,7 @@ import { HttpProvider } from '../../providers/http/http';
 import { GooglePlus } from '@ionic-native/google-plus';
 
 
-import { HomePage } from '../home/home';
+import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
 
 
 
@@ -83,7 +83,7 @@ export class LoginPage {
                   loading.dismiss();
                   
                   toast.present()
-                  this.navCtrl.setRoot(HomePage,{});
+                  this.navCtrl.setRoot(MyRestaurantPage,{});
                 },
                 err => {
                   console.log(err);
@@ -131,7 +131,7 @@ facebookLogin() {
                   
                   
                   toast.present()
-                  this.navCtrl.setRoot(HomePage,{});
+                  this.navCtrl.setRoot(MyRestaurantPage,{});
                   loading.dismiss();
                 },
                 err => {
@@ -147,31 +147,31 @@ facebookLogin() {
         console.log("Error logging into Facebook", e)
 
         
-        );
+      //   );
 
-      let data = {
-                email: "amir@gmail.com",
-                password: "123456",
-              };
+      // let data = {
+      //           email: "fizo@gmail.com",
+      //           password: "123456",
+      //         };
 
 
-      this.httpprovider.loginUser(data).then(
-                result => {
-                  console.log(result)
-                  let toast = this.toastCtrl.create({
-                    message: 'Successfully login',
-                     duration: 3000,
-                    position: 'bottom'
-                  });
+      // this.httpprovider.loginUser(data).then(
+      //           result => {
+      //             console.log(result)
+      //             let toast = this.toastCtrl.create({
+      //               message: 'Successfully login',
+      //                duration: 3000,
+      //               position: 'bottom'
+      //             });
                   
                   
-                  toast.present()
-                  loading.dismiss();
-                  this.navCtrl.setRoot(HomePage,{});
-                },
-                err => {
-                  console.log(err);
-                }
+      //             toast.present()
+      //             loading.dismiss();
+      //             this.navCtrl.setRoot(MyRestaurantPage,{});
+      //           },
+      //           err => {
+      //             console.log(err);
+      //           }
 
 
   );

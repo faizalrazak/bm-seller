@@ -29,7 +29,7 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
 import { VerificationPage } from '../pages/verification/verification';
 import { VerificationCodePage } from '../pages/verification-code/verification-code';
 import { RegisterRestaurantPage } from '../pages/register-restaurant/register-restaurant';
-
+import { NewRiderPage } from '../pages/new-rider/new-rider';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -47,6 +47,7 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Geolocation } from '@ionic-native/geolocation';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     VerificationPage,
     VerificationCodePage,
     RegisterRestaurantPage,
+    NewRiderPage,
     MapsPage
     
   ],
@@ -123,6 +125,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     VerificationPage,
     VerificationCodePage,
     RegisterRestaurantPage,
+    NewRiderPage,
     MapsPage
   ],
   providers: [
@@ -134,7 +137,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     Camera,
     Facebook,
     NativeStorage,
-    GooglePlus
+    GooglePlus,
+    SocialSharing
   ]
 })
 export class AppModule {}

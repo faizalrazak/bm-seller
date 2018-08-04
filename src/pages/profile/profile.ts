@@ -18,6 +18,7 @@ import { EditProfilePage } from '../edit-profile/edit-profile'
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+  imageLink="http://api.bigmomma.com.my/uploads/"
 
   ownerInfo:any;
   ownerId:any;
@@ -30,6 +31,12 @@ export class ProfilePage {
   RestName:any;
   RestAddress:any;
   RestSSMNo:any;
+  restAbout:any;
+  restCat:any;
+  ssmImage:any;
+  icImage:any;
+  icHold:any;
+  restImage:any;
 
 
   constructor(
@@ -72,7 +79,15 @@ export class ProfilePage {
         this.RestId=this.restaurantInfo.data.id
         this.RestName=this.restaurantInfo.data.name
         this.RestAddress=this.restaurantInfo.data.address
+        this.restAbout=this.restaurantInfo.data.about
+        this.restCat=this.restaurantInfo.categories
+        console.log(this.restCat)
         this.RestSSMNo=this.restaurantInfo.data.ssm_reg_no 
+        this.ssmImage=this.imageLink+this.restaurantInfo.data.ssm_verification_image
+        this.icImage=this.imageLink+this.restaurantInfo.data.ic_image
+        this.icHold=this.imageLink+this.restaurantInfo.data.user_ic_image
+        this.restImage=this.imageLink+this.restaurantInfo.data.restaurant_image
+        console.log(this.restImage)
         loading.dismiss();   
      },
      err => {

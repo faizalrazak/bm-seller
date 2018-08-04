@@ -8,7 +8,7 @@
       <button ion-button icon-only (click)="presentProfileModal()">
         <ion-icon ios="ios-create" md="md-create" item-end ></ion-icon>
         </button>
-        <button ion-button icon-only (click)="presentProfileModal()">
+        <button ion-button icon-only (click)="share()">
           <ion-icon ios="ios-redo" md="md-redo"></ion-icon>
         </button>
       </ion-buttons>
@@ -17,7 +17,7 @@
 
 <ion-content style="background: #D8D8D8">
   <div style="height: 20%;">
-    <img src="assets/imgs/res_bg.png">
+    <img src="{{restImage}}">
   </div>
 
   
@@ -75,7 +75,7 @@
         <li *ngFor="let main of mains" value="{{main.id}}">
         <ion-item>
           <ion-avatar item-start>
-            <img src="assets/imgs/person.png">
+            <img src="{{imageLink}}{{main.data.food_image}}">
           </ion-avatar>
           <h2>{{main.data.name}}</h2>
           <p>RM{{main.data.price}}</p>
@@ -89,7 +89,7 @@
         <li *ngFor="let beverage of beverages" value="{{beverage.id}}">
         <ion-item>
           <ion-avatar item-start>
-            <img src="assets/imgs/person.png">
+            <img src="{{imageLink}}{{beverage.data.drink_image}}">
           </ion-avatar>
           <h2>{{beverage.data.name}}</h2>
           <p>RM{{beverage.data.price}}</p>

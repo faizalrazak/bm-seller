@@ -19,7 +19,10 @@
     <div class="acc-img circle">
       <!-- <img class="camera-plus" src="assets/imgs/logo.png" *ngIf={{image}}>
      -->
-      <img class="camera-plus" src="assets/imgs/person.png">
+     <img  style="width:80px;height:80px;margin-top:15%" src="assets/imgs/rest.png" 
+    *ngIf="!restImage">
+    <img   src="{{restImage}}" *ngIf="restImage">
+      
     </div>
   </div>
 
@@ -40,7 +43,7 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 style="font-weight: bold">About</ion-col>
-      <ion-col col-12>Established for over 10 years, we serve authentic Malaysian & Indonesian cuisine.</ion-col>
+      <ion-col col-12>{{restAbout}}</ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-6 style="font-weight: bold">SSM Registeration No.</ion-col>
@@ -48,7 +51,9 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 style="font-weight: bold">Category</ion-col>
-      <ion-col col-12>Halal</ion-col>
+      <ion-col col-12 >
+        <p *ngFor="let category of restCat" >{{category.category}}</p>
+      </ion-col>
     </ion-row>
     <!-- <ion-row no-padding (click)="rider()">
       <button ion-item no-lines>My Rider</button>
@@ -76,25 +81,25 @@
 
   <div class="first-box">
     <ion-row>
-      <ion-col col-6>First Name</ion-col>
+      <ion-col col-6>Name</ion-col>
       <ion-col col-6>{{ownerName}}</ion-col>
     </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col col-6>Last Name</ion-col>
       <ion-col col-6>{{ownerName}}</ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row>
       <ion-col col-6>Email Address</ion-col>
       <ion-col col-6>{{ownerEmail}}</ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-6>Phone Number</ion-col>
-      <ion-col col-6>+{{ownerPhoneNo}}</ion-col>
+      <ion-col col-6>+6{{ownerPhoneNo}}</ion-col>
     </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col col-6>Date Of Birth</ion-col>
       <ion-col col-6>May 3, 1992</ion-col>
-    </ion-row>
+    </ion-row> -->
   </div>
 
   <div class="divider">
@@ -102,16 +107,21 @@
       SSM Verification
     </p>
     <p>All online business owners must registered with SSM in order to operate legally in Malaysia</p>
-    <div class="ssmbox"></div>
+    <div>
+    <img  class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!ssmImage">
+    <img  class="ssmbox" src="{{ssmImage}}" *ngIf="ssmImage">
+  </div>
     <p>IDENTITY VERIFICATION</p>
     <P>Submit your IC photo</P>
-    <div class="ssmbox"></div>
+    <div>
+      <img  class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!icImage">
+    <img  class="ssmbox" src="{{icImage}}" *ngIf="icImage">
+    </div>
     <p>and a photo of you holding your IC for verification</p>
-    <div class="ssmbox"></div>
+    <div>
+      <img  class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!icHold">
+    <img  class="ssmbox" src="{{icHold}}" *ngIf="icHold">
+    </div>
 
-  </div>
-
-  <div padding>
-    <button ion-button full block color="bigmomma">save</button>
   </div>
 </ion-content>
