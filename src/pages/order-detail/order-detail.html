@@ -30,11 +30,11 @@
   </div>
 
   <div padding>
-    <p>Restoran Tanjung Semenyih
+    <p>{{order.restaurant.name}}
       <small>
         <ion-icon name="pin" (click)= "goMaps()"></ion-icon> Get Location</small>
     </p>
-    <p>Jalan Semenyih, 43000, Kajang, Selangor</p>
+    <p>{{order.restaurant.address}}</p>
   </div>
 
   <div padding>
@@ -54,39 +54,32 @@
   </div>
 
   <div padding>
-    <p>En. Fadhil
+    <p>{{order.user.name}}
       <small>
         <ion-icon name="pin"></ion-icon> Get Location</small>
     </p>
-    <p>57, Jalan TSJ 20, Taman Sri Jelok, 43000 Kajang, Selangor</p>
+    <p>{{order.order.delivery_location}}</p>
   </div>
 
   <div>
     <ion-list no-margin>
       <ion-item>
-        <p>Nov 23, 2017</p>
+        <p>{{order.order.date | date : mediumDate}}</p>
         <p item-end>10:00 am</p>
       </ion-item>
       <ion-item>
         <p>Receipt Number</p>
-        <p item-end>RT-2017-51</p>
+        <p item-end>{{order.order.receipt_no}}</p>
       </ion-item>
       <ion-item>
         <p>Payment Method</p>
         <p item-end>Direct Payment</p>
       </ion-item>
-      <ion-item>
+      <ion-item *ngFor="let item of cartItems">
         <p>
-          <ion-badge color="bigmomma">2</ion-badge>
-          Nasi Lemak Buah Bidara</p>
-        <p item-end>RM 9.00</p>
-      </ion-item>
-      <ion-item>
-        <p>
-          <ion-badge color="bigmomma">1</ion-badge>
-          Mee Hailam
-        </p>
-        <p item-end>RM 5.50</p>
+          <ion-badge color="bigmomma">{{item.data.quantity}}</ion-badge>
+          {{item.item.name}}</p>
+        <p item-end>{{item.data.price}}</p>
       </ion-item>
       <ion-item>
         <ion-row>
@@ -94,17 +87,23 @@
             <p>Subtotal</p>
           </ion-col>
           <ion-col text-right>
-            <p>RM 14.50</p>
+            <p>RM {{subtotal}}0</p>
           </ion-col>
         </ion-row>
-        
-        
         <ion-row>
           <ion-col col-6>
             <p>Delivery Fee</p>
           </ion-col>
           <ion-col text-right>
-            <p>RM 3.00</p>
+            <p>RM {{delivery_fee}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            <p>Processing Fee</p>
+          </ion-col>
+          <ion-col text-right>
+            <p>RM {{processing_fee}}</p>
           </ion-col>
         </ion-row>
       </ion-item>
@@ -112,13 +111,13 @@
         <p>
           Total
         </p>
-        <p item-end>RM 19.80</p>
+        <p item-end>RM {{total}}</p>
       </ion-item>
       
     </ion-list>
     <div padding text-center>
       <div padding text-center>
-      <button ion-button block color="bigmomma" (click)="messageRoomButton()">Message Room</button>
+      <button ion-button block color="bigmomma" (click)="messageRoomButton(order.order.chatroom_id)">Message Room</button>
       <button ion-button block color="bigmomma" (click)="presentActionSheet()">Send For Delivery</button>
       
     </div>

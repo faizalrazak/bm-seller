@@ -49,8 +49,8 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'current'">
-      <div (click)="currentDetail()"class="order">
-        <p>Apr 13, 2018</p>
+      <div *ngFor="let order of currentOrders" (click)="orderDetail(order)" class="order">
+        <p>{{order.order.date | date : mediumDate}}</p>
         <hr>
         <p>Receipt No.</p>
       </div>
