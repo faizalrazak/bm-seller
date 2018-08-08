@@ -16,7 +16,8 @@
     <div class="acc-img circle">
     <img (click)="openCameraRestImage()" class="food-image" src="assets/imgs/rest.png" 
     *ngIf="!restImage" style="width:80px;height:80px;margin-top:15%">
-    <img (click)="openCameraRestImage()" class="food-image" src="{{restImage}}" *ngIf="restImage">
+    <img (click)="openCameraRestImage()" class="food-image" src="{{restImage}}" 
+    *ngIf="restImage">
   </div>
     </div>
 

@@ -20,8 +20,8 @@
     </ion-list>
   </ion-content>
   <ion-footer padding>
-    <button *ngIf="!token" menuClose ion-button color="bigmomma" full block (click)="loginSignUp()">Log in or sign up</button>
-    <button *ngIf="token" menuClose ion-button color="bigmomma" full block (click)="logout()">Logout</button>
+    <button *ngIf="!name" menuClose ion-button color="bigmomma" full block (click)="loginSignUp()">Log in or sign up</button>
+    <button *ngIf="name" menuClose ion-button color="bigmomma" full block (click)="logout()">Logout</button>
   </ion-footer>
 
 </ion-menu>

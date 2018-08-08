@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
-import { HomePage } from '../home/home';
+import { LoginSignUpPage } from '../login-sign-up/login-sign-up';
+import { HttpProvider } from '../../providers/http/http';
+
 
 
 /**
@@ -18,7 +20,15 @@ import { HomePage } from '../home/home';
 })
 export class VerificationCodePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	code:any;
+
+
+  constructor(
+  	public navCtrl: NavController, 
+  	public navParams: NavParams,
+  	public loadingCtrl: LoadingController,
+  	public httpprovider:HttpProvider,
+  	public toastCtrl:ToastController) {
   }
 
   ionViewDidLoad() {
@@ -26,8 +36,42 @@ export class VerificationCodePage {
   }
 
   verificationDone(){
-	this.navCtrl.setRoot(HomePage);
+	
+let loading = this.loadingCtrl.create({
+    spinner: 'ios',
+    content: 'Loading Please Wait...'
+  });
+
+  loading.present();
+  console.log(this.code)
+
+    this.httpprovider.sendCode(this.code).then(
+     (response) => {
+     	let toast1 = this.toastCtrl.create({
+                    message: 'User verified',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+                  
+                  loading.dismiss();
+                  toast1.present()
+       this.navCtrl.setRoot(LoginSignUpPage);
+     },
+     err => {
+       let toast1 = this.toastCtrl.create({
+                    message: err._body,
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+                  
+                  loading.dismiss();
+                  toast1.present()
+     },
+   );
+  
 
 }
 
 }
+
+

@@ -48,15 +48,28 @@ export class MyApp {
     
 
     ) {
+    
+    // event.subscribe('token:changed', token => {
+    //     this.token = token
+    //     console.log(this.token)
+    //   })
 
-    event.subscribe('token:changed', token => {
-        this.token = token
-        console.log(this.token)
-      })
-      this.name = "Guest"
-      event.subscribe('username:changed', username => {
-        this.name = username
-      })
+    //   this.name = "Guest"
+    //   event.subscribe('username:changed', username => {
+    //     this.name = username
+    //   })
+
+     if(window.localStorage.getItem('token'))
+    {
+      this.rootPage = MyRestaurantPage;
+      this.name = window.localStorage.getItem('profile')
+
+    }else{
+      this.rootPage = LoginSignUpPage;
+      // this.name = "Guess"
+    }
+
+    
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -83,14 +96,14 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-    if(window.localStorage.getItem('token'))
-    {
-      this.rootPage = MyRestaurantPage;
+    // if(window.localStorage.getItem('token'))
+    // {
+    //   this.rootPage = MyRestaurantPage;
 
           
-    }else{
-      this.rootPage = LoginSignUpPage;
-    }
+    // }else{
+    //   this.rootPage = LoginSignUpPage;
+    // }
     });
 
     

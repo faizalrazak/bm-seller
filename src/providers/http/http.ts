@@ -232,6 +232,7 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address,
       about: restAbout,
       restaurant_image: restImg
     };
+    console.log(data)
     return new Promise((resolve, reject) => {
       
       this.http
@@ -388,7 +389,7 @@ console.log("name"+details.name)
         password: details.password,
         name: details.name,
         category: "2",
-        phone_number: "0197397343"
+        phone_number: "Your phone number"
       }
       console.log(data);
       console.log(data.email);
@@ -493,6 +494,30 @@ console.log("name"+details.name)
             let data = res.json();
             console.log("data");
             resolve(data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+  }
+
+  sendCode(code) {
+    return new Promise((resolve, reject) => {
+      let data = {
+        code : code
+      }
+
+      console.log(data);
+      this.http
+        .put(
+          "http://api.bigmomma.com.my/api/user/verify",data
+        )
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            resolve(data.response);
+            console.log(data.status);
           },
           err => {
             reject(err);

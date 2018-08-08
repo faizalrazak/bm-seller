@@ -6,9 +6,6 @@
 -->
 <ion-header>
   <ion-navbar color="bigmomma">
-    <button ion-button menuToggle>
-      <ion-icon ios="ios-close" md="md-close"></ion-icon>
-    </button>
     <ion-title align="center">Sign Up</ion-title>
   </ion-navbar>
 </ion-header>
@@ -16,7 +13,7 @@
 
 <ion-content padding>
 	<div style="text-align: center">
-	<p>A verification has been sent to your phone 0192663546</p>
+	<p>A verification has been sent to your email.</p>
 	<ins style="color: #000000;">Resend Code?</ins>
 	
 
@@ -25,8 +22,7 @@
    	<p>To complete registration, please enter the verification code</p>
    </div>
     	<ion-item class="box">
-<ion-input type="text" placeholder="Verification Code"></ion-input>
-<a clear item-right (click)="clearInput()">X</a>
+<ion-input type="text" [(ngModel)]="code" placeholder="Verification Code"></ion-input>
 </ion-item>
     	<!-- <button style="float:right;" >
       <ion-icon position="end" ios="ios-close" md="md-close"></ion-icon>

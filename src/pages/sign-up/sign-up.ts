@@ -5,8 +5,10 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { HttpProvider } from '../../providers/http/http';
 import { GooglePlus } from '@ionic-native/google-plus';
 
-import { VerificationPage } from '../verification/verification';
-
+import { VerificationCodePage } from '../verification-code/verification-code';
+import{ LoginPage } from '../login/login'
+import { TermsConditionsPage } from '../terms-conditions/terms-conditions'
+import{ PrivacyPolicyPage } from '../privacy-policy/privacy-policy'
 
 
 
@@ -81,21 +83,31 @@ export class SignUpPage {
                 result => {
                   console.log(result)
                   let toast = this.toastCtrl.create({
-                    message: 'Please fill in your phone number to complete the registration',
+                    message: 'Please check your email to get verfication code',
                      duration: 3000,
                     position: 'bottom'
                   });
                   loading.dismiss();
                   
                   toast.present()
-                  this.navCtrl.push(VerificationPage,{});
+                  this.navCtrl.setRoot(VerificationCodePage,{});
                 },
                 err => {
                   console.log(err);
+                  let toast1 = this.toastCtrl.create({
+                    message: err._body,
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+                  
+                  loading.dismiss();
+                  toast1.present()
                 });
 
     }, (error) => {
+      console.log(error)
       loading.dismiss();
+
     });
   }
 
@@ -126,76 +138,90 @@ export class SignUpPage {
                 email: this.fbProfile.email,
                 password: this.fbProfile.password,
                 name: this.fbProfile.name,
-                // email: "amir@gmail.com",
-                // password: "123456",
-                // name: "amir",
-                category: "2",
-                phone_number: "0197397343"
               };
 
               this.httpprovider.registerUser(this.data).then(
                 result => {
                   console.log(result)
                   let toast = this.toastCtrl.create({
-                    message: 'Please fill in your phone number to complete the registration',
+                    message: 'Please check your email to get verfication code',
                      duration: 3000,
                     position: 'bottom'
                   });
                   loading.dismiss();
                   
                   toast.present()
-                  this.navCtrl.push(VerificationPage,{});
+                  this.navCtrl.setRoot(VerificationCodePage,{});
                 },
                 err => {
-                  console.log(err);
+                  let toast1 = this.toastCtrl.create({
+                    message: err._body,
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+                  
+                  loading.dismiss();
+                  toast1.present()
                 }
               );
           });
       })
       .catch(
-        e => {
-          console.log("Error logging into Facebook", e)
+        e => 
 
+        {
+          console.log(e)
+          loading.dismiss();
 
-          let toast = this.toastCtrl.create({
-                    message: 'Error sign up with facebook',
-                     duration: 3000,
-                    position: 'bottom'
-                  });
-          toast.present()
-
-
-        }
-
-        
-
-        
-        );
+        });
       // let data = {
-      //           email: "amir@gmail.com",
+      //           email: "amirizzuddin27@gmail.com",
       //           password: "123456",
       //           name: "amir",
-      //           category: "2",
-      //           phone_number: "0197397343"
       //         };
 
       //         this.httpprovider.registerUser(data).then(
       //           result => {
       //             console.log(result)
       //             let toast = this.toastCtrl.create({
-      //               message: 'Please fill in your phone number to complete the registration',
+      //               message: 'Please check your email to get verfication code',
       //                duration: 3000,
       //               position: 'bottom'
       //             });
       //             loading.dismiss();
                   
       //             toast.present()
-      //             this.navCtrl.push(VerificationPage,{});
+      //             this.navCtrl.setRoot(VerificationCodePage,{});
       //           },
       //           err => {
       //             console.log(err);
+      //             let toast1 = this.toastCtrl.create({
+      //               message: err._body,
+      //                duration: 3000,
+      //               position: 'bottom'
+      //             });
+                  
+      //             loading.dismiss();
+      //             toast1.present()
+
       //           }
       //           );
+
+  }
+
+  login(){
+    this.navCtrl.push(LoginPage)
+
+  }
+
+  termAndCondition(){
+    this.navCtrl.push(TermsConditionsPage)
+
+  }
+
+  privacyPolicy(){
+    this.navCtrl.push(PrivacyPolicyPage)
+
   }
 
   

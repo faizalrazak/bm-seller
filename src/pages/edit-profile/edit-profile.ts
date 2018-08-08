@@ -143,7 +143,6 @@ export class EditProfilePage {
   });
 
   loading.present();
-  
 
   console.log(this.restaurantInfo);
 

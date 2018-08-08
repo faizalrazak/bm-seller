@@ -30,6 +30,7 @@ import { VerificationPage } from '../pages/verification/verification';
 import { VerificationCodePage } from '../pages/verification-code/verification-code';
 import { RegisterRestaurantPage } from '../pages/register-restaurant/register-restaurant';
 import { NewRiderPage } from '../pages/new-rider/new-rider';
+import{ ForgotPage } from '../pages/forgot/forgot'
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -82,6 +83,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     VerificationCodePage,
     RegisterRestaurantPage,
     NewRiderPage,
+    ForgotPage,
     MapsPage
     
   ],
@@ -126,6 +128,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     VerificationCodePage,
     RegisterRestaurantPage,
     NewRiderPage,
+    ForgotPage,
     MapsPage
   ],
   providers: [

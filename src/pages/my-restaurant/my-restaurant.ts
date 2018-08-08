@@ -150,31 +150,29 @@ export class MyRestaurantPage {
  }
 
  addMenuModal() {
-   let profileModal = this.modalCtrl.create(AddMenuPage);
-   profileModal.onDidDismiss(() => {
+   this.navCtrl.push(AddMenuPage)
+   // let profileModal = this.modalCtrl.create(AddMenuPage);
+   // profileModal.onDidDismiss(() => {
 
-      this.ionViewDidLoad();
+   //    this.ionViewDidLoad();
 
-    });
+   //  });
    
-   profileModal.present();
+   // profileModal.present();
 
  }
-
- // addMenuModal() {
- //    this.navCtrl.push(AddMenuPage, {});
- //  }
 
  
 
  addBeverageModal() {
-   let profileModal = this.modalCtrl.create(AddBeveragesPage);
-   profileModal.onDidDismiss(() => {
+   this.navCtrl.push(AddBeveragesPage)
+   // let profileModal = this.modalCtrl.create(AddBeveragesPage);
+   // profileModal.onDidDismiss(() => {
 
-      this.ionViewDidLoad();
+   //    this.ionViewDidLoad();
 
-    });
-   profileModal.present();
+   //  });
+   // profileModal.present();
 
  }
 

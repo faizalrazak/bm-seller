@@ -6,7 +6,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
 
 
 import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
-
+import { SignUpPage } from '../sign-up/sign-up';
+import{ ForgotPage } from '../forgot/forgot'
 
 
 
@@ -63,11 +64,9 @@ export class LoginPage {
 
       let data={
         email:user.email,
-        name:user.displayName,
         password:user.userId,
-
-
       }
+
       console.log("Name="+user.displayName)
       console.log("Email="+user.email)
       console.log("Password="+user.userId)
@@ -87,9 +86,18 @@ export class LoginPage {
                 },
                 err => {
                   console.log(err);
+                  let toast1 = this.toastCtrl.create({
+                    message: err._body,
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+                  
+                  loading.dismiss();
+                  toast1.present()
                 });
 
     }, (error) => {
+      console.log(error)
       loading.dismiss();
     });
   }
@@ -108,16 +116,12 @@ facebookLogin() {
             profile => {
               this.fbProfile = {
                 email: profile["email"],
-                password: profile["id"]
-                
-                
+                password: profile["id"]   
               }
 
               let data = {
                 email: this.fbProfile.email,
                 password: this.fbProfile.password,
-                // email: "amir@gmail.com",
-                // password: "123456",
               }
 
               this.httpprovider.loginUser(data).then(
@@ -135,8 +139,15 @@ facebookLogin() {
                   loading.dismiss();
                 },
                 err => {
+                 console.log(err);
+                  let toast1 = this.toastCtrl.create({
+                    message: err._body,
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+                  
                   loading.dismiss();
-                  console.log(err);
+                  toast1.present()
                 }
               );
           });
@@ -144,38 +155,46 @@ facebookLogin() {
       .catch(
         e => 
 
-        console.log("Error logging into Facebook", e)
+        {
+          console.log(e)
+          // loading.dismiss();
 
-        
-      //   );
+        });
 
-      // let data = {
-      //           email: "fizo@gmail.com",
-      //           password: "123456",
-      //         };
+      let data = {
+                email: "fizo@gmail.com",
+                password: "123456",
+              };
 
 
-      // this.httpprovider.loginUser(data).then(
-      //           result => {
-      //             console.log(result)
-      //             let toast = this.toastCtrl.create({
-      //               message: 'Successfully login',
-      //                duration: 3000,
-      //               position: 'bottom'
-      //             });
+      this.httpprovider.loginUser(data).then(
+                result => {
+                  console.log(result)
+                  let toast = this.toastCtrl.create({
+                    message: 'Successfully login',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
                   
                   
-      //             toast.present()
-      //             loading.dismiss();
-      //             this.navCtrl.setRoot(MyRestaurantPage,{});
-      //           },
-      //           err => {
-      //             console.log(err);
-      //           }
+                  toast.present()
+                  loading.dismiss();
+                  this.navCtrl.setRoot(MyRestaurantPage,{});
+                },
+                err => {
+                  console.log(err);
+                }
 
 
   );
     }
 
+    signUpNow(){
+      this.navCtrl.push(SignUpPage)
+    }
+
+    forgotPass(){
+      this.navCtrl.push(ForgotPage)
+    }
 
 }
