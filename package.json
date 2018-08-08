@@ -44,12 +44,9 @@
     "cordova-plugin-ionic-webview": "^1.2.0",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-whitelist": "^1.3.3",
-<<<<<<< HEAD
     "cordova-plugin-x-socialsharing": "^5.4.1",
     "es6-promise-plugin": "^4.2.2",
-=======
     "firebase": "^4.8.0",
->>>>>>> d3bb75b76c75b2ad9a6a6c6decd16f25fcf6969a
     "ionic-angular": "3.9.2",
     "ionic2-rating": "^1.2.2",
     "ionicons": "3.0.0",
