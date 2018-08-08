@@ -49,15 +49,15 @@ export class MyApp {
 
     ) {
     
-    // event.subscribe('token:changed', token => {
-    //     this.token = token
-    //     console.log(this.token)
-    //   })
+    event.subscribe('token:changed', token => {
+        this.token = token
+        console.log(this.token)
+      })
 
-    //   this.name = "Guest"
-    //   event.subscribe('username:changed', username => {
-    //     this.name = username
-    //   })
+      this.name = "Guest"
+      event.subscribe('username:changed', username => {
+        this.name = username
+      })
 
      if(window.localStorage.getItem('token'))
     {
@@ -66,7 +66,6 @@ export class MyApp {
 
     }else{
       this.rootPage = LoginSignUpPage;
-      // this.name = "Guess"
     }
 
     
@@ -95,15 +94,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
-    // if(window.localStorage.getItem('token'))
-    // {
-    //   this.rootPage = MyRestaurantPage;
-
-          
-    // }else{
-    //   this.rootPage = LoginSignUpPage;
-    // }
     });
 
     
@@ -137,7 +127,7 @@ export class MyApp {
         text: 'No',
         role: 'No',
         handler: () => {
-           this.nav.setRoot(HomePage);
+           this.nav.popToRoot();
           console.log('No clicked');
       
 
@@ -147,9 +137,17 @@ export class MyApp {
         text: 'Yes',
         role: 'Yes',
         handler: () => {
+          let loading = this.loadingCtrl.create({
+          spinner: 'ios',
+          content: 'Please Wait...'
+          });
+
+          loading.present();
           localStorage.removeItem("token");
-           localStorage.removeItem("profile");
-           window.location.reload()
+          localStorage.removeItem("profile");
+          localStorage.removeItem("email");
+          loading.dismiss();
+          window.location.reload()
           
 
     

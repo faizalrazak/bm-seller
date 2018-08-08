@@ -156,7 +156,7 @@ export class RegisterRestaurantPage {
 
      this.httpprovider.registerRestaurant(rest).then((result) => {
        let toast = this.toastCtrl.create({
-    message: 'Restaurant registration successfully',
+    message: 'Restaurant successfully registered ',
     duration: 3000,
     position: 'bottom'
   });      

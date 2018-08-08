@@ -173,7 +173,8 @@ export class EditProfilePage {
        loading.dismiss();
       toast.present();
       
-     this.navCtrl.setRoot(MyRestaurantPage);
+     // this.navCtrl.setRoot(MyRestaurantPage);
+     this.navCtrl.popToRoot() 
 
      
      },

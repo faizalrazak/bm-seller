@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { AlertController } from 'ionic-angular';
+
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { EditRestaurantPage } from '../edit-restaurant/edit-restaurant';
@@ -44,6 +48,10 @@ export class MyRestaurantPage {
   image:string;
   url:string;
 
+  quotes :any;
+  hideMe:any;
+
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -52,12 +60,30 @@ export class MyRestaurantPage {
     public modalCtrl: ModalController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
+    private http:Http,
     private socialSharing: SocialSharing 
     ) {
     this.restaurants = 'menu'
+    
   }
 
-  ionViewDidLoad() {
+
+
+
+compilemsg(index):string{
+  var msg = this.RestName + "-" + this.restImage ;
+  return msg.concat(" \n Sent from my Bigmomma App !");
+}
+
+
+whatsappShare(index){
+  var msg  = this.compilemsg(index);
+   this.socialSharing.shareViaWhatsApp(msg, null, null);
+ }
+
+ 
+
+  ionViewWillEnter () {
     console.log('ionViewDidLoad MyRestaurantPage');
 
     // this.open =  window.localStorage.getItem('open')  ? window.localStorage.getItem('open') : false  
@@ -139,13 +165,14 @@ export class MyRestaurantPage {
  
 
   presentProfileModal() {
-   let profileModal = this.modalCtrl.create(EditRestaurantPage);
-   profileModal.onDidDismiss(() => {
+    this.navCtrl.push(EditRestaurantPage)
+   // let profileModal = this.modalCtrl.create(EditRestaurantPage);
+   // profileModal.onDidDismiss(() => {
 
-      this.ionViewDidLoad();
+   //    this.ionViewWillEnter ();
 
-    });
-   profileModal.present();
+   //  });
+   // profileModal.present();
 
  }
 
@@ -277,14 +304,6 @@ export class MyRestaurantPage {
       prompt.present();
     }
 
-   }
-
-   share(){
-     this.socialSharing.shareViaFacebook(this.message, this.image, this.url).then(() => {
-  // Sharing via email is possible
-}).catch(() => {
-  // Sharing via email is not possible
-});
    }
  
 }

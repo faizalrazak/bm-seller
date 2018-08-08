@@ -157,12 +157,20 @@ addMenuForm(){
        loading.dismiss();
       toast.present();
       
-     this.navCtrl.setRoot(MyRestaurantPage);
+     this.navCtrl.popToRoot();
 
      
      },
          (err) => {
          console.log(err);
+         let toast1 = this.toastCtrl.create({
+                    message: "Please fill up details",
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+                  
+                  loading.dismiss();
+                  toast1.present()
      });
  }
 }

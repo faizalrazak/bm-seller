@@ -50,7 +50,7 @@ export class ProfilePage {
     ) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter () {
     console.log('ionViewDidLoad ProfilePage');
 
     let loading = this.loadingCtrl.create({
@@ -107,13 +107,8 @@ export class ProfilePage {
   }
 
   editProfile(){
-    let profileModal = this.modalCtrl.create(EditProfilePage);
-   profileModal.onDidDismiss(() => {
+    this.navCtrl.push(EditProfilePage)
 
-      this.ionViewDidLoad();
-
-    });
-   profileModal.present();
 
   }
 

@@ -157,36 +157,36 @@ facebookLogin() {
 
         {
           console.log(e)
-          // loading.dismiss();
+          loading.dismiss();
 
         });
 
-      let data = {
-                email: "fizo@gmail.com",
-                password: "123456",
-              };
+  //     let data = {
+  //               email: "fizo@gmail.com",
+  //               password: "123456",
+  //             };
 
 
-      this.httpprovider.loginUser(data).then(
-                result => {
-                  console.log(result)
-                  let toast = this.toastCtrl.create({
-                    message: 'Successfully login',
-                     duration: 3000,
-                    position: 'bottom'
-                  });
+  //     this.httpprovider.loginUser(data).then(
+  //               result => {
+  //                 console.log(result)
+  //                 let toast = this.toastCtrl.create({
+  //                   message: 'Successfully login',
+  //                    duration: 3000,
+  //                   position: 'bottom'
+  //                 });
                   
                   
-                  toast.present()
-                  loading.dismiss();
-                  this.navCtrl.setRoot(MyRestaurantPage,{});
-                },
-                err => {
-                  console.log(err);
-                }
+  //                 toast.present()
+  //                 loading.dismiss();
+  //                 this.navCtrl.setRoot(MyRestaurantPage,{});
+  //               },
+  //               err => {
+  //                 console.log(err);
+  //               }
 
 
-  );
+  // );
     }
 
     signUpNow(){
