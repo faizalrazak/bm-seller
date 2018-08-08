@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
 import { OrderDetailPage } from '../order-detail/order-detail';
 import { CurrentOrderDetailPage } from '../current-order-detail/current-order-detail';
-
+import { HttpProvider } from '../../providers/http/http'
 
 @IonicPage()
 @Component({
@@ -12,17 +12,24 @@ import { CurrentOrderDetailPage } from '../current-order-detail/current-order-de
 export class OrderPage {
 
   orders:any;
+  currentOrders;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http:HttpProvider, public loading:LoadingController) {
     this.orders = 'current'
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OrderPage');
+    this.http.getCurrentOrders().subscribe(
+      response => {
+        this.currentOrders=response.data
+        console.log(this.currentOrders)
+      },err => {
+        console.log(err);
+      });
   }
 
-  currentDetail(){
-    this.navCtrl.push(OrderDetailPage)
+  orderDetail(order){
+    this.navCtrl.push(OrderDetailPage, order)
   }
 
   pastDetail(){

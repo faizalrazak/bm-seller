@@ -238,13 +238,13 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address,
       
       this.http
         .put(
-          "http://api.bigmomma.com.my/api/restaurant/"+restaurantId+"",
+          "http://api.bigmomma.com.my/api/restaurant/"+restaurantId,
           data,
         )
         .subscribe(
           res => {
             let data = res.json();
-            console.log("data");
+            console.log(data);
             resolve(data);
           },
           err => {
@@ -528,5 +528,16 @@ console.log("name"+details.name)
           }
         );
     });
+  }
+
+  getCurrentOrders(){
+    
+    let headers = new Headers();
+    headers.append("Authorization", "Bearer " + window.localStorage.getItem("token"));
+    return this.http.get("http://api.bigmomma.com.my/api/restaurant/current-order", { headers: headers }).map(res => res.json());
+  }
+
+  getCartItems(id){
+    return this.http.get("http://api.bigmomma.com.my/api/cart/"+id+"/items").map(res => res.json());
   }
 }

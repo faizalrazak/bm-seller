@@ -17,13 +17,16 @@ import { SubscriptionPage } from '../pages/subscription/subscription';
 import { TermsConditionsPage } from '../pages/terms-conditions/terms-conditions';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { RegisterRestaurantPage } from '../pages/register-restaurant/register-restaurant';
+import * as firebase from 'firebase';
 
-
-
-
-
-
-
+const config = {
+  apiKey: "AIzaSyDspITZuKbzr2G_xwED5_cJWz7eZ61fO2c",
+  authDomain: "bigmomma-chat.firebaseapp.com",
+  databaseURL: "https://bigmomma-chat.firebaseio.com",
+  projectId: "bigmomma-chat",
+  storageBucket: "bigmomma-chat.appspot.com",
+  messagingSenderId: "44575375340"
+};
 @Component({
   templateUrl: 'app.html'
 })
@@ -77,7 +80,6 @@ export class MyApp {
       { title: 'My Restaurant', component: MyRestaurantPage },
       { title: 'Orders', component: OrderPage },
       { title: 'Subscription', component: SubscriptionPage },
-       
       { title: 'Notification', component: NotificationsPage },
       { title: 'About Us', component: AboutUsPage },
       { title: 'Privacy Policy', component: PrivacyPolicyPage },
@@ -96,9 +98,8 @@ export class MyApp {
       this.splashScreen.hide();
     });
 
-    
+    firebase.initializeApp(config);
 
-    
 }
 
   openProfile() {

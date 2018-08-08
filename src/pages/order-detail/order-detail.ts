@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, ModalController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
+import { HttpProvider } from '../../providers/http/http'
 import { FindRiderPage } from '../find-rider/find-rider';
 import { RiderPage } from '../rider/rider';
 import { MessageRoomPage } from '../message-room/message-room';
@@ -21,15 +21,44 @@ import { OrderPage } from '../order/order'
   templateUrl: 'order-detail.html',
 })
 export class OrderDetailPage {
+  
   base64Image:any;
+  order;
+  cartItems;
+  subtotal:number;
+  delivery_fee:number = 0.00
+  processing_fee:number = 0.50
+  total:number
 
-  constructor(public modalCtrl: ModalController, public navCtrl: NavController, 
-    public navParams: NavParams, public actionSheetCtrl: ActionSheetController, 
-    private camera: Camera) {
+  constructor(
+    public modalCtrl: ModalController,
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public actionSheetCtrl: ActionSheetController, 
+    private camera: Camera,
+    private http:HttpProvider
+  ){
+
+      this.order = this.navParams.data
+      console.log(this.order)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OrderDetailPage');
+    
+    this.http.getCartItems(this.order.cart.id).subscribe(
+      response => {
+        this.cartItems=response.data
+        console.log(this.cartItems)
+        this.subtotal = 0;
+
+        for(let cart of this.cartItems){
+          this.subtotal = this.subtotal + parseFloat(cart.data.price)
+        }
+        this.total = this.subtotal + this.delivery_fee + this.processing_fee
+        console.log(this.cartItems)
+      },err => {
+        console.log(err);
+      });
   }
 
   presentActionSheet() {
@@ -77,8 +106,10 @@ this.camera.getPicture(options).then((imageData) => {
 }
 
 
-  messageRoomButton(){
-    this.navCtrl.push(MessageRoomPage)
+  messageRoomButton(id){
+    console.log(id)
+    let modal = this.modalCtrl.create(MessageRoomPage, {key:id});
+    modal.present();
   }
 
   goMaps(){
