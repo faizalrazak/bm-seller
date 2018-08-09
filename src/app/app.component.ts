@@ -64,7 +64,7 @@ export class MyApp {
 
      if(window.localStorage.getItem('token'))
     {
-      this.rootPage = MyRestaurantPage;
+      this.rootPage = HomePage;
       this.name = window.localStorage.getItem('profile')
 
     }else{
@@ -84,7 +84,7 @@ export class MyApp {
       { title: 'About Us', component: AboutUsPage },
       { title: 'Privacy Policy', component: PrivacyPolicyPage },
       { title: 'Term and Conditions', component: TermsConditionsPage },
-      { title: 'Register Restaurant', component: RegisterRestaurantPage }, 
+      // { title: 'Register Restaurant', component: RegisterRestaurantPage }, 
 
     ];
 
@@ -128,7 +128,7 @@ export class MyApp {
         text: 'No',
         role: 'No',
         handler: () => {
-           this.nav.setRoot(HomePage);
+           this.nav.popToRoot();
           console.log('No clicked');
       
 
@@ -138,9 +138,18 @@ export class MyApp {
         text: 'Yes',
         role: 'Yes',
         handler: () => {
+          let loading = this.loadingCtrl.create({
+          spinner: 'ios',
+          content: 'Please Wait...'
+          });
+
+          loading.present();
           localStorage.removeItem("token");
-           localStorage.removeItem("profile");
-           window.location.reload()
+          localStorage.removeItem("profile");
+          localStorage.removeItem("firebase:host:bigmomma-chat.firebaseio.com");
+          localStorage.removeItem("email");
+          loading.dismiss();
+          window.location.reload()
           
 
     

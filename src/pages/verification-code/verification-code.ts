@@ -21,6 +21,7 @@ import { HttpProvider } from '../../providers/http/http';
 export class VerificationCodePage {
 
 	code:any;
+  userEmail:any;
 
 
   constructor(
@@ -28,7 +29,10 @@ export class VerificationCodePage {
   	public navParams: NavParams,
   	public loadingCtrl: LoadingController,
   	public httpprovider:HttpProvider,
-  	public toastCtrl:ToastController) {
+  	public toastCtrl:ToastController
+    ) {
+    this.userEmail=window.localStorage.getItem("email")
+    console.log(this.userEmail)
   }
 
   ionViewDidLoad() {

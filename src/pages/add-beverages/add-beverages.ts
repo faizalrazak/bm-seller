@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -43,6 +43,8 @@ export class AddBeveragesPage {
   	public httpprovider: HttpProvider, 
     public loadingCtrl: LoadingController,
     private camera: Camera,
+    private toastCtrl: ToastController,
+
     ) {
   }
 
@@ -117,11 +119,26 @@ export class AddBeveragesPage {
   
 
      this.httpprovider.createBeverage(beverage, this.RestId).then((result) => {
-     	 loading.dismiss();
-      this.navCtrl.setRoot(MyRestaurantPage);    
+     	 let toast = this.toastCtrl.create({
+        message:'New beverage successfully added' ,
+        duration: 3000,
+        position: 'bottom'
+      });
+       loading.dismiss();
+      toast.present();
+      
+     this.navCtrl.popToRoot();   
      },
          (err) => {
          console.log(err);
+         let toast1 = this.toastCtrl.create({
+                    message: "Please fill up details",
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+                  
+                  loading.dismiss();
+                  toast1.present()
      });
  }
 

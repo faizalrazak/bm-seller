@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { AlertController } from 'ionic-angular';
+
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { EditRestaurantPage } from '../edit-restaurant/edit-restaurant';
@@ -9,6 +13,8 @@ import { EditMenuPage } from '../edit-menu/edit-menu';
 import { EditBeveragePage } from '../edit-beverage/edit-beverage';
 import { AddMenuPage } from '../add-menu/add-menu';
 import { AddBeveragesPage } from '../add-beverages/add-beverages';
+import { RegisterRestaurantPage } from '../register-restaurant/register-restaurant';
+
 
 
 /**
@@ -44,6 +50,10 @@ export class MyRestaurantPage {
   image:string;
   url:string;
 
+  quotes :any;
+  hideMe:any;
+
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -52,17 +62,24 @@ export class MyRestaurantPage {
     public modalCtrl: ModalController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
+    private http:Http,
     private socialSharing: SocialSharing 
     ) {
     this.restaurants = 'menu'
+    
   }
+compilemsg(index):string{
+  var msg = this.RestName + "-" + this.restImage ;
+  return msg.concat(" \n Sent from my Bigmomma App !");
+}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MyRestaurantPage');
 
-    // this.open =  window.localStorage.getItem('open')  ? window.localStorage.getItem('open') : false  
+whatsappShare(index){
+  var msg  = this.compilemsg(index);
+   this.socialSharing.shareViaWhatsApp(msg, null, null);
+ }
 
-
+  ionViewDidEnter(){
     let loading = this.loadingCtrl.create({
     spinner: 'ios',
     content: 'Please Wait...'
@@ -73,8 +90,9 @@ export class MyRestaurantPage {
      this.httpprovider.getRestaurantInfo().then(
      (response) => {
        console.log(response)
-       
-        this.restaurantInfo=response
+       this.restaurantInfo=response
+        if(this.restaurantInfo != null){
+        
         this.RestId=this.restaurantInfo.data.id
         this.restImage=this.imageLink+this.restaurantInfo.data.restaurant_image
         this.RestName=this.restaurantInfo.data.name
@@ -82,6 +100,7 @@ export class MyRestaurantPage {
         this.RestOpenHour=this.restaurantInfo.data.opening_hour
         this.RestCloseHour=this.restaurantInfo.data.closing_hour
         this.open=this.restaurantInfo.data.open
+
 
         if(this.open == 1) {
           this.toggleValue = true
@@ -118,7 +137,10 @@ export class MyRestaurantPage {
      console.log('List of menus')
      loading.dismiss();
    }
-   );   
+   );  
+   }
+    loading.dismiss();
+
      },
      err => {
        console.log(err);
@@ -139,13 +161,14 @@ export class MyRestaurantPage {
  
 
   presentProfileModal() {
-   let profileModal = this.modalCtrl.create(EditRestaurantPage);
-   profileModal.onDidDismiss(() => {
+    this.navCtrl.push(EditRestaurantPage)
+   // let profileModal = this.modalCtrl.create(EditRestaurantPage);
+   // profileModal.onDidDismiss(() => {
 
-      this.ionViewDidLoad();
+   //    this.ionViewWillEnter ();
 
-    });
-   profileModal.present();
+   //  });
+   // profileModal.present();
 
  }
 
@@ -279,12 +302,9 @@ export class MyRestaurantPage {
 
    }
 
-   share(){
-     this.socialSharing.shareViaFacebook(this.message, this.image, this.url).then(() => {
-  // Sharing via email is possible
-}).catch(() => {
-  // Sharing via email is not possible
-});
+   setupRest(){
+    this.navCtrl.push(RegisterRestaurantPage)
+
    }
  
 }

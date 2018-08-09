@@ -3,11 +3,6 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { HttpProvider } from '../../providers/http/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
-
-
-import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
-
-
 /**
  * Generated class for the EditRestaurantPage page.
  *
@@ -46,9 +41,7 @@ export class EditRestaurantPage {
     public httpprovider: HttpProvider,
     public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private camera: Camera,
-
-    ) {
+    private camera: Camera){
   }
 
   ionViewDidLoad() {
@@ -87,6 +80,13 @@ export class EditRestaurantPage {
      },
      err => {
        console.log(err);
+       let toast = this.toastCtrl.create({
+                    message: 'Please register a restaurant first',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+          toast.present()
+          loading.dismiss();
      },
      ()=>{
      console.log('List of categories')
@@ -97,20 +97,31 @@ export class EditRestaurantPage {
      },
      err => {
        console.log(err);
+       let toast = this.toastCtrl.create({
+                    message: 'Please register a restaurant first 2',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+          toast.present()
+          loading.dismiss();
      },
    );
 
   }
 
   updateForm(){
+
+    if(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(this.restImg)) 
+    {      
+      this.restImg=""
+    }
+
     let loading = this.loadingCtrl.create({
     spinner: 'ios',
     content: 'Loading Please Wait...'
   });
 
   loading.present();
-  
-
   console.log(this.restaurantInfo);
 
 
@@ -124,22 +135,18 @@ export class EditRestaurantPage {
        this.restCategory,
        this.restId,
        this.restAbout,
-       this.restImg)
+       this.restImg).then((result) => {
 
-       .then((result) => {
-       let toast = this.toastCtrl.create({
-        message:'Restaurant info successfully updated' ,
-        duration: 3000,
-        position: 'bottom'
-      });
-       loading.dismiss();
-      toast.present();
-      
-     this.navCtrl.pop();
+        let toast = this.toastCtrl.create({
+          message:'Restaurant info successfully updated' ,
+          duration: 3000,
+          position: 'bottom'
+        });
 
-     
-     },
-         (err) => {
+        loading.dismiss();
+        toast.present();
+        this.navCtrl.popToRoot()
+      },(err) => {
          console.log(err);
      });
  }

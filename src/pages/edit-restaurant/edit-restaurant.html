@@ -8,26 +8,17 @@
 
   <ion-navbar color="bigmomma">
     <ion-title>My Restaurant</ion-title>
-    <ion-buttons start>
-        <button ion-button icon-only (click)="back()">
-          <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" ></ion-icon>
-        </button>
-      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content style="background: #E9E9E9">
-  <div style="height: 20%;">
+<ion-content style="background: #E9E9E9" no-bounce>
 
-    <img (click)="openCameraRestImage()"  src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!restImg" style="height: 120%;width: 100%">
-    <img (click)="openCameraRestImage()"  src="{{restImg}}" *ngIf="restImg" style="height: 120%;width: 100%">
-  </div>
+    <img (click)="openCameraRestImage()"  class="img-res" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!restImg">
+    <img (click)="openCameraRestImage()"  class="img-res" src="{{restImg}}" *ngIf="restImg">
   <ion-item style="background: #E9E9E9">
-  
       RESTAURANT INFO
-  
   </ion-item>
   <div class="first-box">
       <ion-row>
@@ -146,9 +137,7 @@
     </ion-row>
   </div>
 
-  <div padding>
-    <button ion-button full block color="bigmomma" (click)="updateForm()">Save</button>
-  </div>
-
-
 </ion-content>
+<ion-footer>
+  <button (click)="updateForm()" no-margin ion-button full color="bigmomma">Save</button>
+</ion-footer>

@@ -8,6 +8,7 @@ import "rxjs/add/operator/map";
 export class HttpProvider {
   token: any;
   profile:any;
+  email:any;
   constructor(
     public http: Http,
     public event:Events
@@ -179,6 +180,7 @@ getCategoryMain() {
             resolve(data);
           },
           err => {
+            console.log(err)
             reject(err);
           }
         );
@@ -393,6 +395,9 @@ console.log("name"+details.name)
       }
       console.log(data);
       console.log(data.email);
+      this.email=data.email
+            window.localStorage.setItem("email", this.email)
+            console.log(this.email)
       this.http
         .post(
           "http://api.bigmomma.com.my/api/user/register",

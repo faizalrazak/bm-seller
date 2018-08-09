@@ -68,14 +68,12 @@ export class OrderDetailPage {
         {
           text: 'My Rider',
           handler: () => {
-            let modal = this.modalCtrl.create(RiderPage);
-            modal.present();
+            this.navCtrl.push(RiderPage)
           }
         }, {
           text: 'Find Rider',
           handler: () => {
-            let modal = this.modalCtrl.create(FindRiderPage);
-            modal.present();
+            this.navCtrl.push(FindRiderPage)
           }
         }, {
           text: 'Cancel',
