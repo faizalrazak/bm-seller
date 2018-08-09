@@ -180,6 +180,7 @@ getCategoryMain() {
             resolve(data);
           },
           err => {
+            console.log(err)
             reject(err);
           }
         );

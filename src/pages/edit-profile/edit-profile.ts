@@ -89,6 +89,7 @@ export class EditProfilePage {
        console.log(response)
        
         this.restaurantInfo=response
+        if(this.restaurantInfo != null){
         this.RestId=this.restaurantInfo.data.id
         this.RestName=this.restaurantInfo.data.name
         this.RestAddress=this.restaurantInfo.data.address
@@ -108,10 +109,19 @@ export class EditProfilePage {
         console.log(this.restCat)
         console.log(this.restUnit)
 
-          
+      }
+        loading.dismiss();
+
      },
      err => {
-       console.log(err);
+        console.log(err);
+       let toast = this.toastCtrl.create({
+                    message: 'Please register a restaurant first',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+          toast.present()
+          loading.dismiss();
      },
    );
         this.httpprovider.getCategoryRest().subscribe(
@@ -121,10 +131,11 @@ export class EditProfilePage {
      },
      err => {
        console.log(err);
+          loading.dismiss();
      },
      ()=>{
      console.log('List of categories')
-       loading.dismiss();
+       // loading.dismiss();
 
    }
    );
@@ -132,64 +143,84 @@ export class EditProfilePage {
      },
      err => {
        console.log(err);
+          loading.dismiss();
             },
    );
   }
 
   updateForm(){
+    if(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(this.restImage)) 
+    {      
+      this.restImage=""
+       } 
+       
     let loading = this.loadingCtrl.create({
     spinner: 'ios',
     content: 'Loading Please Wait...'
   });
-
   loading.present();
 
+
   console.log(this.restaurantInfo);
+  
 
        this.httpprovider.editRest(
-       this.RestName,
-       this.RestAddress,
-       this.RestSSMNo,
-       this.restAbout,
-       this.RestId,
-       this.ssmImage,
-       this.icPic,
-       this.icHoldPic,
-       this.restImage,
-       this.restUnit,
-        this.restOpenHour,
-        this.restCloseHour,
-        this.location,
-       )
+         this.RestName,
+         this.RestAddress,
+         this.RestSSMNo,
+         this.restAbout,
+         this.RestId,
+         this.ssmImage,
+         this.icPic,
+         this.icHoldPic,
+         this.restImage,
+         this.restUnit,
+          this.restOpenHour,
+          this.restCloseHour,
+          this.location).then((result) => {
 
-       .then((result) => {
          this.httpprovider.editProfile(this.ownerName, this.ownerEmail, this.ownerPhoneNo)
          .then((result) => {
-       let toast = this.toastCtrl.create({
-        message:'Detail successfully updated' ,
-        duration: 3000,
-        position: 'bottom'
-      });
-       loading.dismiss();
-      toast.present();
-      
-     // this.navCtrl.setRoot(MyRestaurantPage);
-     this.navCtrl.popToRoot() 
-
-     
+           loading.dismiss();
+           let toast = this.toastCtrl.create({
+            message:'Detail successfully updated' ,
+            duration: 3000,
+            position: 'bottom'
+          });
+          toast.present();
+      this.navCtrl.popToRoot()
      },
          (err) => {
          console.log(err);
      
    });
+     },(err) => {
+         console.log(err);
+         loading.dismiss();
+     });
+ }
 
-     
-
-     
+ editProfile(){
+   let loading = this.loadingCtrl.create({
+    spinner: 'ios',
+    content: 'Loading Please Wait...'
+  });
+   loading.present()
+   this.httpprovider.editProfile(this.ownerName, this.ownerEmail, this.ownerPhoneNo)
+         .then((result) => {
+           loading.dismiss();
+       let toast = this.toastCtrl.create({
+        message:'Detail successfully updated' ,
+        duration: 3000,
+        position: 'bottom'
+      });
+      toast.present();
+      this.navCtrl.popToRoot()
      },
          (err) => {
          console.log(err);
-     });
+     
+   });
  }
 
   openCameraSsm(){

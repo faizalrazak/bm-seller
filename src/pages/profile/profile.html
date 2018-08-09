@@ -14,8 +14,8 @@
 
 
 <ion-content style="background : #D8D8D8">
-
-  <div class="first-row">
+  <div *ngIf="restaurantInfo">
+    <div class="first-row">
     <div class="acc-img circle">
       <!-- <img class="camera-plus" src="assets/imgs/logo.png" *ngIf={{image}}>
      -->
@@ -94,7 +94,7 @@
     </ion-row>
     <ion-row>
       <ion-col col-6>Phone Number</ion-col>
-      <ion-col col-6>+6{{ownerPhoneNo}}</ion-col>
+      <ion-col col-6>{{ownerPhoneNo}}</ion-col>
     </ion-row>
     <!-- <ion-row>
       <ion-col col-6>Date Of Birth</ion-col>
@@ -124,4 +124,36 @@
     </div>
 
   </div>
+  </div>
+  <div *ngIf="!restaurantInfo">
+    <div class="divider">
+    <p>
+      PERSONAL INFO
+    </p>
+  </div>
+    <div class="first-box">
+    <ion-row>
+      <ion-col col-6>Name</ion-col>
+      <ion-col col-6>{{ownerName}}</ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col col-6>Last Name</ion-col>
+      <ion-col col-6>{{ownerName}}</ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-col col-6>Email Address</ion-col>
+      <ion-col col-6>{{ownerEmail}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>Phone Number</ion-col>
+      <ion-col col-6>{{ownerPhoneNo}}</ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col col-6>Date Of Birth</ion-col>
+      <ion-col col-6>May 3, 1992</ion-col>
+    </ion-row> -->
+  </div>
+  </div>
+
+  
 </ion-content>

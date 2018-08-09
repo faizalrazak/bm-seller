@@ -166,7 +166,15 @@ export class RegisterRestaurantPage {
      },
          (err) => {
          console.log(err);
+           let toast = this.toastCtrl.create(
+           {
+            message: 'Please fill up required',
+            duration: 3000,
+            position: 'bottom'
+           });      
+
            loading.dismiss();
+           toast.present();
 
      });
   }

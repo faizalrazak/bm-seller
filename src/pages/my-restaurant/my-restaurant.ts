@@ -13,6 +13,8 @@ import { EditMenuPage } from '../edit-menu/edit-menu';
 import { EditBeveragePage } from '../edit-beverage/edit-beverage';
 import { AddMenuPage } from '../add-menu/add-menu';
 import { AddBeveragesPage } from '../add-beverages/add-beverages';
+import { RegisterRestaurantPage } from '../register-restaurant/register-restaurant';
+
 
 
 /**
@@ -99,8 +101,9 @@ whatsappShare(index){
      this.httpprovider.getRestaurantInfo().then(
      (response) => {
        console.log(response)
-       
-        this.restaurantInfo=response
+       this.restaurantInfo=response
+        if(this.restaurantInfo != null){
+        
         this.RestId=this.restaurantInfo.data.id
         this.restImage=this.imageLink+this.restaurantInfo.data.restaurant_image
         this.RestName=this.restaurantInfo.data.name
@@ -108,6 +111,7 @@ whatsappShare(index){
         this.RestOpenHour=this.restaurantInfo.data.opening_hour
         this.RestCloseHour=this.restaurantInfo.data.closing_hour
         this.open=this.restaurantInfo.data.open
+
 
         if(this.open == 1) {
           this.toggleValue = true
@@ -144,7 +148,10 @@ whatsappShare(index){
      console.log('List of menus')
      loading.dismiss();
    }
-   );   
+   );  
+   }
+    loading.dismiss();
+
      },
      err => {
        console.log(err);
@@ -303,6 +310,11 @@ whatsappShare(index){
       });
       prompt.present();
     }
+
+   }
+
+   setupRest(){
+    this.navCtrl.push(RegisterRestaurantPage)
 
    }
  

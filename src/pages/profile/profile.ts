@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, ModalController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 
 
@@ -44,13 +44,17 @@ export class ProfilePage {
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public httpprovider: HttpProvider, 
-    public modalCtrl: ModalController
-
+    public modalCtrl: ModalController,
+    public toastCtrl:ToastController
 
     ) {
   }
 
-  ionViewWillEnter () {
+  ionViewDidEnter(){
+    this.ionViewDidLoad();
+  }
+
+  ionViewDidLoad () {
     console.log('ionViewDidLoad ProfilePage');
 
     let loading = this.loadingCtrl.create({
@@ -62,6 +66,8 @@ export class ProfilePage {
 
      this.httpprovider.getOwnerInfo().then(
      (response) => {
+       
+
        console.log(response)
        
         this.ownerInfo=response
@@ -76,6 +82,7 @@ export class ProfilePage {
        console.log(response)
        
         this.restaurantInfo=response
+        if(this.restaurantInfo != null){
         this.RestId=this.restaurantInfo.data.id
         this.RestName=this.restaurantInfo.data.name
         this.RestAddress=this.restaurantInfo.data.address
@@ -88,16 +95,30 @@ export class ProfilePage {
         this.icHold=this.imageLink+this.restaurantInfo.data.user_ic_image
         this.restImage=this.imageLink+this.restaurantInfo.data.restaurant_image
         console.log(this.restImage)
-        loading.dismiss();   
+        }   
+
      },
      err => {
-       console.log(err);
+        console.log(err);
+       let toast = this.toastCtrl.create({
+                    message: 'Please register a restaurant first',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+          toast.present()
+          loading.dismiss();
      },
+
    );
- 
+      
+
+     loading.dismiss();
+     
      },
+
      err => {
-       console.log(err);
+      console.log(err);
+          loading.dismiss();
             },
    );
   }

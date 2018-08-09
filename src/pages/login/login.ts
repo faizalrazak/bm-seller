@@ -5,7 +5,7 @@ import { HttpProvider } from '../../providers/http/http';
 import { GooglePlus } from '@ionic-native/google-plus';
 
 
-import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
+import { HomePage } from '../home/home';
 import { SignUpPage } from '../sign-up/sign-up';
 import{ ForgotPage } from '../forgot/forgot'
 
@@ -82,7 +82,7 @@ export class LoginPage {
                   loading.dismiss();
                   
                   toast.present()
-                  this.navCtrl.setRoot(MyRestaurantPage,{});
+                  this.navCtrl.setRoot(HomePage,{});
                 },
                 err => {
                   console.log(err);
@@ -135,7 +135,7 @@ facebookLogin() {
                   
                   
                   toast.present()
-                  this.navCtrl.setRoot(MyRestaurantPage,{});
+                  this.navCtrl.setRoot(HomePage,{});
                   loading.dismiss();
                 },
                 err => {
@@ -161,32 +161,32 @@ facebookLogin() {
 
         });
 
-  //     let data = {
-  //               email: "fizo@gmail.com",
-  //               password: "123456",
-  //             };
+      let data = {
+                email: "fizo@gmail.com",
+                password: "123456",
+              };
 
 
-  //     this.httpprovider.loginUser(data).then(
-  //               result => {
-  //                 console.log(result)
-  //                 let toast = this.toastCtrl.create({
-  //                   message: 'Successfully login',
-  //                    duration: 3000,
-  //                   position: 'bottom'
-  //                 });
+      this.httpprovider.loginUser(data).then(
+                result => {
+                  console.log(result)
+                  let toast = this.toastCtrl.create({
+                    message: 'Successfully login',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
                   
                   
-  //                 toast.present()
-  //                 loading.dismiss();
-  //                 this.navCtrl.setRoot(MyRestaurantPage,{});
-  //               },
-  //               err => {
-  //                 console.log(err);
-  //               }
+                  toast.present()
+                  loading.dismiss();
+                  this.navCtrl.setRoot(HomePage,{});
+                },
+                err => {
+                  console.log(err);
+                }
 
 
-  // );
+  );
     }
 
     signUpNow(){

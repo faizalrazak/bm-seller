@@ -5,10 +5,16 @@
     </button>
     <ion-title>My Restaurant</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="presentProfileModal()">
+        <!-- <button *ngIf="!restaurantInfo" ion-button (click)="setupRest()">
+          Setup Restaurant
+        </button> -->
+        <button ion-button *ngIf="!restaurantInfo"(click)="setupRest()" class="plus">
+        <ion-icon name="add"></ion-icon>
+        </button>
+      <button *ngIf="restaurantInfo" ion-button icon-only (click)="presentProfileModal()">
         <ion-icon ios="ios-create" md="md-create" item-end ></ion-icon>
         </button>
-        <button ion-button icon-only (click)="whatsappShare()" >
+        <button *ngIf="restaurantInfo" ion-button icon-only (click)="whatsappShare()" >
           <ion-icon ios="ios-redo" md="md-redo"></ion-icon>
         </button>
       </ion-buttons>
@@ -16,6 +22,7 @@
 </ion-header>
 
 <ion-content style="background: #D8D8D8">
+  <div *ngIf="restaurantInfo">
   <div style="height: 20%;">
     <img src="{{restImage}}">
   </div>
@@ -95,6 +102,11 @@
           </li>
       </ion-list>
     </div>
+  </div>
+  </div>
+  <div *ngIf="!restaurantInfo">
+    <h1 align="center">Whoopss!!!</h1>
+    <p align="center">Please set up a restaurant</p>
   </div>
 
   <!-- <div><ul>

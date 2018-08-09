@@ -87,6 +87,13 @@ export class EditRestaurantPage {
      },
      err => {
        console.log(err);
+       let toast = this.toastCtrl.create({
+                    message: 'Please register a restaurant first',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+          toast.present()
+          loading.dismiss();
      },
      ()=>{
      console.log('List of categories')
@@ -97,6 +104,13 @@ export class EditRestaurantPage {
      },
      err => {
        console.log(err);
+       let toast = this.toastCtrl.create({
+                    message: 'Please register a restaurant first 2',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+          toast.present()
+          loading.dismiss();
      },
    );
 
