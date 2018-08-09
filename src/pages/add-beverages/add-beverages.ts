@@ -126,12 +126,17 @@ export class AddBeveragesPage {
  }
 
  openCamera(){
-     const options: CameraOptions = {
-  quality: 70,
-  destinationType: this.camera.DestinationType.DATA_URL,
-  encodingType: this.camera.EncodingType.JPEG,
-  mediaType: this.camera.MediaType.PICTURE
-}
+  const options: CameraOptions = {
+    quality: 70,
+    targetWidth: 900,
+    targetHeight: 600,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    saveToPhotoAlbum: false,
+    allowEdit: true,
+    sourceType: 1
+  }
 
 this.camera.getPicture(options).then((imageData) => {
  // imageData is either a base64 encoded string or a file URI
