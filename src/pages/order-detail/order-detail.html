@@ -116,15 +116,11 @@
       
     </ion-list>
     <div padding text-center>
-      <div padding text-center>
-      <button ion-button block color="bigmomma" (click)="messageRoomButton(order.order.chatroom_id)">Message Room</button>
-      <button ion-button block color="bigmomma" (click)="presentActionSheet()">Send For Delivery</button>
-      
+      <div>
+        <button ion-button block color="bigmomma" (click)="messageRoomButton(order.order.chatroom_id)">Message Room</button>
+        <button ion-button block color="bigmomma" (click)="presentActionSheet()">Send For Delivery</button>
+      </div>
     </div>
-      <p (click)="cancel()">Cancel Order</p>
-    </div>
+    <p text-center (click)="cancel()">Cancel Order</p>
   </div>
-
-
-
 </ion-content>

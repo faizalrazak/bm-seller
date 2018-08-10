@@ -3,11 +3,6 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { HttpProvider } from '../../providers/http/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
-
-
-import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
-
-
 /**
  * Generated class for the EditRestaurantPage page.
  *
@@ -46,9 +41,7 @@ export class EditRestaurantPage {
     public httpprovider: HttpProvider,
     public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private camera: Camera,
-
-    ) {
+    private camera: Camera){
   }
 
   ionViewDidLoad() {
@@ -117,14 +110,18 @@ export class EditRestaurantPage {
   }
 
   updateForm(){
+
+    if(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(this.restImg)) 
+    {      
+      this.restImg=""
+    }
+
     let loading = this.loadingCtrl.create({
     spinner: 'ios',
     content: 'Loading Please Wait...'
   });
 
   loading.present();
-  
-
   console.log(this.restaurantInfo);
 
 
@@ -138,33 +135,34 @@ export class EditRestaurantPage {
        this.restCategory,
        this.restId,
        this.restAbout,
-       this.restImg)
+       this.restImg).then((result) => {
 
-       .then((result) => {
-       let toast = this.toastCtrl.create({
-        message:'Restaurant info successfully updated' ,
-        duration: 3000,
-        position: 'bottom'
-      });
-       loading.dismiss();
-      toast.present();
-      
-     this.navCtrl.pop();
+        let toast = this.toastCtrl.create({
+          message:'Restaurant info successfully updated' ,
+          duration: 3000,
+          position: 'bottom'
+        });
 
-     
-     },
-         (err) => {
+        loading.dismiss();
+        toast.present();
+        this.navCtrl.popToRoot()
+      },(err) => {
          console.log(err);
      });
  }
 
  openCameraRestImage(){
      const options: CameraOptions = {
-  quality: 70,
-  destinationType: this.camera.DestinationType.DATA_URL,
-  encodingType: this.camera.EncodingType.JPEG,
-  mediaType: this.camera.MediaType.PICTURE
-}
+        quality: 70,
+        targetWidth: 900,
+        targetHeight: 600,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        saveToPhotoAlbum: false,
+        allowEdit: true,
+        sourceType: 1
+      }
 
 this.camera.getPicture(options).then((imageData) => {
  // imageData is either a base64 encoded string or a file URI

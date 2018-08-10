@@ -5,26 +5,19 @@
     </button>
     <ion-title>Profile</ion-title>
     <ion-buttons end>
-        <button ion-button (click)="editProfile()">
-          EDIT
-        </button>
-      </ion-buttons> 
+      <button ion-button (click)="editProfile()" class="plus">
+      <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content style="background : #D8D8D8">
   <div *ngIf="restaurantInfo">
-    <div class="first-row">
-    <div class="acc-img circle">
-      <!-- <img class="camera-plus" src="assets/imgs/logo.png" *ngIf={{image}}>
-     -->
-     <img  style="width:80px;height:80px;margin-top:15%" src="assets/imgs/rest.png" 
-    *ngIf="!restImage">
-    <img   src="{{restImage}}" *ngIf="restImage">
-      
-    </div>
-  </div>
+
+    <img src="assets/imgs/rest.png" *ngIf="!restImage" class="img-res">
+    <img src="{{restImage}}" *ngIf="restImage" class="img-res">
 
   <div class="divider">
     <p>
@@ -102,27 +95,24 @@
     </ion-row> -->
   </div>
 
-  <div class="divider">
-    <p>
-      SSM Verification
-    </p>
-    <p>All online business owners must registered with SSM in order to operate legally in Malaysia</p>
-    <div>
-    <img  class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!ssmImage">
-    <img  class="ssmbox" src="{{ssmImage}}" *ngIf="ssmImage">
-  </div>
-    <p>IDENTITY VERIFICATION</p>
-    <P>Submit your IC photo</P>
-    <div>
-      <img  class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!icImage">
-    <img  class="ssmbox" src="{{icImage}}" *ngIf="icImage">
+  <div>
+    <div padding>
+      <p>SSM Verification</p>
+      <p>All online business owners must registered with SSM in order to operate legally in Malaysia</p>
     </div>
-    <p>and a photo of you holding your IC for verification</p>
-    <div>
-      <img  class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!icHold">
-    <img  class="ssmbox" src="{{icHold}}" *ngIf="icHold">
+    <img  class="img-res" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!ssmImage">
+    <img  class="img-res" src="{{ssmImage}}" *ngIf="ssmImage">
+    <div padding>
+      <p>IDENTITY VERIFICATION</p>
+      <P>Submit your IC photo</P>
     </div>
-
+    <img  class="img-res" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!icImage">
+    <img  class="img-res" src="{{icImage}}" *ngIf="icImage">
+    <div padding>
+      <p>and a photo of you holding your IC for verification</p>
+    </div>
+      <img  class="img-res" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!icHold">
+      <img  class="img-res" src="{{icHold}}" *ngIf="icHold">
   </div>
   </div>
   <div *ngIf="!restaurantInfo">
@@ -154,6 +144,4 @@
     </ion-row> -->
   </div>
   </div>
-
-  
 </ion-content>

@@ -1,14 +1,7 @@
 <ion-header>
-
   <ion-navbar color="bigmomma">
     <ion-title>My Rider</ion-title>
-    <ion-buttons start>
-      <!-- <button ion-button icon-only (click)="dismissModal()">
-        <ion-icon name="close"></ion-icon>
-      </button> -->
-    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -33,8 +26,7 @@
     </ion-item>
   </li>
   </ion-list>
-  <div padding>
-    <button (click)="newRider()" ion-button full block color="bigmomma">Add New Rider</button>
-  </div>
-
 </ion-content>
+<ion-footer>
+    <button (click)="newRider()" no-margin ion-button full color="bigmomma">Add New Rider</button>
+</ion-footer>

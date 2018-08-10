@@ -5,9 +5,6 @@
     </button>
     <ion-title>My Restaurant</ion-title>
     <ion-buttons end>
-        <!-- <button *ngIf="!restaurantInfo" ion-button (click)="setupRest()">
-          Setup Restaurant
-        </button> -->
         <button ion-button *ngIf="!restaurantInfo"(click)="setupRest()" class="plus">
         <ion-icon name="add"></ion-icon>
         </button>
@@ -21,11 +18,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content style="background: #D8D8D8">
+<ion-content style="background: #D8D8D8" no-bounce>
   <div *ngIf="restaurantInfo">
-  <div style="height: 20%;">
-    <img src="{{restImage}}">
-  </div>
+    <img class="img-res" src="{{restImage}}">
 
 
   <div class="detail">
@@ -64,11 +59,11 @@
       <ion-segment [(ngModel)]="restaurants" color="bigmomma" style="background: white">
         <ion-segment-button value="menu">
           Mains                  
-         <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addMenuModal()"></ion-icon>
+         <ion-icon ios="ios-add-circle" md="md-add-circle" style="vertical-align: middle"  (click)="addMenuModal()"></ion-icon>
         </ion-segment-button>
         <ion-segment-button value="beverage">       
           Beverages
-          <ion-icon ios="ios-add-circle" md="md-add-circle"  (click)="addBeverageModal()"></ion-icon>
+          <ion-icon ios="ios-add-circle" md="md-add-circle" style="vertical-align: middle" (click)="addBeverageModal()"></ion-icon>
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -108,18 +103,4 @@
     <h1 align="center">Whoopss!!!</h1>
     <p align="center">Please set up a restaurant</p>
   </div>
-
-  <!-- <div><ul>
-      <li *ngFor="let beverage of beverages" value="{{beverage.id}}"><div   
-        >{{beverage.name}}</div></li> -->
-      <!-- loop start -->
-      <!--   <li><div class="square" style="background-color: palegreen">{{category.category}}</div></li> -->
-        <!-- <li><div class="square" style="background-color: aqua">EDUCATION</div></li>
-        <li><div class="square" style="background-color: purple">ENTERTAIMENT</div></li>
-        <li><div class="square" style="background-color: yellow">FOOD AND BEVERAGES</div></li>
-        <li><div class="square" style="background-color: coral">GADGETS</div></li>
-        <li><div class="square" style="background-color: bisque">GROCERIES</div></li>
-        <li><div class="square" style="background-color: orange">TRANSPORTATION</div></li> -->
-    <!-- </ul></div> -->
-
 </ion-content>

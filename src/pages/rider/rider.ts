@@ -81,9 +81,4 @@ export class RiderPage {
   newRider(){
     this.navCtrl.push(NewRiderPage);
   }
-
-  dismissModal(){
-    this.viewCtrl.dismiss();
-  }
-
 }

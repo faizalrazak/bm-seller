@@ -68,10 +68,6 @@ export class MyRestaurantPage {
     this.restaurants = 'menu'
     
   }
-
-
-
-
 compilemsg(index):string{
   var msg = this.RestName + "-" + this.restImage ;
   return msg.concat(" \n Sent from my Bigmomma App !");
@@ -83,14 +79,7 @@ whatsappShare(index){
    this.socialSharing.shareViaWhatsApp(msg, null, null);
  }
 
- 
-
-  ionViewWillEnter () {
-    console.log('ionViewDidLoad MyRestaurantPage');
-
-    // this.open =  window.localStorage.getItem('open')  ? window.localStorage.getItem('open') : false  
-
-
+  ionViewDidEnter(){
     let loading = this.loadingCtrl.create({
     spinner: 'ios',
     content: 'Please Wait...'
