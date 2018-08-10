@@ -94,16 +94,10 @@
     <ion-row>
       <ion-col col-12>
         <ion-item no-lines>
-          <ion-label  style="font-weight: bold"  stacked>Category</ion-label>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12>
-        <ion-item no-lines>
-          <ion-label>Select Category</ion-label>
-  <ion-select  [(ngModel)]="restCategory" multiple="true">
-    <ion-option *ngFor="let category of restCategories" value="{{category.id}}">{{category.category}}</ion-option>
-  </ion-select>
+          <ion-label style="font-weight: bold; font-size: 1.2rem;">Categories</ion-label>
+          <ion-select  [(ngModel)]="restCategory" name="restCategory" multiple="true">
+            <ion-option *ngFor="let category of restCategories" value="{{category.id}}" selected="category.id == restCategory">{{category.category}}</ion-option>
+          </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>

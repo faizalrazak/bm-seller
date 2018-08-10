@@ -31,8 +31,8 @@ export class EditRestaurantPage {
   restImg:any;
   restAbout:any;
   restPic:any;
-
   restCategories:any;
+  categoryArray = []
 
 
   constructor(
@@ -65,26 +65,24 @@ export class EditRestaurantPage {
         this.restOpenHour=this.restaurantInfo.data.opening_hour
         this.restCloseHour=this.restaurantInfo.data.closing_hour
         this.restAddress=this.restaurantInfo.data.address
-        this.restCategory=this.restaurantInfo.data.category_id
+        this.restCategory=this.restaurantInfo.categories
         this.restUnitNo=this.restaurantInfo.data.unit_no
         this.restAbout=this.restaurantInfo.data.about
         this.restImg=this.imageLink+this.restaurantInfo.data.restaurant_image
-        console.log(this.restImg)
+
+        console.log(this.restCategory)
         
 
         this.httpprovider.getCategoryRest().subscribe(
-     response => {
-       console.log(response)
-       this.restCategories=response.data
-       
-     },
-     err => {
-       console.log(err);
-       let toast = this.toastCtrl.create({
-                    message: 'Please register a restaurant first',
-                     duration: 3000,
-                    position: 'bottom'
-                  });
+        response => {
+          this.restCategories=response.data
+        },err => {
+          console.log(err);
+          let toast = this.toastCtrl.create({
+            message: 'Please register a restaurant first',
+              duration: 3000,
+            position: 'bottom'
+          });
           toast.present()
           loading.dismiss();
      },
@@ -122,7 +120,7 @@ export class EditRestaurantPage {
   });
 
   loading.present();
-  console.log(this.restaurantInfo);
+  console.log(this.restCategory);
 
 
        this.httpprovider.updateRestInfo(
