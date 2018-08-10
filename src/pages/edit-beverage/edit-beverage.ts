@@ -32,6 +32,9 @@ export class EditBeveragePage {
   bevImg:any;
   imageLink="http://api.bigmomma.com.my/uploads/"
   categories = "";
+
+  beverageCategories:any;
+  category:any;
   
 
   constructor(
@@ -50,6 +53,20 @@ export class EditBeveragePage {
   }
 
   ionViewDidLoad() {
+     this.httpprovider.getCategoryBev().subscribe(
+     response => {
+       console.log(response)
+       this.beverageCategories=response.data
+     },
+     err => {
+       console.log(err);
+     },
+     ()=>{
+     console.log('List of categories')
+
+   }
+   ); 
+
     console.log('ionViewDidLoad EditBeveragePage');
     let loading = this.loadingCtrl.create({
     spinner: 'ios',
@@ -77,7 +94,7 @@ export class EditBeveragePage {
         this.beveragesCategory=this.beveragesInfo.data.categories
         this.bevSold="1"
         for(let category of this.beveragesCategory  ) {
-        	this.categories = this.categories+" - "+category.type
+        	this.categories = this.categories+"-"+category.type
         }
 		console.log(this.categories)
         
@@ -102,6 +119,10 @@ export class EditBeveragePage {
   }
 
   updateForm(){
+     if(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(this.bevImg)) 
+    {      
+      this.bevImg=""
+       }
         
         console.log(this.bevImg)
 
@@ -123,7 +144,8 @@ export class EditBeveragePage {
        this.beveragesId,
        this.restId,
        this.bevImg,
-       this.bevSold)
+       this.bevSold,
+       this.category)
 
        .then((result) => {
        let toast = this.toastCtrl.create({

@@ -35,9 +35,8 @@ export class EditMenuPage {
   sold:any;
   categories = "";
   imageLink="http://api.bigmomma.com.my/uploads/"
-
-
-
+  mainCategories:any;
+  category:any;
 
   constructor(
     public navCtrl: NavController, 
@@ -53,6 +52,18 @@ export class EditMenuPage {
   }
 
   ionViewDidLoad() {
+   this.httpprovider.getCategoryMain().subscribe(
+     response => {
+       console.log(response)
+       this.mainCategories=response.data
+     },
+     err => {
+       console.log(err);
+     },
+     ()=>{
+     console.log('List of mains categories')
+   }
+   );
 
     console.log('ionViewDidLoad EditMenuPage');
     let loading = this.loadingCtrl.create({
@@ -131,7 +142,8 @@ export class EditMenuPage {
        this.mainsId,
        this.restId,
        this.mainsImg,
-       this.sold)
+       this.sold,
+       this.category)
 
        .then((result) => {
        let toast = this.toastCtrl.create({

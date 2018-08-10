@@ -271,13 +271,14 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address,
       .map(res => res.json());
   }
 
-  updateMainsInfo(name, price, mainsId,  restaurantId, mainImg, mainSold) {
+  updateMainsInfo(name, price, mainsId,  restaurantId, mainImg, mainSold, cat) {
     console.log(restaurantId)
     let data = {
       name:name,
       price:price,
       food_image:mainImg,
-      sold:mainSold
+      sold:mainSold,
+      categories:cat
       };
       console.log(data)
     return new Promise((resolve, reject) => {
@@ -316,13 +317,15 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address,
       .map(res => res.json());
   }
 
-  updateBeveragesInfo(name, price, beveragesId,  restaurantId, bevImg, bevSold) {
+  updateBeveragesInfo(name, price, beveragesId,  restaurantId, bevImg, bevSold, cat) {
     console.log(restaurantId)
     let data = {
       name:name,
       price:price,
       drink_image:bevImg,
-      sold:bevSold
+      sold:bevSold,
+      categories:cat
+
       };
       console.log(data)
     return new Promise((resolve, reject) => {

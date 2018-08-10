@@ -35,10 +35,21 @@
        
       <ion-item no-lines text-wrap>
         <ion-label item-start color="black" fixed>Category</ion-label>
-        
-            <ion-input value={{categories}} ></ion-input>
-        
       </ion-item>
+        <ion-item no-lines text-wrap>
+            <!-- <ion-input value={{categories}} ></ion-input> -->
+            <ion-select [(ngModel)]="category" placeholder="{{categories}}" class="myCustomSelect" multiple="true">
+    <ion-option *ngFor="let category of beverageCategories" value="{{category.id}}">{{category.type}}</ion-option>
+</ion-select>
+</ion-item>
+        
+
+      
+
+<!-- <ion-label>Select Category</ion-label>
+                <ion-select   multiple="true">
+                  <ion-option *ngFor="let category of beverageCategories" value="{{category.id}}">{{category.type}}</ion-option>
+                </ion-select> -->
       
       <ion-item no-lines>
         <ion-label item-start color="black" fixed>Price(RM)</ion-label>

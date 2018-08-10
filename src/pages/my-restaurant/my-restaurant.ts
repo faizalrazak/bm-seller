@@ -146,7 +146,6 @@ whatsappShare(index){
      },
      ()=>{
      console.log('List of menus')
-     loading.dismiss();
    }
    );  
    }
