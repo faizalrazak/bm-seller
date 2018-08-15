@@ -16,21 +16,14 @@
 	<p>A verification has been sent to your email.</p>
   <p><b>{{userEmail}}</b></p>
 	<ins style="color: #000000;">Resend Code?</ins>
-	
 
-	
-   <!--  <div class="box"> -->
    	<p>To complete registration, please enter the verification code</p>
    </div>
     	<ion-item class="box">
 <ion-input type="text" [(ngModel)]="code" placeholder="Verification Code"></ion-input>
 </ion-item>
-    	<!-- <button style="float:right;" >
-      <ion-icon position="end" ios="ios-close" md="md-close"></ion-icon>
-    </button>
-    <ion-input></ion-input> -->
-	<!-- </div> -->
-  
 
-	 <button style="margin-top:25px;" ion-button block color="bigmomma" (click)="verificationDone()">Verify</button>
 </ion-content>
+<ion-footer>
+   <button style="margin-top:25px;" ion-button block color="bigmomma" (click)="verificationDone()">Verify</button>
+</ion-footer>

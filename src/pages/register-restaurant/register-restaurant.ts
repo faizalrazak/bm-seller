@@ -33,7 +33,7 @@ export class RegisterRestaurantPage {
 
   rest = {
       
-      // rest_image:'',
+      rest_image:'',
       name:'',
       location:'',
       unit_no:'',
@@ -43,14 +43,12 @@ export class RegisterRestaurantPage {
       opening_hour:'',
       closing_hour:'',
       ssm_reg_no:'',
-      // ssm_verification_image:'',
-      // ic_image:'',
-      // user_ic_image:'',
+      ssm_verification_image:'',
+      ic_image:'',
+      user_ic_image:'',
       categories:''
      }
   
-
-
   constructor(
   	public navCtrl: NavController, 
   	public navParams: NavParams,
@@ -82,7 +80,6 @@ export class RegisterRestaurantPage {
     spinner: 'ios',
     content: 'Please Wait...'
   });
-
   loading.present();
 
   if (!this.restImage) {
@@ -113,45 +110,18 @@ export class RegisterRestaurantPage {
       restaurant_image:this.restImage,
       ssm_verification_image:this.ssmImage, 
       name: this.rest.name,
-      // name: "resttest",
       location : this.rest.location,
-      // location : "bangi",
-
       unit_no : this.rest.unit_no,
-      // unit_no : "13",
-
       address:this.rest.address,
-      // address:"test",
-
-      // open:this.rest.open,
       open:0,
-
       about:this.rest.about,
-      // about:"test",
-
-      opening_hour:this.rest.opening_hour,
-      // opening_hour:"08:00:21",
-
-      closing_hour:this.rest.closing_hour,
-      // closing_hour:"10:00:24",
-
+      closing_hour:"2018-08-12"+" "+this.rest.closing_hour,
+      opening_hour:"2018-08-12"+" "+this.rest.opening_hour,
       ssm_reg_no:this.rest.ssm_reg_no,
-      // ssm_reg_no:"test",
-
-      // ssm_verification_image:this.rest.ssm_verification_image,
-      // ic_image:this.rest.ic_image,
       ic_image:this.icImage,
-
-      // user_ic_image:this.rest.user_ic_image,
       user_ic_image:this.holdIc,
-
       categories:this.rest.categories
-      // categories:["4"]
-
       
-
-
-
      }
 
      this.httpprovider.registerRestaurant(rest).then((result) => {
@@ -172,10 +142,8 @@ export class RegisterRestaurantPage {
             duration: 3000,
             position: 'bottom'
            });      
-
            loading.dismiss();
            toast.present();
-
      });
   }
 

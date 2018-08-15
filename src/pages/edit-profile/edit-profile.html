@@ -232,9 +232,9 @@
 
   </div>
 
-  <div padding>
+  <!-- <div padding>
     <button ion-button full block color="bigmomma" (click)="updateForm()">Save</button>
-  </div>
+  </div> -->
 </div>
 <div *ngIf="!restaurantInfo">
     <div class="divider">
@@ -287,9 +287,15 @@
     </ion-row>
 
   </div>
-  <div padding>
+ <!--  <div padding>
     <button ion-button full block color="bigmomma" (click)="editProfile()">Save</button>
-  </div>
+  </div> -->
   </div>
   
 </ion-content>
+<ion-footer>
+ 
+  <button *ngIf="!restaurantInfo" (click)="editProfile()" no-margin ion-button full color="bigmomma">Save</button>
+  <button *ngIf="restaurantInfo" (click)="updateForm()" no-margin ion-button full color="bigmomma">Save</button>
+  
+</ion-footer>

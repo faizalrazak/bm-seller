@@ -145,7 +145,7 @@ export class EditBeveragePage {
        this.restId,
        this.bevImg,
        this.bevSold,
-       this.category)
+       this.beveragesCategory)
 
        .then((result) => {
        let toast = this.toastCtrl.create({

@@ -36,7 +36,6 @@ export class EditMenuPage {
   categories = "";
   imageLink="http://api.bigmomma.com.my/uploads/"
   mainCategories:any;
-  category:any;
 
   constructor(
     public navCtrl: NavController, 
@@ -97,12 +96,6 @@ export class EditMenuPage {
         // } else {
         //   this.soldValue = false
         // }
-        for(let category of this.mainsCategory  ) {
-          this.categories = this.categories +" - "+category.type
-        }
-
-        console.log(this.categories)
-        console.log(this.mainsInfo)
        
          },
            err => {
@@ -135,6 +128,7 @@ export class EditMenuPage {
   });
 
   loading.present();
+  console.log(this.mainsCategory)
   
        this.httpprovider.updateMainsInfo(
        this.mainsName,
@@ -143,7 +137,8 @@ export class EditMenuPage {
        this.restId,
        this.mainsImg,
        this.sold,
-       this.category)
+       this.mainsCategory)
+
 
        .then((result) => {
        let toast = this.toastCtrl.create({

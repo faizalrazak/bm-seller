@@ -12,9 +12,9 @@
 
   <div class="first-row">
     <div class="acc-img circle">
-      <!-- <img class="camera-plus" src="assets/imgs/logo.png" *ngIf={{image}}>
-     -->
-      <img class="camera-plus" src="assets/imgs/person.png">
+    <img (click)="openCameraRider()" class="camera-plus" src="assets/imgs/person.png" 
+    *ngIf="!riderImage">
+    <img (click)="openCameraRider()"  src="{{riderImage}}" *ngIf="riderImage">
     </div>
   </div>
 

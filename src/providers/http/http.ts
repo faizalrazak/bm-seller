@@ -357,8 +357,14 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address,
   }
 
   addRider(details,restId){
-    return new Promise((resolve, reject) => {
-      let headers = new Headers();
+     return new Promise((resolve, reject) => {
+       let headers = new Headers();
+      headers.append(
+        "Authorization",
+        "Bearer " + window.localStorage.getItem("token")
+      );
+      console.log(window.localStorage.getItem("token"));
+      console.log(details)
 
       headers.append("Content-Type", "application/json");
 
@@ -381,6 +387,33 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address,
     });
 
   }
+
+  restJob(){
+  return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append(
+        "Authorization",
+        "Bearer " + window.localStorage.getItem("token")
+      );
+      console.log(headers)
+      this.http
+        .get("http://api.bigmomma.com.my/api/restaurant/jobs", {
+          headers: headers
+        })
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            resolve(data.data);
+            console.log("data");
+          },
+          err => {
+            console.log(err)
+            reject(err);
+          }
+        );
+    });
+
+}
 
   registerUser(details) {
     return new Promise((resolve, reject) => {

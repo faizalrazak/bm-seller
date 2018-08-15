@@ -18,13 +18,13 @@
 
 <ion-item style="background: #ECE8E7" >
 	<ion-label>Today’s Jobs Completed</ion-label>
-	<b style="color: black" item-end>19</b>
+	<b style="color: black" item-end>{{todayTotalJob}}</b>
 </ion-item>
 <p style="color: white"></p>
 
 <ion-item style="background: #ECE8E7">
 	<ion-label>Today’s Earnings</ion-label>
-	<b style="color: black" item-end item-end>RM 105.00</b>
+	<b style="color: black" item-end item-end>{{todayEarning| currency:"RM":0}}</b>
 </ion-item>
 <p style="color: white"></p>
 

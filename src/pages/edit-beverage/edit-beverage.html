@@ -24,33 +24,16 @@
             <ion-input  [(ngModel)]="beveragesName"></ion-input>
             
             </ion-item>
-
-            
-      <!-- <ion-item>
-              <ion-label>Select Category</ion-label>
-                <ion-select  [(ngModel)]="category" multiple="true">
-                  <ion-option *ngFor="let category of beverageCategories" value="{{category.id}}">{{category.type}}</ion-option>
-                </ion-select>
-            </ion-item> -->
        
       <ion-item no-lines text-wrap>
         <ion-label item-start color="black" fixed>Category</ion-label>
       </ion-item>
-        <ion-item no-lines text-wrap>
-            <!-- <ion-input value={{categories}} ></ion-input> -->
-            <ion-select [(ngModel)]="category" placeholder="{{categories}}" class="myCustomSelect" multiple="true">
-    <ion-option *ngFor="let category of beverageCategories" value="{{category.id}}">{{category.type}}</ion-option>
-</ion-select>
-</ion-item>
+        <ion-item no-lines >
+          <ion-select  [(ngModel)]="beveragesCategory" name="beveragesCategory" multiple="true">
+            <ion-option *ngFor="let category of beverageCategories" value="{{category.id}}" selected="category.id == beveragesCategory">{{category.type}}</ion-option>
+          </ion-select>
+        </ion-item>
         
-
-      
-
-<!-- <ion-label>Select Category</ion-label>
-                <ion-select   multiple="true">
-                  <ion-option *ngFor="let category of beverageCategories" value="{{category.id}}">{{category.type}}</ion-option>
-                </ion-select> -->
-      
       <ion-item no-lines>
         <ion-label item-start color="black" fixed>Price(RM)</ion-label>
             <ion-input type="number" [(ngModel)]="beveragesPrice"></ion-input>
@@ -71,8 +54,8 @@
       </ion-row>
     </div>
   </div>
-  <div padding>
-    <button ion-button color="bigmomma" full block (click)="updateForm()">Save</button>
-  </div>
 
 </ion-content>
+<ion-footer>
+  <button (click)="updateForm()" no-margin ion-button full color="bigmomma">Save</button>
+</ion-footer>
