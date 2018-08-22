@@ -110,9 +110,10 @@ this.camera.getPicture(options).then((imageData) => {
 
 
   messageRoomButton(id){
+    this.navCtrl.push(MessageRoomPage, {key:id})
     console.log(id)
-    let modal = this.modalCtrl.create(MessageRoomPage, {key:id});
-    modal.present();
+    // let modal = this.modalCtrl.create(MessageRoomPage, {key:id});
+    // modal.present();
   }
 
   goMaps(){
@@ -120,7 +121,7 @@ this.camera.getPicture(options).then((imageData) => {
   }
 
   cancel(){
-    this.navCtrl.setRoot(OrderPage)
+    this.navCtrl.popToRoot()
   }
 
 }

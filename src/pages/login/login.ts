@@ -8,10 +8,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { HomePage } from '../home/home';
 import { SignUpPage } from '../sign-up/sign-up';
 import{ ForgotPage } from '../forgot/forgot'
-
-
-
-
+import { VerificationCodePage } from '../verification-code/verification-code';
 
 /**
  * Generated class for the LoginPage page.
@@ -93,12 +90,49 @@ export class LoginPage {
                   
                   loading.dismiss();
                   toast1.present()
+                  if(err._body=="User not verified"){
+                  this.navCtrl.setRoot(VerificationCodePage,{});
+                  }
                 });
 
     }, (error) => {
       console.log(error)
       loading.dismiss();
     });
+    // let data = {
+    //             email: "commonroombangi99@gmail.com",
+    //             password: "password",
+    //           };
+
+
+    //   this.httpprovider.loginUser(data).then(
+    //             result => {
+    //               console.log(result)
+    //               let toast = this.toastCtrl.create({
+    //                 message: 'Successfully login',
+    //                  duration: 3000,
+    //                 position: 'bottom'
+    //               });
+                  
+                  
+    //               toast.present()
+    //               loading.dismiss();
+    //               this.navCtrl.setRoot(HomePage,{});
+    //             },
+    //             err => {
+    //              let toast1 = this.toastCtrl.create({
+    //                 message: err._body,
+    //                  duration: 3000,
+    //                 position: 'bottom'
+    //               });
+                  
+    //               // loading.dismiss();
+    //               toast1.present()
+    //               if(err._body=="User not verified"){
+    //               this.navCtrl.setRoot(VerificationCodePage,{});
+    //               }
+    //             }
+    //   );
   }
 
 facebookLogin() {
@@ -147,6 +181,9 @@ facebookLogin() {
                   
                   loading.dismiss();
                   toast1.present()
+                  if(err._body=="User not verified"){
+                  this.navCtrl.setRoot(VerificationCodePage,{});
+                  }
                 }
               );
           });
@@ -158,30 +195,30 @@ facebookLogin() {
 
         }
         );
-        let data = {
-                email: "fizo@gmail.com",
-                password: "123456",
-              };
+      //   let data = {
+      //           email: "fizo@gmail.com",
+      //           password: "123456",
+      //         };
 
 
-      this.httpprovider.loginUser(data).then(
-                result => {
-                  console.log(result)
-                  let toast = this.toastCtrl.create({
-                    message: 'Successfully login',
-                     duration: 3000,
-                    position: 'bottom'
-                  });
+      // this.httpprovider.loginUser(data).then(
+      //           result => {
+      //             console.log(result)
+      //             let toast = this.toastCtrl.create({
+      //               message: 'Successfully login',
+      //                duration: 3000,
+      //               position: 'bottom'
+      //             });
                   
                   
-                  toast.present()
-                  loading.dismiss();
-                  this.navCtrl.setRoot(HomePage,{});
-                },
-                err => {
-                  console.log(err);
-                }
-      );
+      //             toast.present()
+      //             loading.dismiss();
+      //             this.navCtrl.setRoot(HomePage,{});
+      //           },
+      //           err => {
+      //             console.log(err);
+      //           }
+      // );
 
 
     }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController  } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ViewController, ToastController } from 'ionic-angular'
@@ -57,6 +57,7 @@ export class RegisterRestaurantPage {
     public viewCtrl:ViewController,
     private toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
 
   	) {
   }
@@ -115,8 +116,8 @@ export class RegisterRestaurantPage {
       address:this.rest.address,
       open:0,
       about:this.rest.about,
-      closing_hour:"2018-08-12"+" "+this.rest.closing_hour,
-      opening_hour:"2018-08-12"+" "+this.rest.opening_hour,
+      closing_hour:this.rest.closing_hour,
+      opening_hour:this.rest.opening_hour,
       ssm_reg_no:this.rest.ssm_reg_no,
       ic_image:this.icImage,
       user_ic_image:this.holdIc,
@@ -147,102 +148,236 @@ export class RegisterRestaurantPage {
      });
   }
 
-   openCameraRest(){
-    const options: CameraOptions = {
-      quality: 70,
-      targetWidth: 900,
-      targetHeight: 600,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
-      allowEdit: true,
-      sourceType: 1
-    }
-
-this.camera.getPicture(options).then((imageData) => {
- // imageData is either a base64 encoded string or a file URI
- // If it's base64:
- this.base64Image = 'data:image/jpeg;base64,' + imageData;
- this.restImage=this.base64Image
-}, (err) => {
- // Handle error
-});
-}
-
-openCameraSsm(){
-  const options: CameraOptions = {
-    quality: 70,
-    targetWidth: 900,
-    targetHeight: 600,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    saveToPhotoAlbum: false,
-    allowEdit: true,
-    sourceType: 1
+  restPhotoMethod() {
+    let alert = this.alertCtrl.create({
+      title: "Choose your photo from:",
+      buttons: [
+        {
+          text: "Camera",
+          role: "Camera",
+          handler: () => {
+            const options: CameraOptions = {
+             quality: 70,
+              targetWidth: 900,
+              targetHeight: 600,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              mediaType: this.camera.MediaType.PICTURE,
+              saveToPhotoAlbum: false,
+              allowEdit: true,
+              sourceType: 1
+            };
+            this.camera.getPicture(options).then(
+              imageData => {
+                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.restImage = this.base64Image;
+                console.log(this.restImage);
+              },
+              err => {
+              }
+            );
+          }
+        },
+        {
+          text: "Gallery",
+          role: "Gallery",
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 70,
+              sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              correctOrientation: true,
+              mediaType: this.camera.MediaType.PICTURE
+            };
+            this.camera.getPicture(options).then(
+              imageData => {
+                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.restImage = this.base64Image;
+                console.log(this.restImage);
+              },
+              err => {
+              }
+            );
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
-this.camera.getPicture(options).then((imageData) => {
- // imageData is either a base64 encoded string or a file URI
- // If it's base64:
- this.base64Image = 'data:image/jpeg;base64,' + imageData;
- this.ssmImage=this.base64Image
-}, (err) => {
- // Handle error
-});
-}
-
-openCameraIc(){
-  const options: CameraOptions = {
-    quality: 70,
-    targetWidth: 900,
-    targetHeight: 600,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    saveToPhotoAlbum: false,
-    allowEdit: true,
-    sourceType: 1
+  ssmPhotoMethod() {
+    let alert = this.alertCtrl.create({
+      title: "Choose your photo from:",
+      buttons: [
+        {
+          text: "Camera",
+          role: "Camera",
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 70,
+              targetWidth: 900,
+              targetHeight: 600,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              mediaType: this.camera.MediaType.PICTURE,
+              saveToPhotoAlbum: false,
+              allowEdit: true,
+              sourceType: 1
+            };
+            this.camera.getPicture(options).then(
+              imageData => {
+                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.ssmImage = this.base64Image;
+                console.log(this.ssmImage);
+              },
+              err => {
+              }
+            );
+          }
+        },
+        {
+          text: "Gallery",
+          role: "Gallery",
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 70,
+              sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              correctOrientation: true,
+              mediaType: this.camera.MediaType.PICTURE
+            };
+            this.camera.getPicture(options).then(
+              imageData => {
+                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.ssmImage = this.base64Image;
+                console.log(this.ssmImage);
+              },
+              err => {
+              }
+            );
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
-this.camera.getPicture(options).then((imageData) => {
- // imageData is either a base64 encoded string or a file URI
- // If it's base64:
- this.base64Image = 'data:image/jpeg;base64,' + imageData;
- this.icImage=this.base64Image
-}, (err) => {
- // Handle error
-});
-}
-
-openCameraHoldIc(){
-  const options: CameraOptions = {
-    quality: 70,
-    targetWidth: 900,
-    targetHeight: 600,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    saveToPhotoAlbum: false,
-    allowEdit: true,
-    sourceType: 1
+  icPhotoMethod() {
+    let alert = this.alertCtrl.create({
+      title: "Choose your photo from:",
+      buttons: [
+        {
+          text: "Camera",
+          role: "Camera",
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 70,
+              targetWidth: 900,
+              targetHeight: 600,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              mediaType: this.camera.MediaType.PICTURE,
+              saveToPhotoAlbum: false,
+              allowEdit: true,
+              sourceType: 1
+            };
+            this.camera.getPicture(options).then(
+              imageData => {
+                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.icImage = this.base64Image;
+                console.log(this.icImage);
+              },
+              err => {
+              }
+            );
+          }
+        },
+        {
+          text: "Gallery",
+          role: "Gallery",
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 70,
+              sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              correctOrientation: true,
+              mediaType: this.camera.MediaType.PICTURE
+            };
+            this.camera.getPicture(options).then(
+              imageData => {
+                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.icImage = this.base64Image;
+                console.log(this.icImage);
+              },
+              err => {
+              }
+            );
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
-this.camera.getPicture(options).then((imageData) => {
- // imageData is either a base64 encoded string or a file URI
- // If it's base64:
- this.base64Image = 'data:image/jpeg;base64,' + imageData;
- this.holdIc=this.base64Image
-}, (err) => {
- // Handle error
-});
-}
-
-
-back(){
-    this.navCtrl.pop();
+HoldIcPhotoMethod() {
+    let alert = this.alertCtrl.create({
+      title: "Choose your photo from:",
+      buttons: [
+        {
+          text: "Camera",
+          role: "Camera",
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 70,
+              targetWidth: 900,
+              targetHeight: 600,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              mediaType: this.camera.MediaType.PICTURE,
+              saveToPhotoAlbum: false,
+              allowEdit: true,
+              sourceType: 1
+            };
+            this.camera.getPicture(options).then(
+              imageData => {
+                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.holdIc = this.base64Image;
+                console.log(this.holdIc);
+              },
+              err => {
+              }
+            );
+          }
+        },
+        {
+          text: "Gallery",
+          role: "Gallery",
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 70,
+              sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              correctOrientation: true,
+              mediaType: this.camera.MediaType.PICTURE
+            };
+            this.camera.getPicture(options).then(
+              imageData => {
+                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.holdIc = this.base64Image;
+                console.log(this.holdIc);
+              },
+              err => {
+              }
+            );
+          }
+        }
+      ]
+    });
+    alert.present();
   }
-
 }
 

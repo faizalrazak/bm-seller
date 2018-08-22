@@ -12,9 +12,9 @@
 
   <div class="first-row">
     <div class="acc-img circle">
-    <img (click)="openCameraRest()" style="width:80px;height:80px;margin-top:15%" src="assets/imgs/rest.png" 
+    <img (click)="restPhotoMethod()" style="width:80px;height:80px;margin-top:15%" src="assets/imgs/rest.png" 
     *ngIf="!restImage">
-    <img (click)="openCameraRest()"  src="{{restImage}}" *ngIf="restImage">
+    <img (click)="restPhotoMethod()"  src="{{restImage}}" *ngIf="restImage">
   </div>
     </div>
 
@@ -62,7 +62,7 @@
 
       <ion-col col-6>
         <ion-item no-lines no-padding text-wrap>
-          <ion-textarea type="number" [(ngModel)]="rest.unit_no" name="unit_no" value="" placeholder="Your restaurant unit number"></ion-textarea>
+          <ion-input type="text" [(ngModel)]="rest.unit_no" name="unit_no" value="" placeholder="Your restaurant unit number"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -76,7 +76,7 @@
 
       <ion-col col-6>
         <ion-item no-lines no-padding text-wrap>
-          <ion-textarea type="number" [(ngModel)]="rest.location" name="location" value="" placeholder="Your restaurant unit number"></ion-textarea>
+          <ion-input type="text" [(ngModel)]="rest.location" name="location" value="" placeholder="Your restaurant location"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -103,7 +103,7 @@
       </ion-col>
       <ion-col col-12>
        <ion-item no-lines no-padding text-wrap>
-          <ion-datetime displayFormat="HH : mm : ss : A" type="text" [(ngModel)]="rest.opening_hour" name="opening_hour" value="" class="ion-input" placeholder="Opening Hour">     
+          <ion-datetime displayFormat="HH : mm" type="text" [(ngModel)]="rest.opening_hour" name="opening_hour" value="" class="ion-input" placeholder="Opening Hour">     
           </ion-datetime>
        </ion-item>
       </ion-col>
@@ -117,7 +117,7 @@
       </ion-col>
       <ion-col col-12>
        <ion-item no-lines no-padding text-wrap>
-          <ion-datetime displayFormat="HH : mm : ss : A" type="text" [(ngModel)]="rest.closing_hour" name="closing_hour" value="" class="ion-input" placeholder="Closing Hour">     
+          <ion-datetime displayFormat="HH : mm" type="text" [(ngModel)]="rest.closing_hour" name="closing_hour" value="" class="ion-input" placeholder="Closing Hour">     
           </ion-datetime>
        </ion-item>
       </ion-col>
@@ -164,20 +164,20 @@
     <p>All online business owners must registered with SSM in order to operate legally in Malaysia</p>
 
     <div>
-    <img (click)="openCameraSsm()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!ssmImage">
-    <img (click)="openCameraSsm()" class="ssmbox" src="{{ssmImage}}" *ngIf="ssmImage">
+    <img (click)="ssmPhotoMethod()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!ssmImage">
+    <img (click)="ssmPhotoMethod()" class="ssmbox" src="{{ssmImage}}" *ngIf="ssmImage">
   </div>
 
     <p>IDENTITY VERIFICATION</p>
     <P>Submit your IC photo</P>
     <div>
-    <img (click)="openCameraIc()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!icImage">
-    <img (click)="openCameraIc()" class="ssmbox" src="{{icImage}}" *ngIf="icImage">
+    <img (click)="icPhotoMethod()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!icImage">
+    <img (click)="icPhotoMethod()" class="ssmbox" src="{{icImage}}" *ngIf="icImage">
   </div>
     <p>and a photo of you holding your IC for verification</p>
     <div>
-    <img (click)="openCameraHoldIc()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!holdIc">
-    <img (click)="openCameraHoldIc()" class="ssmbox" src="{{holdIc}}" *ngIf="holdIc">
+    <img (click)="HoldIcPhotoMethod()" class="ssmbox" src="assets/imgs/Image-Edition-Tools-Screenshot-icon.png"  *ngIf="!holdIc">
+    <img (click)="HoldIcPhotoMethod()" class="ssmbox" src="{{holdIc}}" *ngIf="holdIc">
   </div>
 
   </div>

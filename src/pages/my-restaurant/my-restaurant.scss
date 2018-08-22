@@ -40,8 +40,9 @@ page-my-restaurant {
     }
 
     .img-res{
-        height: 200px;
-        width: 100%;
+        height: auto;
+        width: auto;
+        flex-shrink: 0;
     }
 
     

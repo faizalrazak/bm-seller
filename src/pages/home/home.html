@@ -8,14 +8,12 @@
 </ion-header>
 
 <ion-content padding-top>
+	<div *ngIf="restJobInfo">
 	<div>
     <img class="second" src="assets/imgs/highlights.png">
   </div>
 
 <h4 text-left item-left>Earnings</h4>
-<!-- <ion-toggle [(ngModel)]="open" (ionChange)="OpenRest(rest)" checked="open" class="toggle"></ion-toggle> -->
-  
-
 <ion-item style="background: #ECE8E7" >
 	<ion-label>Today’s Jobs Completed</ion-label>
 	<b style="color: black" item-end>{{todayTotalJob}}</b>
@@ -38,6 +36,11 @@
 	<ion-label>(Total) Monthly Earnings</ion-label>
 	<b style="color: black" item-end>RM 105.00</b>
 </ion-item>
+</div>
+<div *ngIf="!restJobInfo">
+    <h1 align="center">Whoopss!!!</h1>
+    <p align="center">Please set up a restaurant</p>
+  </div>
 
        
 

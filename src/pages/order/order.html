@@ -41,15 +41,15 @@
 
   <div [ngSwitch]="orders">
     <ion-list *ngSwitchCase="'past'">
-      <div (click)="pastDetail()" class="past-order">
-        <p>Nov 23, 2017</p>
+      <div *ngFor="let order of pastOrders" (click)="pastDetail(pastOrder)" class="past-order">
+        <p>{{order.order.date | date : mediumDate}}</p>
         <hr>
         <p>Receipt No.</p>
       </div>
     </ion-list>
 
     <ion-list *ngSwitchCase="'current'">
-      <div *ngFor="let order of currentOrders" (click)="orderDetail(order)" class="order">
+      <div *ngFor="let order of currentOrders" (click)="orderDetail()" class="order">
         <p>{{order.order.date | date : mediumDate}}</p>
         <hr>
         <p>Receipt No.</p>

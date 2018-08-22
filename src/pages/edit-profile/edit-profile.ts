@@ -46,6 +46,7 @@ export class EditProfilePage {
   restCloseHour:any;
   restOpenHour:any;
   location:any;
+  restCategory:any;
 
 
   restCategories:any;
@@ -97,6 +98,7 @@ export class EditProfilePage {
         this.RestSSMNo=this.restaurantInfo.data.ssm_reg_no 
         this.restAbout=this.restaurantInfo.data.about
         this.restCat=this.restaurantInfo.categories
+        console.log(this.restCat)
         this.ssmImage=this.imageLink+this.restaurantInfo.data.ssm_verification_image
         this.icImage=this.imageLink+this.restaurantInfo.data.ic_image
         this.icHold=this.imageLink+this.restaurantInfo.data.user_ic_image
@@ -104,10 +106,9 @@ export class EditProfilePage {
         this.restOpenHour=this.restaurantInfo.data.opening_hour
         this.restCloseHour=this.restaurantInfo.data.closing_hour
         this.location=this.restaurantInfo.data.location
-
-
-        console.log(this.restCat)
         console.log(this.restUnit)
+        console.log(this.restaurantInfo);
+
 
       }
         loading.dismiss();
@@ -152,17 +153,13 @@ export class EditProfilePage {
     if(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(this.restImage)) 
     {      
       this.restImage=""
-       } 
+       }
        
     let loading = this.loadingCtrl.create({
     spinner: 'ios',
     content: 'Loading Please Wait...'
   });
   loading.present();
-
-
-  console.log(this.restaurantInfo);
-  
 
        this.httpprovider.editRest(
          this.RestName,
@@ -175,9 +172,10 @@ export class EditProfilePage {
          this.icHoldPic,
          this.restImage,
          this.restUnit,
-          this.restOpenHour,
-          this.restCloseHour,
-          this.location).then((result) => {
+         this.restCloseHour,
+         this.restOpenHour,
+         this.location,
+         this.restCat).then((result) => {
 
          this.httpprovider.editProfile(this.ownerName, this.ownerEmail, this.ownerPhoneNo)
          .then((result) => {

@@ -83,7 +83,7 @@ export class MyApp {
       { title: 'Notification', component: NotificationsPage },
       { title: 'About Us', component: AboutUsPage },
       { title: 'Privacy Policy', component: PrivacyPolicyPage },
-      { title: 'Term and Conditions', component: TermsConditionsPage },
+      { title: 'Terms and Conditions', component: TermsConditionsPage },
       // { title: 'Register Restaurant', component: RegisterRestaurantPage }, 
 
     ];
@@ -149,7 +149,8 @@ export class MyApp {
           localStorage.removeItem("firebase:host:bigmomma-chat.firebaseio.com");
           localStorage.removeItem("email");
           loading.dismiss();
-          window.location.reload()
+          this.nav.setRoot(LoginSignUpPage);
+          // window.location.reload()
           
 
     

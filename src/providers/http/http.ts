@@ -41,6 +41,30 @@ export class HttpProvider {
     });
   }
 
+  resendCode(email) {
+    return new Promise((resolve, reject) => {
+      let data = {
+        email :email
+      }
+     
+
+      this.http
+        .post(
+          "http://api.bigmomma.com.my/api/verification-code",
+          data)
+        .subscribe(
+          res => {
+            let data = res;
+            console.log(data);
+            resolve(data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+  }
+
   createBeverage(details, restaurantId) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -150,7 +174,7 @@ getCategoryMain() {
   }
 
   editRest(name,address,ssmNo,about,restaurantId,ssmImg,icImg,holdImg,restImg,unitNo,close,
-    open,location){
+    open,location,restCat){
     let data = {
       name:name,
       address: address,
@@ -161,9 +185,10 @@ getCategoryMain() {
       user_ic_image:holdImg,
       restaurant_image:restImg,
       unit_no:unitNo,
-      opening_hour:open,
       closing_hour:close,
-      location:location
+      opening_hour:open,
+      location:location,
+      categories:restCat
       
     };
     return new Promise((resolve, reject) => {
@@ -574,7 +599,66 @@ console.log("name"+details.name)
     return this.http.get("http://api.bigmomma.com.my/api/restaurant/current-order", { headers: headers }).map(res => res.json());
   }
 
+  getPastOrders(){
+    
+    let headers = new Headers();
+    headers.append("Authorization", "Bearer " + window.localStorage.getItem("token"));
+    return this.http.get("http://api.bigmomma.com.my/api/restaurant/past-order", { headers: headers }).map(res => res.json());
+  }
+
   getCartItems(id){
     return this.http.get("http://api.bigmomma.com.my/api/cart/"+id+"/items").map(res => res.json());
   }
+
+  subscribe(value){
+    return new Promise((resolve, reject) => {
+       let headers = new Headers();
+      headers.append(
+        "Authorization",
+        "Bearer " + window.localStorage.getItem("token")
+      );
+      console.log(window.localStorage.getItem("token"));
+      console.log(value)
+
+      this.http
+        .post(
+          "http://api.bigmomma.com.my/api/restaurant/subscribe",
+          JSON.stringify(value),
+          { headers: headers }
+        )
+        .subscribe(
+          res => {
+            let data = res;
+            console.log(data);
+            resolve(data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+
+  }
+
+  postSubscription(data){
+  return new Promise((resolve, reject) => {
+    let headers = new Headers();
+    headers.append(
+      "Authorization",
+      "Bearer " + window.localStorage.getItem("token")
+    );
+    console.log(data)
+    this.http.post("http://api.bigmomma.com.my/api/order", data, { headers: headers })
+      .subscribe(
+        res => {
+          let data = res.json();
+          resolve(data);
+          console.log(data)
+        },
+        err => {
+          reject(err);
+        }
+      );
+  });
+}
 }

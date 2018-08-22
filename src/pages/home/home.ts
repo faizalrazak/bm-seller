@@ -45,6 +45,7 @@ export class HomePage {
      },
      err => {
        console.log(err);
+         loading.dismiss();
      },
    );
   

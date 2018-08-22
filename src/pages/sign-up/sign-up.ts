@@ -109,6 +109,37 @@ export class SignUpPage {
       loading.dismiss();
 
     });
+    // let data = {
+    //             email: "commonroombangi99@gmail.com",
+    //             password: "password",
+    //             name:"common room"
+    //           };
+
+    //           this.httpprovider.registerUser(data).then(
+    //             result => {
+    //               console.log(result)
+    //               let toast = this.toastCtrl.create({
+    //                 message: 'Please check your email to get verfication code',
+    //                  duration: 3000,
+    //                 position: 'bottom'
+    //               });
+    //               loading.dismiss();
+                  
+    //               toast.present()
+    //               this.navCtrl.setRoot(VerificationCodePage,{});
+    //             },
+    //             err => {
+    //               console.log(err);
+    //               let toast1 = this.toastCtrl.create({
+    //                 message: err._body,
+    //                  duration: 3000,
+    //                 position: 'bottom'
+    //               });
+                  
+    //               // loading.dismiss();
+    //               toast1.present()
+                  
+    //             });
   }
 
   

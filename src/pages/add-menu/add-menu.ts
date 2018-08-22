@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, ViewController } 
+import { IonicPage, NavController, NavParams, LoadingController,AlertController, ToastController, ViewController } 
 from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { HttpProvider } from '../../providers/http/http';
@@ -45,7 +45,9 @@ export class AddMenuPage {
     public httpprovider: HttpProvider, 
     public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    public viewCtrl: ViewController) {
+    public viewCtrl: ViewController,
+    private alertCtrl: AlertController,
+    ) {
 
     
   }
@@ -101,28 +103,86 @@ ionViewDidLoad() {
    );
   }
 
-openCamera(){
-  const options: CameraOptions = {
-    quality: 70,
-    targetWidth: 900,
-    targetHeight: 600,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    saveToPhotoAlbum: false,
-    allowEdit: true,
-    sourceType: 1
+  openCamera() {
+    let alert = this.alertCtrl.create({
+      title: "Choose your photo from:",
+      buttons: [
+        {
+          text: "Camera",
+          role: "Camera",
+          handler: () => {
+            const options: CameraOptions = {
+             quality: 70,
+              targetWidth: 900,
+              targetHeight: 600,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              mediaType: this.camera.MediaType.PICTURE,
+              saveToPhotoAlbum: false,
+              allowEdit: true,
+              sourceType: 1
+            };
+            this.camera.getPicture(options).then(
+              imageData => {
+                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.foodImg = this.base64Image;
+                console.log(this.foodImg);
+              },
+              err => {
+              }
+            );
+          }
+        },
+        {
+          text: "Gallery",
+          role: "Gallery",
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 70,
+              sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              correctOrientation: true,
+              mediaType: this.camera.MediaType.PICTURE
+            };
+            this.camera.getPicture(options).then(
+              imageData => {
+                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.foodImg = this.base64Image;
+                console.log(this.foodImg);
+              },
+              err => {
+              }
+            );
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
-this.camera.getPicture(options).then((imageData) => {
- // imageData is either a base64 encoded string or a file URI
- // If it's base64:
- this.base64Image = 'data:image/jpeg;base64,' + imageData;
- this.foodImg=this.base64Image
-}, (err) => {
- // Handle error
-});
-}
+// openCamera(){
+//   const options: CameraOptions = {
+//     quality: 70,
+//     targetWidth: 900,
+//     targetHeight: 600,
+//     destinationType: this.camera.DestinationType.DATA_URL,
+//     encodingType: this.camera.EncodingType.JPEG,
+//     mediaType: this.camera.MediaType.PICTURE,
+//     saveToPhotoAlbum: false,
+//     allowEdit: true,
+//     sourceType: 1
+//   }
+
+// this.camera.getPicture(options).then((imageData) => {
+//  // imageData is either a base64 encoded string or a file URI
+//  // If it's base64:
+//  this.base64Image = 'data:image/jpeg;base64,' + imageData;
+//  this.foodImg=this.base64Image
+// }, (err) => {
+//  // Handle error
+// });
+// }
 
 addMenuForm(){
 

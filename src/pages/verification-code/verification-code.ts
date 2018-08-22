@@ -67,6 +67,7 @@ let loading = this.loadingCtrl.create({
                      duration: 3000,
                     position: 'bottom'
                   });
+       console.log(err)
                   
                   loading.dismiss();
                   toast1.present()
@@ -76,6 +77,40 @@ let loading = this.loadingCtrl.create({
 
 }
 
+sendAgain(){
+  
+let loading = this.loadingCtrl.create({
+    spinner: 'ios',
+    content: 'Loading Please Wait...'
+  });
+
+  loading.present();
+  console.log(this.userEmail)
+
+    this.httpprovider.resendCode(this.userEmail).then(
+     (response) => {
+       let toast1 = this.toastCtrl.create({
+                    message: 'New verification code send',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+                  
+                  loading.dismiss();
+                  toast1.present()
+     },
+     err => {
+       let toast1 = this.toastCtrl.create({
+                    message: err._body,
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+       console.log(err)
+                  
+                  loading.dismiss();
+                  toast1.present()
+     },
+   );
+}
 }
 
 

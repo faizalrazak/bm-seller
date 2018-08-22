@@ -87,7 +87,7 @@ export class ProfilePage {
         this.RestName=this.restaurantInfo.data.name
         this.RestAddress=this.restaurantInfo.data.address
         this.restAbout=this.restaurantInfo.data.about
-        this.restCat=this.restaurantInfo.categories
+        this.restCat=this.restaurantInfo.category
         console.log(this.restCat)
         this.RestSSMNo=this.restaurantInfo.data.ssm_reg_no 
         this.ssmImage=this.imageLink+this.restaurantInfo.data.ssm_verification_image
