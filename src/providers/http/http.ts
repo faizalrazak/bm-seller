@@ -166,11 +166,29 @@ getCategoryMain() {
   }
 
    getAddOn() {
-    return this.http
-      .get(
-        "http://api.bigmomma.com.my/api/add-ons"
-      )
-      .map(res => res.json());
+     return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append(
+        "Authorization",
+        "Bearer " + window.localStorage.getItem("token")
+      );
+      console.log(headers)
+      this.http
+        .get("http://api.bigmomma.com.my/api/restaurant/add-ons", {
+          headers: headers
+        })
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            resolve(data.data);
+            console.log("data");
+          },
+          err => {
+            console.log(err)
+            reject(err);
+          }
+        );
+    });
   }
 
   editRest(name,address,ssmNo,about,restaurantId,ssmImg,icImg,holdImg,restImg,unitNo,close,
@@ -610,26 +628,15 @@ console.log("name"+details.name)
     return this.http.get("http://api.bigmomma.com.my/api/cart/"+id+"/items").map(res => res.json());
   }
 
-  subscribe(value){
+  subscribePlan(data){
     return new Promise((resolve, reject) => {
        let headers = new Headers();
-      headers.append(
-        "Authorization",
-        "Bearer " + window.localStorage.getItem("token")
-      );
-      console.log(window.localStorage.getItem("token"));
-      console.log(value)
+      headers.append("Authorization", "Bearer " + window.localStorage.getItem("token"));
 
-      this.http
-        .post(
-          "http://api.bigmomma.com.my/api/restaurant/subscribe",
-          JSON.stringify(value),
-          { headers: headers }
-        )
-        .subscribe(
+      this.http.post("http://api.bigmomma.com.my/api/restaurant/subscribe", data, {headers:headers})
+      .subscribe(
           res => {
-            let data = res;
-            console.log(data);
+            let data = res.json();
             resolve(data);
           },
           err => {
@@ -640,25 +647,26 @@ console.log("name"+details.name)
 
   }
 
-  postSubscription(data){
-  return new Promise((resolve, reject) => {
-    let headers = new Headers();
-    headers.append(
-      "Authorization",
-      "Bearer " + window.localStorage.getItem("token")
-    );
-    console.log(data)
-    this.http.post("http://api.bigmomma.com.my/api/order", data, { headers: headers })
-      .subscribe(
-        res => {
-          let data = res.json();
-          resolve(data);
-          console.log(data)
-        },
-        err => {
-          reject(err);
-        }
-      );
-  });
-}
+  addMenuAddOn(data){
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append("Authorization", "Bearer " + window.localStorage.getItem("token"));
+
+      
+      console.log(data)
+      this.http.post("http://api.bigmomma.com.my/api/restaurant/add-ons", data, { headers: headers })
+        .subscribe(
+          res => {
+            let data = res.json();
+            resolve(data);
+            console.log(data)
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+  }
+
+  
 }

@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { AlertController } from 'ionic-angular';
-
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { SocialSharing } from '@ionic-native/social-sharing';
-
+import moment from 'moment';
 import { EditRestaurantPage } from '../edit-restaurant/edit-restaurant';
 import { EditMenuPage } from '../edit-menu/edit-menu';
 import { EditBeveragePage } from '../edit-beverage/edit-beverage';
@@ -52,7 +52,11 @@ export class MyRestaurantPage {
 
   quotes :any;
   hideMe:any;
-
+  expiredDate:any;
+  dateTo:any;
+  dateFrom:any;
+  notiDate:any;
+  
 
   constructor(
     public navCtrl: NavController, 
@@ -63,9 +67,14 @@ export class MyRestaurantPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private http:Http,
-    private socialSharing: SocialSharing 
+    private socialSharing: SocialSharing,
+    private localNotifications: LocalNotifications 
     ) {
     this.restaurants = 'menu'
+
+   
+    
+    
     
   }
 compilemsg(index):string{
@@ -100,6 +109,43 @@ whatsappShare(index){
         this.RestOpenHour=this.restaurantInfo.data.opening_hour
         this.RestCloseHour=this.restaurantInfo.data.closing_hour
         this.open=this.restaurantInfo.data.open
+        this.expiredDate=this.restaurantInfo.data.expiry_date
+        console.log(this.expiredDate)
+
+        this.dateTo = this.expiredDate
+        console.log(this.dateTo)
+        this.dateFrom = moment(this.dateTo).subtract(3,'d').format('YYYY-MM-DD');
+        console.log(this.dateFrom)
+        this.notiDate=moment(this.dateFrom)
+        console.log(this.notiDate)
+        
+        
+
+        if(moment().format('YYYY-MM-DD')==this.notiDate._i){
+
+          this.localNotifications.schedule({
+          
+          id: 1,
+          title: "Hey, your subscription have 3 days before expired!",
+          text: "Please renew your subscription fee in 3 days",
+        });
+
+        }
+         console.log(moment().format('YYYY-MM-DD'))
+         console.log(this.notiDate._i)
+
+           if(moment().format('YYYY-MM-DD')==this.dateTo){
+
+          this.localNotifications.schedule({
+          
+          id: 2,
+          title: "Hey, your subscription plan already expired!",
+          text: "Please renew your subscription fee",
+        });
+
+        }
+        console.log(moment().format('YYYY-MM-DD'))
+        console.log(this.dateTo)
 
 
         if(this.open == 1) {

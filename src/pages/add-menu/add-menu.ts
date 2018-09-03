@@ -4,7 +4,7 @@ from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { HttpProvider } from '../../providers/http/http';
 
-
+import{ AddAddOnPage } from '../add-add-on/add-add-on'
 import { MyRestaurantPage } from '../my-restaurant/my-restaurant';
 
 
@@ -38,7 +38,8 @@ export class AddMenuPage {
   addOnMain:'',
   
   };
-
+  addOnName:any
+  showMainAddOn:any
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private camera: Camera,
@@ -52,7 +53,7 @@ export class AddMenuPage {
     
   }
 
-ionViewDidLoad() {
+ionViewDidEnter() {
   console.log('ionViewDidLoad AddMenuPage');
   let loading = this.loadingCtrl.create({
     spinner: 'ios',
@@ -78,24 +79,39 @@ ionViewDidLoad() {
      },
      ()=>{
      console.log('List of mains categories')
+     // loading.dismiss();
    }
    );
 
-        this.httpprovider.getAddOn().subscribe(
-     response => {
+   //      this.httpprovider.getAddOn().subscribe(
+   //   response => {
+   //     console.log(response)
+   //     this.mainAddOn=response.data
+   //     loading.dismiss();
+   //   },
+   //   err => {
+   //     console.log(err);
+   //   },
+   //   ()=>{
+   //   console.log('List of mains add-on')
+   // }
+   // );
+    this.httpprovider.getAddOn().then(
+     (response) => {
        console.log(response)
-       this.mainAddOn=response.data
-       loading.dismiss();
+        this.mainAddOn=response
+        if(this.mainAddOn.length != 0){
+        this.showMainAddOn=this.mainAddOn
+        console.log(this.mainAddOn)
+        
+        }
+         loading.dismiss();
      },
      err => {
        console.log(err);
+         loading.dismiss();
      },
-     ()=>{
-     console.log('List of mains add-on')
-   }
-   );
-
-        
+     )
      },
      err => {
        console.log(err);
@@ -161,28 +177,10 @@ ionViewDidLoad() {
     alert.present();
   }
 
-// openCamera(){
-//   const options: CameraOptions = {
-//     quality: 70,
-//     targetWidth: 900,
-//     targetHeight: 600,
-//     destinationType: this.camera.DestinationType.DATA_URL,
-//     encodingType: this.camera.EncodingType.JPEG,
-//     mediaType: this.camera.MediaType.PICTURE,
-//     saveToPhotoAlbum: false,
-//     allowEdit: true,
-//     sourceType: 1
-//   }
-
-// this.camera.getPicture(options).then((imageData) => {
-//  // imageData is either a base64 encoded string or a file URI
-//  // If it's base64:
-//  this.base64Image = 'data:image/jpeg;base64,' + imageData;
-//  this.foodImg=this.base64Image
-// }, (err) => {
-//  // Handle error
-// });
-// }
+addAddOn(restID){
+  this.navCtrl.push(AddAddOnPage, {restID:this.RestId})
+  console.log({restID:this.RestId})
+}
 
 addMenuForm(){
 

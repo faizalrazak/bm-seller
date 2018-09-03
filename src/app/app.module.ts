@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import moment from 'moment';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
@@ -32,7 +33,7 @@ import { VerificationCodePage } from '../pages/verification-code/verification-co
 import { RegisterRestaurantPage } from '../pages/register-restaurant/register-restaurant';
 import { NewRiderPage } from '../pages/new-rider/new-rider';
 import{ ForgotPage } from '../pages/forgot/forgot'
-
+import{ AddAddOnPage } from '../pages/add-add-on/add-add-on'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -85,6 +86,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     RegisterRestaurantPage,
     NewRiderPage,
     ForgotPage,
+    AddAddOnPage,
     MapsPage
     
   ],
@@ -130,6 +132,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     RegisterRestaurantPage,
     NewRiderPage,
     ForgotPage,
+    AddAddOnPage,
     MapsPage
   ],
   providers: [
@@ -143,7 +146,9 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     NativeStorage,
     GooglePlus,
     SocialSharing,
-    InAppBrowser
+    InAppBrowser,
+    LocalNotifications,
+    
   ]
 })
 export class AppModule {}

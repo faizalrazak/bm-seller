@@ -32,50 +32,6 @@ export class SubscriptionPage {
   }
 
   proceedSubscription(){
-    let loading = this.loadingCtrl.create({
-    spinner: 'ios',
-    content: 'Please Wait...'
-  });
-
-  loading.present();
- 
-   let subscribe = {
-       subscription_code:this.subscribeValue,
-      }
-
-
-
-  console.log(subscribe);
-  
-      
-
-     this.httpprovider.subscribe(subscribe)
-     .then((result) => {
-      let toast = this.toastCtrl.create({
-        message:'Subscription plan selected' ,
-        duration: 3000,
-        position: 'bottom'
-      });
-       loading.dismiss();
-      toast.present();
-      
-     this.navCtrl.push(CheckoutPage)
-
-     
-     },
-         (err) => {
-         console.log(err);
-         let toast1 = this.toastCtrl.create({
-                    message: "Please choose which plan you want",
-                     duration: 3000,
-                    position: 'bottom'
-                  });
-                  
-                  loading.dismiss();
-                  toast1.present()
-     });
- 
-    
+    this.navCtrl.push(CheckoutPage, this.subscribeValue)  
   }
-
 }

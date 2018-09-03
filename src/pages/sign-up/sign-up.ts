@@ -31,7 +31,6 @@ export class SignUpPage {
   data:any;
   acct:any;
   user:any;
-
   personName:any;
   constructor(
     public navCtrl: NavController, 
@@ -42,7 +41,6 @@ export class SignUpPage {
   	private toastCtrl: ToastController,
     public googlePlus: GooglePlus
     ) {
-
   }
 
 
@@ -147,21 +145,26 @@ export class SignUpPage {
 
 
   facebookSignUp() {
+
     let nav = this.navCtrl;
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
     loading.present();
+    let params = new Array<string>();
     this.fb
-      .login(["public_profile", "user_friends", "email"])
+      .login(["public_profile","email"])
       .then((res: FacebookLoginResponse) => {
         this.fb
           .api("me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture)",[]).then(
+          // .api("/me?fields=name,gender", params).then(
+            
             profile => {
               this.fbProfile = {
                 email: profile["email"],
                 password: profile["id"],
-                name: profile["name"]               
+                name: profile["name"], 
+                // gender: profile["gender"]              
               }
 
 
@@ -169,6 +172,7 @@ export class SignUpPage {
                 email: this.fbProfile.email,
                 password: this.fbProfile.password,
                 name: this.fbProfile.name,
+                // gender: this.fbProfile.gender
               };
 
               this.httpprovider.registerUser(this.data).then(
@@ -202,6 +206,7 @@ export class SignUpPage {
 
         {
           console.log(e)
+
           loading.dismiss();
 
         });

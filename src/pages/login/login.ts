@@ -100,7 +100,7 @@ export class LoginPage {
       loading.dismiss();
     });
     // let data = {
-    //             email: "commonroombangi99@gmail.com",
+    //             email: "ahmed2@gmail.com",
     //             password: "password",
     //           };
 
@@ -142,7 +142,7 @@ facebookLogin() {
     });
     loading.present();
     this.fb
-      .login(["public_profile", "user_friends", "email"])
+      .login(["public_profile","email"])
       .then((res: FacebookLoginResponse) => {
         this.fb
           .api("me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture)",[]).then(

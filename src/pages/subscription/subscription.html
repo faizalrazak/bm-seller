@@ -22,17 +22,17 @@
 
    <ion-list radio-group [(ngModel)]="subscribeValue" no-lines no-margin>
       <ion-item>
-        <ion-label>10 Days [ RM 10.00 ]</ion-label>
+        <ion-label>10 Days [ RM 25.00 ]</ion-label>
         <ion-radio value="1"></ion-radio>
       </ion-item>
     
       <ion-item>
-        <ion-label>20 Days [ RM 20.00 ]</ion-label>
+        <ion-label>20 Days [ RM 50.00 ]</ion-label>
         <ion-radio value="2"></ion-radio>
       </ion-item>
     
       <ion-item>
-        <ion-label>30 Days [ RM 30.00 ]</ion-label>
+        <ion-label>30 Days [ RM 75.00 ]</ion-label>
         <ion-radio value="3"></ion-radio>
       </ion-item>
     </ion-list>
@@ -41,7 +41,5 @@
 
 </ion-content>
 <ion-footer>
-  <div padding>
-      <button ion-button full block color="bigmomma" (click)="proceedSubscription()">Continue</button>
-    </div>
+      <button ion-button full block color="bigmomma" (click)="proceedSubscription(subscribe)">Continue</button>
 </ion-footer>

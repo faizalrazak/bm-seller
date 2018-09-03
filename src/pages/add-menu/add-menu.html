@@ -71,20 +71,23 @@
       <ion-item>
         <ion-row>
           <ion-col col-6 no-padding>           
-            <p style="margin-top: 15px">Price</p> 
+            <p style="margin-top: 15px">Menu Add On</p> 
           </ion-col>
           <ion-col col-6 no-padding class="item-right" text-wrap>
-            <p>+ Add More</p>
+            <p (click)="addAddOn(restID)">+ Add More</p>
           </ion-col>
         </ion-row>
       </ion-item>
     </ion-list>
-    <ion-item>
+    <div *ngIf="showMainAddOn">
+      <ion-item >
               <ion-label>Select Add On</ion-label>
                 <ion-select  [(ngModel)]="input.addOnMain" multiple="true">
                   <ion-option *ngFor="let addOn of mainAddOn"  value="{{addOn.id}}">{{addOn.name}}</ion-option>
                 </ion-select>
             </ion-item>
+    </div>
+    
     <!-- <ion-list radio-group >
       <ion-item class="radio-item">
         <ion-label ></ion-label>

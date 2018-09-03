@@ -17,10 +17,10 @@
 
   <div class="top-desc">
     <strong>
-      You have chosen Direct Payment
+      You have chosen Online Payment
     </strong>
     <p>
-      Please make an online payment of RM10.00 to proceed with your subscription.
+      Please make an online payment of RM{{price}} to proceed with your subscription.
     </p>
   </div>
 
@@ -28,36 +28,17 @@
     <ion-item>
       <ion-row>
         <ion-col col-6>
-          10 Days
+          RM{{price}}
         </ion-col>
         <ion-col text-right>
-          RM 10.00
+          {{totalDays}} days
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item>
-      <ion-row>
-        <ion-col col-6>
-          10 Days
-        </ion-col>
-        <ion-col text-right>
-          RM 10.00
-        </ion-col>
-      </ion-row>
-    </ion-item>
-    <ion-item>
-      <ion-row>
-        <ion-col col-6>
-          10 Days
-        </ion-col>
-        <ion-col text-right>
-          RM 10.00
-        </ion-col>
-      </ion-row>
-    </ion-item>
+   
   </ion-list>
 
 </ion-content>
 <ion-footer>
-  <button color="bigmomma" no-margin ion-button full (click)="pay()">Pay now</button>
+  <button ion-button full block color="bigmomma" (click)="pay()">Pay now</button>
 </ion-footer>

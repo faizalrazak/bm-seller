@@ -18,7 +18,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser'
 export class CheckoutPage {
 
   paymentLink:any
-
+  subuscriptionValue:any
+  price:any
+  totalDays:any
 
   constructor(
   	public navCtrl: NavController, 
@@ -29,6 +31,20 @@ export class CheckoutPage {
     private iab: InAppBrowser
 
   	) {
+    this.subuscriptionValue = this.navParams.data;
+
+    if(this.subuscriptionValue == 1){
+      this.price = 25.00
+      this.totalDays = 10
+    }else if(this.subuscriptionValue == 2){
+      this.price = 50.00
+      this.totalDays = 20
+    }else{
+      this.price = 75.00
+      this.totalDays = 30
+    }
+    console.log(this.price)
+    console.log(this.totalDays)
   }
 
   ionViewDidLoad() {
@@ -40,54 +56,30 @@ export class CheckoutPage {
     spinner: 'ios',
     content: 'Please Wait...'
   });
-
-  // let newData = this.ref.push();
-  //   newData.set({
-  //     roomname:this.item.restaurant.name+'-'+this.item.id
-  // });
-  //  this.chatroom_id = newData
-  // console.log(this.chatroom_id.path.pieces_[1])
-
   let data = {
-    'restaurant_id' : '1',
-    'date' : '2018-02-09',
-    'delivery_location' : 'test',
-    'status' : 0,
-    'rider_id' : 0,
-    'cart_id' : '2',
-    'total_price' : '30',
-    // 'chatroom_id' : this.chatroom_id.path.pieces_[1]
+    'subscription_code' : this.subuscriptionValue,
   }
 
   console.log(data)
 
-  this.httpprovider.postSubscription(data)
+  this.httpprovider.subscribePlan(data)
      .then((result) => {
        loading.dismiss();
        console.log(result)
 
       this.paymentLink = result
-       const browser = this.iab.create(this.paymentLink, '_self',{location:'no'}); 
+       const browser = this.iab.create(this.paymentLink, "_self ",{location:"yes"}); 
         browser.on('loadstop').subscribe(event => {        
-          if (event.url.match("return-payment")) {
+          if (event.url.match("payment-success")) {
             browser.close();
-
-            // let newData = this.ref.push();
-            // newData.set({
-            //   roomname:this.data.roomname
-            // });
-            // console.log(newData)
-            
             let toast = this.toastCtrl.create({
               message: 'Payment Success',
               duration:3000,
               position: 'bottom'
             });
             toast.present();
-            // this.navCtrl.setRoot(TabsPage);
-
           }
-          else if (event.url.match("payment-failed")){
+          else if (event.url.match("payment-fail")){
             browser.close();            
             let toast = this.toastCtrl.create({
               message: 'Payment Fail, Please Try Again',

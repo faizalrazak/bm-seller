@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color="bigmomma">
+    <ion-title>Menu Add On</ion-title>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>  -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="input.name" name="name" placeholder="Add On Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" [(ngModel)]="input.price" name="price" placeholder="Add On Price(RM)"></ion-input>
+    </ion-item>
+      <button style="margin-top:20px;" ion-button block color="bigmomma" (click)="addAddOn()">Add</button>
+  </form>
+</ion-content>
