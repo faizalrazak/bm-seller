@@ -9,7 +9,10 @@ import { HttpProvider } from '../../providers/http/http'
 export class HomePage {
 	restJobInfo:any;
 	todayTotalJob:any;
-  	todayEarning:any;
+  todayEarning:any;
+  homeBanner:any;
+  bannerURL = "http://api.bigmomma.com.my/uploads/"
+
   constructor(
   	public navCtrl: NavController, 
   	public httpprovider:HttpProvider,
@@ -20,6 +23,22 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+    this.httpprovider.getBanner().then(
+     (response) => {
+       console.log(response)
+        
+        this.homeBanner=response
+
+        console.log(this.homeBanner)
+     },
+     err => {
+       console.log(err);
+         loading.dismiss();
+     },
+   );
+
+
+
     let loading = this.loadingCtrl.create({
     spinner: 'ios',
     content: 'Please Wait...'

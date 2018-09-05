@@ -14,8 +14,8 @@ import { EditBeveragePage } from '../edit-beverage/edit-beverage';
 import { AddMenuPage } from '../add-menu/add-menu';
 import { AddBeveragesPage } from '../add-beverages/add-beverages';
 import { RegisterRestaurantPage } from '../register-restaurant/register-restaurant';
-
-
+import{ SocialSharingPage } from '../social-sharing/social-sharing';
+import { Screenshot } from '@ionic-native/screenshot';
 
 /**
  * Generated class for the MyRestaurantPage page.
@@ -56,6 +56,9 @@ export class MyRestaurantPage {
   dateTo:any;
   dateFrom:any;
   notiDate:any;
+
+  sharingData:any;
+  state: boolean = false;
   
 
   constructor(
@@ -68,25 +71,11 @@ export class MyRestaurantPage {
     private alertCtrl: AlertController,
     private http:Http,
     private socialSharing: SocialSharing,
-    private localNotifications: LocalNotifications 
+    private localNotifications: LocalNotifications,
+    private screenshot: Screenshot
     ) {
-    this.restaurants = 'menu'
-
-   
-    
-    
-    
+    this.restaurants = 'menu' 
   }
-compilemsg(index):string{
-  var msg = this.RestName + "-" + this.restImage ;
-  return msg.concat(" \n Sent from my Bigmomma App !");
-}
-
-
-whatsappShare(index){
-  var msg  = this.compilemsg(index);
-   this.socialSharing.shareViaWhatsApp(msg, null, null);
- }
 
   ionViewDidEnter(){
     let loading = this.loadingCtrl.create({
@@ -203,45 +192,75 @@ whatsappShare(index){
       
   }
 
+  reset() {
+    var self = this;
+    setTimeout(function(){ 
+      self.state = false;
+    }, 1000);
+  }
+
+  goToMediaSocial() {
+    let loading = this.loadingCtrl.create({
+    spinner: 'ios',
+    content: 'Please Wait...'
+  });
+
+  loading.present();
+
+      this.screenshot.URI(80).then((result) => {
+        console.log(result)
+      this.sharingData=result.URI
+        console.log(this.sharingData)
+      this.state = true;
+      this.reset();
+      loading.dismiss();
+  // Success!
+  // (message, subject, file, url)
+    this.socialSharing.share("Earn more with Bigmomma Seller Apps", " ",this.sharingData, "https://play.google.com/store/apps/details?id=com.mdr.sellerbm").
+then(() => {
+  loading.dismiss();
+  // Success!
+
+
+}).catch(() => {
+// Error!
+let toast = this.toastCtrl.create({
+                    message: 'Sharing failed',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+          toast.present()
+          loading.dismiss();
+});
+
+
+}).catch(() => {
+// Error!
+let toast = this.toastCtrl.create({
+                    message: 'Sharing failed',
+                     duration: 3000,
+                    position: 'bottom'
+                  });
+          toast.present()
+          loading.dismiss();
+
+});
+ }
+
  
 
   presentProfileModal() {
     this.navCtrl.push(EditRestaurantPage)
-   // let profileModal = this.modalCtrl.create(EditRestaurantPage);
-   // profileModal.onDidDismiss(() => {
-
-   //    this.ionViewWillEnter ();
-
-   //  });
-   // profileModal.present();
-
  }
 
  addMenuModal() {
    this.navCtrl.push(AddMenuPage)
-   // let profileModal = this.modalCtrl.create(AddMenuPage);
-   // profileModal.onDidDismiss(() => {
-
-   //    this.ionViewDidLoad();
-
-   //  });
-   
-   // profileModal.present();
-
  }
 
  
 
  addBeverageModal() {
    this.navCtrl.push(AddBeveragesPage)
-   // let profileModal = this.modalCtrl.create(AddBeveragesPage);
-   // profileModal.onDidDismiss(() => {
-
-   //    this.ionViewDidLoad();
-
-   //  });
-   // profileModal.present();
-
  }
 
   editMenu(menuId){

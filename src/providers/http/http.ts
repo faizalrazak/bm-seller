@@ -115,6 +115,23 @@ export class HttpProvider {
     });
 }
 
+getBanner(){
+   return new Promise((resolve, reject) => {
+      this.http
+        .get("http://api.bigmomma.com.my/api/banners")
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            resolve(data.data);
+            console.log(data.data);
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+}
+
 getRestaurantInfo(){
    return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -447,7 +464,7 @@ updateRestInfo(name, location, opening_hour, closing_hour, unit_no, address,
         .subscribe(
           data => {
             resolve(data.data);
-            console.log("data");
+            console.log(data.data);
           },
           err => {
             console.log(err)

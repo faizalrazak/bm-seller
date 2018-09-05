@@ -9,11 +9,13 @@
 
 <ion-content padding-top>
 	<div *ngIf="restJobInfo">
-	<div>
-    <img class="second" src="assets/imgs/highlights.png">
-  </div>
+    <ion-slides autoplay="5000" loop="true" speed="3000">
+    <ion-slide *ngFor="let banner of homeBanner">
+      <img class="second" src="{{bannerURL}}{{banner.banner_image}}">
+    </ion-slide>    
+  </ion-slides>
 
-<h4 text-left item-left>Earnings</h4>
+<h4 text-left item-left padding>Earnings</h4>
 <ion-item style="background: #ECE8E7" >
 	<ion-label>Today’s Jobs Completed</ion-label>
 	<b style="color: black" item-end>{{todayTotalJob}}</b>

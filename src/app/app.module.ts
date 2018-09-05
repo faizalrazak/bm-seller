@@ -32,8 +32,9 @@ import { VerificationPage } from '../pages/verification/verification';
 import { VerificationCodePage } from '../pages/verification-code/verification-code';
 import { RegisterRestaurantPage } from '../pages/register-restaurant/register-restaurant';
 import { NewRiderPage } from '../pages/new-rider/new-rider';
-import{ ForgotPage } from '../pages/forgot/forgot'
-import{ AddAddOnPage } from '../pages/add-add-on/add-add-on'
+import{ ForgotPage } from '../pages/forgot/forgot';
+import{ AddAddOnPage } from '../pages/add-add-on/add-add-on';
+import{ SocialSharingPage } from '../pages/social-sharing/social-sharing';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -51,6 +52,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Screenshot } from '@ionic-native/screenshot';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     NewRiderPage,
     ForgotPage,
     AddAddOnPage,
+    SocialSharingPage,
     MapsPage
     
   ],
@@ -133,6 +136,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     NewRiderPage,
     ForgotPage,
     AddAddOnPage,
+    SocialSharingPage,
     MapsPage
   ],
   providers: [
@@ -145,6 +149,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     Facebook,
     NativeStorage,
     GooglePlus,
+    Screenshot,
     SocialSharing,
     InAppBrowser,
     LocalNotifications,

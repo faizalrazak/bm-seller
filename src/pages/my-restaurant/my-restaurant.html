@@ -11,8 +11,8 @@
       <button *ngIf="restaurantInfo" ion-button icon-only (click)="presentProfileModal()">
         <ion-icon ios="ios-create" md="md-create" item-end ></ion-icon>
         </button>
-        <button *ngIf="restaurantInfo" ion-button icon-only (click)="whatsappShare()" >
-          <ion-icon ios="ios-redo" md="md-redo"></ion-icon>
+        <button *ngIf="restaurantInfo" ion-button icon-only (click)="goToMediaSocial()" >
+          <ion-icon name="share"></ion-icon>
         </button>
       </ion-buttons>
   </ion-navbar>
@@ -47,7 +47,7 @@
           30 min
         </ion-badge>
       </ion-row> -->
-      <p>{{RestOpenHour}} - {{RestCloseHour}}</p>
+      <p>{{RestOpenHour.substring(0,5)}} - {{RestCloseHour.substring(0,5)}}</p>
       <!-- <div class="box-below">
         Discount 15% for all purchases! Just enter Coupon Code M1234
       </div> -->

@@ -100,7 +100,7 @@ export class LoginPage {
       loading.dismiss();
     });
     // let data = {
-    //             email: "ahmed2@gmail.com",
+    //            email: "commonroombangi99@gmail.com",
     //             password: "password",
     //           };
 
